@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 #include "Mesure.h"
-#include "Time.cpp"
+#include "Temps.h"
 #include <iterator>
 #include <list>
 #include <string>
