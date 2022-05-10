@@ -1,38 +1,41 @@
+#if !defined(UTILISATEUR_H)
+#define UTULISATEUR_H
 
-#if ! defined ( UTILISATEUR_H )
-#define UTILISATEUR_H
-using namespace std;
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
+using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
-//------------------------------------------------------------------------
-
-class  Utilisateur
+class Utilisateur
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
+    //----------------------------------------------------- Méthodes publiques
 
-//------------------------------------------------- Surcharge d'opérateurs
+    //------------------------------------------------- Surcharge d'opérateurs
 
-//-------------------------------------------- Constructeurs - destructeur
-    Utilisateur (String login, String motDePasse);
-    virtual ~Utilisateur ();
-//------------------------------------------------------------------ PRIVE
+    //-------------------------------------------- Constructeurs - destructeur
+    Utilisateur(string login, string mdp);
+
+    string getIdentifiantUtilisateur() const;
+
+    string getMotDePasse() const;
+
+    virtual ~Utilisateur();
+
+    //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+    string identifiantUtilisateur;
+    string motDePasse;
+    //----------------------------------------------------- Méthodes protégées
 
-//----------------------------------------------------- Attributs protégés
-    String identifiantUtilisateur;
-    String motDePasse;
-
+    //----------------------------------------------------- Attributs protégés
 };
 
+//-------------------------------- Autres définitions dépendantes de <Xxx>
 
-#endif 
-
+#endif // UTILISATEUR_H
