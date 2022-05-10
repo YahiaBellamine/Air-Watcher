@@ -1,46 +1,46 @@
 /*************************************************************************
-                           Fournisseur  -  description
+                           AgenceGouvernementale  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Fournisseur> (fichier Fournisseur.h) ----------------
-#if ! defined ( FOURNISSEUR_H )
-#define FOURNISSEUR_H
+//---------- Interface de la classe <AgenceGouvernementale> (fichier AgenceGouvernementale.h) ----------------
+#if ! defined ( AGENCEGOUVERNEMENTALE_H )
+#define AGENCEGOUVERNEMENTALE_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
 #include "Utilisateur.h"
-#include "Nettoyeur.h"
+#include "Capteur.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Fournisseur>
+// Rôle de la classe <AgenceGouvernementale>
 //
 //
 //------------------------------------------------------------------------
 
-class Fournisseur : public Utilisateur
+class AgenceGouvernementale : public Utilisateur
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool ajouterNettoyeur (Nettoyeur nettoyeur);
-    vector<Capteur*> getListeNettoyeurs() const;
+    bool ajouterCapteur(Capteur capteur);
+    vector<Capteur*> getListeCapteurs() const;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Fournisseur(string login, string mdp);
+    AgenceGouvernementale(string login, string mdp);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Fournisseur ( );
+    virtual ~AgenceGouvernementale ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -49,13 +49,11 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 private:
-//----------------------------------------------------- Méthodes protégées
-    list<Nettoyeur*> listeNettoyeur;
-//----------------------------------------------------- Attributs protégés
+    list<Capteur*> listeCapteurs;
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Fournisseur>
+//-------------------------------- Autres définitions dépendantes de <AgenceGouvernementale>
 
-#endif // FOURNISSEUR_H
+#endif // AGENCEGOUVERNEMENTALE_H
 
