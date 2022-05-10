@@ -5,10 +5,13 @@
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
-
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if !defined(MESURE_H)
-#define MESURE_H
+#include "Mesure.h"
+#include <iterator>
+#include <list>
+using namespace std;
+//---------- Interface de la classe <SerieMesures> (fichier SerieMesures.h) ----------------
+#if !defined(SERIEMESURE_H)
+#define SERIEMESURE_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -22,7 +25,7 @@
 //
 //------------------------------------------------------------------------
 
-class Mesure
+class SerieMesures
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -34,6 +37,9 @@ public:
     // Contrat :
     //
 
+    bool atmo();
+
+    bool ajouterMesure(Mesure mesure);
     //------------------------------------------------- Surcharge d'opérateurs
     // Xxx &operator=(const Xxx &unXxx);
     // Mode d'emploi :
@@ -48,24 +54,21 @@ public:
     // Contrat :
     //
 
-    Mesure(float valeur);
+    SerieMesures(/*Capteur capteur, dateSerieMesures date, SerieMesures serieMesures*/);
 
-    virtual ~Mesure();
+    virtual ~SerieMesures();
     // Inutile
 
-    float getValeur();
-
-    void setValeur(float valeur);
+    Mesure getMesure(int index);
 
     //------------------------------------------------------------------ PRIVE
 
 protected:
     //----------------------------------------------------- Méthodes protégées
-
+    list<Mesure> *listeMesures;
     //----------------------------------------------------- Attributs protégés
-    float valeur;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>
 
-#endif // XXX_H
+#endif // SERIEMESURES_H

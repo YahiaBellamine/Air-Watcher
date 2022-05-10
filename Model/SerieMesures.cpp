@@ -38,17 +38,17 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(/*Capteur capteur*/, /*dateSerieMesures date*/, )
+SerieMesures::SerieMesures(/*Capteur capteur, dateSerieMesures date*/)
 // Algorithme :
 //
 {
-    this->valeur = valeur;
+    listeMesures = new list<Mesure>;
 #ifdef MAP
     cout << "Appel au constructeur de <Xxx>" << endl;
 #endif
 } //----- Fin de Xxx
 
-Mesure::~Mesure()
+SerieMesures::~SerieMesures()
 // Algorithme :
 //
 {
@@ -57,14 +57,21 @@ Mesure::~Mesure()
 #endif
 } //----- Fin de ~Xxx
 
-float Mesure::getValeur()
+bool SerieMesures::ajouterMesure(Mesure mesure)
 {
-    return valeur;
+    list<Mesure>::iterator it = listeMesures->begin();
+    listeMesures->insert(it, mesure);
 }
 
-void Mesure::setValeur(float valeur)
+bool SerieMesures::atmo()
 {
-    this->valeur = valeur;
+}
+
+Mesure SerieMesures::getMesure(int index)
+{
+    list<Mesure>::iterator it = listeMesures->begin();
+    advance(it, index);
+    return *it;
 }
 
 //------------------------------------------------------------------ PRIVE
