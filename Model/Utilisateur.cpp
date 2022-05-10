@@ -9,30 +9,36 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
+//----------------------------------------------------- Méthodes publiques
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Utilisateur::Utilisateur(String login, String motDePasse)
+Utilisateur::Utilisateur(string login, string mdp)
 {
     this->identifiantUtilisateur = login;
-    this->motDePasse = motDePasse;
-    #ifdef MAP
-        cout << "Appel au constructeur de <Utilisateur>" << endl;
-    #endif
-} 
+    this->motDePasse = mdp;
+#ifdef MAP
+    cout << "Appel au constructeur de <Xxx>" << endl;
+#endif
+}
 
-Utilisateur::getLogin() const{
+string Utilisateur::getIdentifiantUtilisateur() const
+{
     return this->identifiantUtilisateur;
 }
 
-
+string Utilisateur::getMotDePasse() const
+{
+    return this->motDePasse;
+}
 
 Utilisateur::~Utilisateur()
 {
-    #ifdef MAP
-        cout << "Appel au destructeur de <Utilisateur>" << endl;
-    #endif
-} 
+#ifdef MAP
+    cout << "Appel au destructeur de <Xxx>" << endl;
+#endif
+} //----- Fin de ~Xxx
 
 //------------------------------------------------------------------ PRIVE
 
