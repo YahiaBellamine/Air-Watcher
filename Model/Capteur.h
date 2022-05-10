@@ -1,41 +1,55 @@
 /*************************************************************************
-                           Nettoyeur  -  description
+                           Capteur  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Nettoyeur> (fichier Nettoyeur.h) ----------------
-#if ! defined ( NETTOYEUR_H )
-#define NETTOYEUR_H
+//---------- Interface de la classe <Capteur> (fichier Capteur.h) ----------------
+#if ! defined ( CAPTEUR_H )
+#define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Fournisseur.h"
-#include "Temps.h"
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Nettoyeur>
+// Rôle de la classe <Capteur>
 //
 //
 //------------------------------------------------------------------------
 
-class Nettoyeur
+class Capteur : public Ancetre
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
-//-------------------------------------------- Constructeurs - destructeur
-    Nettoyeur(int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f);
+//----------------------------------------------------- Méthodes publiques
+    int getIdCapteur() const;
+    float getLatitudeCapteur() const;
+    void setLatitudeCapteur(float lat);
+    float getLongitudeCapteur() const;
+    void setLongitudeCapteur(float lon);
+
+//------------------------------------------------- Surcharge d'opérateurs
+    Capteur & operator = ( const Capteur & unXxx );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Nettoyeur ( );
+
+//-------------------------------------------- Constructeurs - destructeur
+    Capteur(int id, float lat, float lon);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    virtual ~Capteur ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -45,18 +59,14 @@ public:
 
 private:
 //----------------------------------------------------- Méthodes protégées
-    int idNettoyeur;
+    int idCapteur;
     float latitude;
     float longitude;
-    Temps timeStart;
-    Temps timeStop;
-    Fournisseur * fournisseur;
-
 //----------------------------------------------------- Attributs protégés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Nettoyeur>
+//-------------------------------- Autres définitions dépendantes de <Capteur>
 
-#endif // NETTOYEUR_H
+#endif // CAPTEUR_H
 
