@@ -11,6 +11,8 @@
 #define FOURNISSEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <cstring>
+#include "Utilisateur.h"
 #include "Nettoyeur.h"
 //------------------------------------------------------------- Constantes
 
@@ -29,19 +31,10 @@ class Fournisseur : public Utilisateur
 public:
 //----------------------------------------------------- Méthodes publiques
     bool ajouterNettoyeur (Nettoyeur nettoyeur);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    vector<Capteur*> getListeNettoyeurs() const;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Fournisseur ( const Fournisseur & unXxx );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    Fournisseur ();
+    Fournisseur(string login, string mdp);
     // Mode d'emploi :
     //
     // Contrat :
@@ -57,7 +50,7 @@ public:
 
 private:
 //----------------------------------------------------- Méthodes protégées
-    list<Nettoyeur> listeNettoyeur;
+    list<Nettoyeur*> listeNettoyeur;
 //----------------------------------------------------- Attributs protégés
 
 };

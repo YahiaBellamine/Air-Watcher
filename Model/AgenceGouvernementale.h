@@ -1,41 +1,46 @@
 /*************************************************************************
-                           Nettoyeur  -  description
+                           AgenceGouvernementale  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Nettoyeur> (fichier Nettoyeur.h) ----------------
-#if ! defined ( NETTOYEUR_H )
-#define NETTOYEUR_H
+//---------- Interface de la classe <AgenceGouvernementale> (fichier AgenceGouvernementale.h) ----------------
+#if ! defined ( AGENCEGOUVERNEMENTALE_H )
+#define AGENCEGOUVERNEMENTALE_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Fournisseur.h"
-#include "Temps.h"
+#include <cstring>
+#include "Utilisateur.h"
+#include "Capteur.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Nettoyeur>
+// Rôle de la classe <AgenceGouvernementale>
 //
 //
 //------------------------------------------------------------------------
 
-class Nettoyeur
+class AgenceGouvernementale : public Utilisateur
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
+//----------------------------------------------------- Méthodes publiques
+    bool ajouterCapteur(Capteur capteur);
+    vector<Capteur*> getListeCapteurs() const;
+
 //-------------------------------------------- Constructeurs - destructeur
-    Nettoyeur(int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f);
+    AgenceGouvernementale(string login, string mdp);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Nettoyeur ( );
+    virtual ~AgenceGouvernementale ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -44,19 +49,11 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 private:
-//----------------------------------------------------- Méthodes protégées
-    int idNettoyeur;
-    float latitude;
-    float longitude;
-    Temps timeStart;
-    Temps timeStop;
-    Fournisseur * fournisseur;
-
-//----------------------------------------------------- Attributs protégés
+    list<Capteur*> listeCapteurs;
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Nettoyeur>
+//-------------------------------- Autres définitions dépendantes de <AgenceGouvernementale>
 
-#endif // NETTOYEUR_H
+#endif // AGENCEGOUVERNEMENTALE_H
 

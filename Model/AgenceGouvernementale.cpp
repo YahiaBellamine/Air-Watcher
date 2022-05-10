@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Fournisseur  -  description
+                           AgenceGouvernementale  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Fournisseur> (fichier Fournisseur.cpp) ------------
+//---------- Réalisation de la classe <AgenceGouvernementale> (fichier AgenceGouvernementale.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,53 +15,53 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Fournisseur.h"
+#include "AgenceGouvernementale.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool ajouterNettoyeur (Nettoyeur nettoyeur)
+bool AgenceGouvernementale::ajouterCapteur(Capteur capteur)
 // Algorithme :
 //
 {
     bool added = false;
-    int sizeBeforeAdd = listeNettoyeur.size();
-    listeNettoyeur.push_back(nettoyeur);
-    int sizeAfterAdd = listeNettoyeur.size();
+    int sizeBeforeAdd = listeCapteurs.size();
+    listeCapteurs.push_back(capteur);
+    int sizeAfterAdd = listeCapteurs.size();
     if(sizeAfterAdd==sizeBeforeAdd+1){
         added = true;
     }
     return added;
 } //----- Fin de Méthode
 
-vector<Capteur*> IndividuPrive::getListeNettoyeurs() const
+vector<Capteur*> AgenceGouvernementale::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return this->listeNettoyeur;
+    return this->listeCapteur;
 }//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
-Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)
+AgenceGouvernementale::AgenceGouvernementale(string login, string mdp) : Utilisateur(login, mdp)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Fournisseur>" << endl;
+    cout << "Appel au constructeur de <AgenceGouvernementale>" << endl;
 #endif
-} //----- Fin de Fournisseur
+} //----- Fin de AgenceGouvernementale
 
 
-Fournisseur::~Fournisseur ( )
+AgenceGouvernementale::~AgenceGouvernementale ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Fournisseur>" << endl;
+    cout << "Appel au destructeur de <AgenceGouvernementale>" << endl;
 #endif
-} //----- Fin de ~Fournisseur
+} //----- Fin de ~AgenceGouvernementale
 
 
 //------------------------------------------------------------------ PRIVE

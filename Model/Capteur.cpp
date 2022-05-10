@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Nettoyeur  -  description
+                           Capteur  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Nettoyeur> (fichier Nettoyeur.cpp) ------------
+//---------- Réalisation de la classe <Capteur> (fichier Capteur.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,37 +15,60 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Nettoyeur.h"
+#include "Capteur.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
+//----------------------------------------------------- Méthodes publiques
+int Capteur::getIdCapteur() const
+{
+    return this->idCapteur;
+}
+
+float Capteur::getLatitudeCapteur() const
+{
+    return this->latitude;
+}
+
+void Capteur::setLatitudeCapteur(float lat)
+{
+    this->latitude = lat; 
+}
+
+float Capteur::getLongitudeCapteur() const
+{
+    return this->longitude;
+}
+
+void Capteur::setLongitudeCapteur(float lon)
+{
+    this->longitude = lon;
+}
+
 //-------------------------------------------- Constructeurs - destructeur
-Nettoyeur::Nettoyeur (int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f)
+Capteur::Capteur(int id, float lat, float lon)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Nettoyeur>" << endl;
+    cout << "Appel au constructeur de <Capteur>" << endl;
 #endif
-    this->idNettoyeur = id;
+    this->idCapteur = id;
     this->latitude = lat;
     this->longitude = lon;
-    this->timeStart = tDeb;
-    this->timeStop = tFin;
-    this->fournisseur = f;
-} //----- Fin de Nettoyeur
+} //----- Fin de Capteur
 
 
-Nettoyeur::~Nettoyeur ( )
+Capteur::~Capteur ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Nettoyeur>" << endl;
+    cout << "Appel au destructeur de <Capteur>" << endl;
 #endif
-} //----- Fin de ~Nettoyeur
+} //----- Fin de ~Capteur
 
 
 //------------------------------------------------------------------ PRIVE
