@@ -8,6 +8,7 @@
 #include "Mesure.h"
 #include <iterator>
 #include <list>
+#include <ctime>
 using namespace std;
 //---------- Interface de la classe <SerieMesures> (fichier SerieMesures.h) ----------------
 #if !defined(SERIEMESURE_H)
@@ -54,18 +55,21 @@ public:
     // Contrat :
     //
 
-    SerieMesures(/*Capteur capteur, dateSerieMesures date, SerieMesures serieMesures*/);
+    SerieMesures(/*Capteur capteur*/ time_t date);
 
     virtual ~SerieMesures();
     // Inutile
 
     Mesure getMesure(int index);
 
+    time_t getDate();
+
     //------------------------------------------------------------------ PRIVE
 
 protected:
     //----------------------------------------------------- Méthodes protégées
     list<Mesure> *listeMesures;
+    time_t date;
     //----------------------------------------------------- Attributs protégés
 };
 
