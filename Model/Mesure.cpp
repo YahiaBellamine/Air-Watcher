@@ -44,7 +44,7 @@ Mesure::Mesure(float valeur)
 {
     this->valeur = valeur;
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
 } //----- Fin de Xxx
 
@@ -53,7 +53,7 @@ Mesure::~Mesure()
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <Mesure>" << endl;
 #endif
 } //----- Fin de ~Xxx
 

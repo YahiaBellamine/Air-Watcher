@@ -38,7 +38,7 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(/*Capteur capteur*/ time_t date)
+SerieMesures::SerieMesures(/*Capteur capteur*/ temps date)
 // Algorithme :
 //
 {
@@ -46,7 +46,7 @@ SerieMesures::SerieMesures(/*Capteur capteur*/ time_t date)
     this->date = date;
     this->listeMesures = new list<Mesure>;
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
 } //----- Fin de Xxx
 
@@ -55,7 +55,7 @@ SerieMesures::~SerieMesures()
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <Mesure>" << endl;
 #endif
 } //----- Fin de ~Xxx
 
@@ -78,7 +78,7 @@ Mesure SerieMesures::getMesure(int index)
     return *it;
 }
 
-time_t SerieMesures::getDate()
+temps SerieMesures::getDate()
 {
     return date;
 }

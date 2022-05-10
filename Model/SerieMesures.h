@@ -6,9 +6,10 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 #include "Mesure.h"
+#include "Time.cpp"
 #include <iterator>
 #include <list>
-#include <ctime>
+#include <string>
 using namespace std;
 //---------- Interface de la classe <SerieMesures> (fichier SerieMesures.h) ----------------
 #if !defined(SERIEMESURE_H)
@@ -55,21 +56,21 @@ public:
     // Contrat :
     //
 
-    SerieMesures(/*Capteur capteur*/ time_t date);
+    SerieMesures(/*Capteur capteur*/ temps date);
 
     virtual ~SerieMesures();
     // Inutile
 
     Mesure getMesure(int index);
 
-    time_t getDate();
+    temps getDate();
 
     //------------------------------------------------------------------ PRIVE
 
 protected:
     //----------------------------------------------------- Méthodes protégées
     list<Mesure> *listeMesures;
-    time_t date;
+    temps date;
     //----------------------------------------------------- Attributs protégés
 };
 
