@@ -37,7 +37,7 @@ public:
     enum idAttribut {O3, SO2, NO2, PM10};
 
     string getId() const;
-    void setId(int attribut);
+    void setId(string attribut);
 
     string getUnite() const;
     void setUnite(string newUnite);
