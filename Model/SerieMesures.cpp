@@ -38,7 +38,7 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(/*Capteur capteur*/ temps date)
+SerieMesures::SerieMesures(/*Capteur capteur*/ Temps date)
 // Algorithme :
 //
 {
@@ -78,7 +78,7 @@ Mesure SerieMesures::getMesure(int index)
     return *it;
 }
 
-temps SerieMesures::getDate()
+Temps SerieMesures::getDate()
 {
     return date;
 }

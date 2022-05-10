@@ -56,21 +56,21 @@ public:
     // Contrat :
     //
 
-    SerieMesures(/*Capteur capteur*/ temps date);
+    SerieMesures(/*Capteur capteur*/ Temps date);
 
     virtual ~SerieMesures();
     // Inutile
 
     Mesure getMesure(int index);
 
-    temps getDate();
+    Temps getDate();
 
     //------------------------------------------------------------------ PRIVE
 
 protected:
     //----------------------------------------------------- Méthodes protégées
     list<Mesure> *listeMesures;
-    temps date;
+    Temps date;
     //----------------------------------------------------- Attributs protégés
 };
 

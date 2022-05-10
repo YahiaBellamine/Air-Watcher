@@ -5,7 +5,7 @@
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
-
+#include "Attribut.h"
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
 #if !defined(MESURE_H)
 #define MESURE_H
@@ -48,7 +48,7 @@ public:
     // Contrat :
     //
 
-    Mesure(float valeur);
+    Mesure(float valeur, string idAttribut);
 
     virtual ~Mesure();
     // Inutile
@@ -57,6 +57,10 @@ public:
 
     void setValeur(float valeur);
 
+    string getAttribut();
+
+    void setAttribut(string idAttribut);
+
     //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -64,6 +68,7 @@ protected:
 
     //----------------------------------------------------- Attributs protégés
     float valeur;
+    string idAttribut;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>
