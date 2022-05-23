@@ -16,6 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "SerieMesures.h"
+#include "Capteur.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -38,11 +39,11 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(/*Capteur capteur*/ Temps date)
+SerieMesures::SerieMesures(Capteur *capteur, Temps date)
 // Algorithme :
 //
 {
-
+    this->capteur = capteur;
     this->date = date;
     this->listeMesures = new list<Mesure>;
 #ifdef MAP
@@ -54,28 +55,40 @@ SerieMesures::~SerieMesures()
 // Algorithme :
 //
 {
+    listeMesures->clear();
 #ifdef MAP
     cout << "Appel au destructeur de <Mesure>" << endl;
 #endif
 } //----- Fin de ~Xxx
 
-bool SerieMesures::ajouterMesure(Mesure mesure)
+bool SerieMesures::ajouterMesure(Mesure *mesure)
 {
     list<Mesure>::iterator it = listeMesures->begin();
-    listeMesures->insert(it, mesure);
+    listeMesures->insert(it, *mesure);
     return true;
 }
 
 bool SerieMesures::atmo()
 {
-    return true;
+    if (this->getMesure("O3").getValeur() < 104 && this->getMesure("SO2").getValeur() < 159 && this->getMesure("NO2").getValeur() < 109 && this->getMesure("PM10").getValeur() < 27)
+    {
+        return true;
+    }
+    return false;
 }
 
-Mesure SerieMesures::getMesure(int index)
+Mesure SerieMesures::getMesure(string type)
 {
     list<Mesure>::iterator it = listeMesures->begin();
-    advance(it, index);
-    return *it;
+    for (int index = 0; index < listeMesures->size(); index++)
+    {
+        if ((*it).getAttribut() == type)
+        {
+            return *it;
+        }
+        advance(it, 1);
+    }
+    return Mesure(0, "");
 }
 
 Temps SerieMesures::getDate()
@@ -83,6 +96,10 @@ Temps SerieMesures::getDate()
     return date;
 }
 
+Capteur *SerieMesures::getCapteur()
+{
+    return capteur;
+}
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées

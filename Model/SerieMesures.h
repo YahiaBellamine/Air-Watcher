@@ -7,6 +7,7 @@
 *************************************************************************/
 #include "Mesure.h"
 #include "Temps.h"
+#include "Capteur.h"
 #include <iterator>
 #include <list>
 #include <string>
@@ -41,7 +42,7 @@ public:
 
     bool atmo();
 
-    bool ajouterMesure(Mesure mesure);
+    bool ajouterMesure(Mesure *mesure);
     //------------------------------------------------- Surcharge d'opérateurs
     // Xxx &operator=(const Xxx &unXxx);
     // Mode d'emploi :
@@ -56,14 +57,16 @@ public:
     // Contrat :
     //
 
-    SerieMesures(/*Capteur capteur*/ Temps date);
+    SerieMesures(Capteur *capteur, Temps date);
 
     virtual ~SerieMesures();
     // Inutile
 
-    Mesure getMesure(int index);
+    Mesure getMesure(string type);
 
     Temps getDate();
+
+    Capteur *getCapteur();
 
     //------------------------------------------------------------------ PRIVE
 
@@ -71,6 +74,7 @@ protected:
     //----------------------------------------------------- Méthodes protégées
     list<Mesure> *listeMesures;
     Temps date;
+    Capteur *capteur;
     //----------------------------------------------------- Attributs protégés
 };
 

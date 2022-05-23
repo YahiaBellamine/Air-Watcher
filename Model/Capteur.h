@@ -7,7 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Capteur> (fichier Capteur.h) ----------------
-#if ! defined ( CAPTEUR_H )
+#if !defined(CAPTEUR_H)
 #define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
@@ -22,51 +22,48 @@
 //
 //------------------------------------------------------------------------
 
-class Capteur : public Ancetre
+class Capteur
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
+    //----------------------------------------------------- Méthodes publiques
     int getIdCapteur() const;
     float getLatitudeCapteur() const;
     void setLatitudeCapteur(float lat);
     float getLongitudeCapteur() const;
     void setLongitudeCapteur(float lon);
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Capteur & operator = ( const Capteur & unXxx );
+    //------------------------------------------------- Surcharge d'opérateurs
+    Capteur &operator=(const Capteur &unXxx);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-
-//-------------------------------------------- Constructeurs - destructeur
+    //-------------------------------------------- Constructeurs - destructeur
     Capteur(int id, float lat, float lon);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Capteur ( );
+    virtual ~Capteur();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 private:
-//----------------------------------------------------- Méthodes protégées
+    //----------------------------------------------------- Méthodes protégées
     int idCapteur;
     float latitude;
     float longitude;
-//----------------------------------------------------- Attributs protégés
-
+    //----------------------------------------------------- Attributs protégés
 };
 
 //-------------------------------- Autres définitions dépendantes de <Capteur>
 
 #endif // CAPTEUR_H
-

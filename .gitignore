@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+mainColin.cpp
+mainColin.o
+mainColin
