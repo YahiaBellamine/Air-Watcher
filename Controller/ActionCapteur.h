@@ -12,6 +12,8 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "../Model/Capteur.h"
+#include <list>
+#include <iterator>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -34,7 +36,7 @@ public:
     // Contrat :
     //
 
-    Capteur comparerCapteur(Capteur capteur);
+    list <Capteur> comparerCapteur(Capteur capteur);
     // Mode d'emploi :
     //
     // Contrat :
