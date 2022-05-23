@@ -34,7 +34,7 @@ float Capteur::getLatitudeCapteur() const
 
 void Capteur::setLatitudeCapteur(float lat)
 {
-    this->latitude = lat; 
+    this->latitude = lat;
 }
 
 float Capteur::getLongitudeCapteur() const
@@ -60,8 +60,7 @@ Capteur::Capteur(int id, float lat, float lon)
     this->longitude = lon;
 } //----- Fin de Capteur
 
-
-Capteur::~Capteur ( )
+Capteur::~Capteur()
 // Algorithme :
 //
 {
@@ -70,8 +69,11 @@ Capteur::~Capteur ( )
 #endif
 } //----- Fin de ~Capteur
 
+bool Capteur::operator==(const Capteur &cap) const
+{
+    return (cap.idCapteur == idCapteur);
+}
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

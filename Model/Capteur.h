@@ -53,7 +53,7 @@ public:
     //
     // Contrat :
     //
-
+    bool operator==(const Capteur &cap) const;
     //------------------------------------------------------------------ PRIVE
 
 private:

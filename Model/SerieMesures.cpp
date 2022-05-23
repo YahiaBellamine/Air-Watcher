@@ -64,7 +64,7 @@ SerieMesures::~SerieMesures()
 bool SerieMesures::ajouterMesure(Mesure *mesure)
 {
     list<Mesure>::iterator it = listeMesures->begin();
-    listeMesures->insert(it, *mesure);
+    .listeMesures->insert(it, *mesure);
     return true;
 }
 
@@ -80,15 +80,15 @@ bool SerieMesures::atmo()
 Mesure SerieMesures::getMesure(string type)
 {
     list<Mesure>::iterator it = listeMesures->begin();
-    for (int index = 0; index < listeMesures->size(); index++)
+    for (it = listeMesures->begin(); it != listeMesures->end(); it++)
     {
+
         if ((*it).getAttribut() == type)
         {
             return *it;
         }
-        advance(it, 1);
     }
-    return Mesure(0, "");
+    return Mesure(5, "");
 }
 
 Temps SerieMesures::getDate()
@@ -99,6 +99,11 @@ Temps SerieMesures::getDate()
 Capteur *SerieMesures::getCapteur()
 {
     return capteur;
+}
+
+bool SerieMesures::operator==(const SerieMesures &sm) const
+{
+    return (*sm.capteur == *capteur && sm.date.difftime(sm.date, date) == 0);
 }
 //------------------------------------------------------------------ PRIVE
 

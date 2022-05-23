@@ -68,6 +68,8 @@ public:
 
     Capteur *getCapteur();
 
+    bool operator==(const SerieMesures &sm) const;
+
     //------------------------------------------------------------------ PRIVE
 
 protected:
