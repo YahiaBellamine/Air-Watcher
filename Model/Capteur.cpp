@@ -47,6 +47,12 @@ void Capteur::setLongitudeCapteur(float lon)
     this->longitude = lon;
 }
 
+ostream & operator << (ostream & out, const Capteur & c)
+{
+    out << "Capteur " << c.idCapteur << endl;
+    return out;
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 Capteur::Capteur(int id, float lat, float lon)
 // Algorithme :
