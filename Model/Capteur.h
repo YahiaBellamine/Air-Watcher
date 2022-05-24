@@ -43,7 +43,7 @@ public:
 
     void setLongitudeCapteur(float lon);
 
-    vector<SerieMesures> getSeriesMesures();
+    vector<SerieMesures> & getSeriesMesures();
 
     void ajouterSerieMesures(SerieMesures &m);
 
