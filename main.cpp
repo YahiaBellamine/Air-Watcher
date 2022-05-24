@@ -13,6 +13,7 @@ using namespace std;
 
 
 static list<Capteur> maListeDeCapteur; 
+// g++ -o main main.cpp Model/Capteur.cpp
 void initialisationCapteur(){
     string id; 
     float lat;

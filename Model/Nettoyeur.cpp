@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //-------------------------------------------- Constructeurs - destructeur
-Nettoyeur::Nettoyeur (int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f)
+Nettoyeur::Nettoyeur (string id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f)
 // Algorithme :
 //
 {
@@ -37,6 +37,22 @@ Nettoyeur::Nettoyeur (int id, float lat, float lon, Temps tDeb, Temps tFin, Four
     this->fournisseur = f;
 } //----- Fin de Nettoyeur
 
+
+
+Nettoyeur::Nettoyeur (string id, float lat, float lon, Temps tDeb, Temps tFin)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Nettoyeur>" << endl;
+#endif
+    this->idNettoyeur = id;
+    this->latitude = lat;
+    this->longitude = lon;
+    this->timeStart = tDeb;
+    this->timeStop = tFin;
+    this->fournisseur = nullptr;
+} //----- Fin de Nettoyeur
 
 Nettoyeur::~Nettoyeur ( )
 // Algorithme :

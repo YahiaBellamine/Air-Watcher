@@ -13,6 +13,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "Fournisseur.h"
 #include "Temps.h"
+#include <cstring>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -29,11 +30,12 @@ class Nettoyeur
 
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    Nettoyeur(int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f);
+    Nettoyeur(string id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f);
     // Mode d'emploi :
     //
     // Contrat :
     //
+    Nettoyeur(string id, float lat, float lon, Temps tDeb, Temps tFin);
 
     virtual ~Nettoyeur ( );
     // Mode d'emploi :
@@ -45,7 +47,7 @@ public:
 
 private:
 //----------------------------------------------------- Méthodes protégées
-    int idNettoyeur;
+    string idNettoyeur;
     float latitude;
     float longitude;
     Temps timeStart;
