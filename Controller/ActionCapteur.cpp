@@ -79,6 +79,8 @@ list<Capteur*>* ActionCapteur::comparerCapteur(Capteur *capteurSelectionne, list
 	nombreDeMesuresNO2 = 0;
 	nombreDeMesuresPM10 = 0;
 
+
+	/* Parcours de la liste de SM du capteur !!! */
 	for(Capteur* c : *listeCapteurs)
 	{
 		if(!(*c == *capteurSelectionne))
