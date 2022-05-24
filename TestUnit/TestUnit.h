@@ -6,16 +6,11 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 #include <iostream>
-#include <ctime>
-#include <list>
-#include "../Model/Temps.h"
-#include "../Model/Capteur.h"
-#include "../Model/SerieMesures.h"
 using namespace std;
 
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if !defined(ACTIONQUALITEAIR_H)
-#define ACTIONQUALITEAIR_H
+#if !defined(TESTUNIT_H)
+#define TESTUNIT_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -28,17 +23,16 @@ using namespace std;
 //
 //
 
-class ActionQualiteAir
+class TestUnit
 {
     //----------------------------------------------------------------- PUBLIC
 
 public:
     //----------------------------------------------------- Méthodes publiques
     //------------------------------------------------------------------------
-    static float *moyenneQualiteAir(float centre_lat, float centre_long, float rayon, list<SerieMesures> *toutesLesMesures, list<Capteur> *tousLesCapteurs, Temps dateDebutMesures);
-    // static float moyenneQualiteAir(Measurement measure, Date dateDebut, Date dateFin);
-    static list<Capteur> *capteursDansAire(float centre_long, float centre_lat, float rayon, list<Capteur> *tousLesCapteurs);
+    static bool Test1();
 
+    static bool AllTests();
     //------------------------------------------------------------------ PRIVE
 
 protected:

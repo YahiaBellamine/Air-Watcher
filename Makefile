@@ -6,8 +6,7 @@ else
 	CXXFLAGS=-ansi -pedantic -Wall -std=c++11 -g
 endif
 EXEC=main
-OBJECTS=mainAlexis.cpp Model/Capteur.o Model/SerieMesures.o Model/Mesure.o Controller/ActionCapteur.o
-
+OBJECTS=Model/Attribut.o Model/SerieMesures.o Model/Mesure.o Model/AgenceGouvernementale.o Model/Capteur.o Model/Fournisseur.o Model/IndividuPrive.o Model/Nettoyeur.o  Model/Utilisateur.o Controller/ActionQualiteAir.o TestUnit/TestUnit.o
 all: $(OBJECTS)
 	$(CXX) -o $(EXEC) $(OBJECTS)
 

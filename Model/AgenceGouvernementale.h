@@ -7,7 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <AgenceGouvernementale> (fichier AgenceGouvernementale.h) ----------------
-#if ! defined ( AGENCEGOUVERNEMENTALE_H )
+#if !defined(AGENCEGOUVERNEMENTALE_H)
 #define AGENCEGOUVERNEMENTALE_H
 
 //--------------------------------------------------- Interfaces utilisées
@@ -26,34 +26,32 @@
 
 class AgenceGouvernementale : public Utilisateur
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
+    //----------------------------------------------------- Méthodes publiques
     bool ajouterCapteur(Capteur capteur);
-    vector<Capteur*> getListeCapteurs() const;
+    list<Capteur *> getListeCapteurs() const;
 
-//-------------------------------------------- Constructeurs - destructeur
+    //-------------------------------------------- Constructeurs - destructeur
     AgenceGouvernementale(string login, string mdp);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~AgenceGouvernementale ( );
+    virtual ~AgenceGouvernementale();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 private:
-    list<Capteur*> listeCapteurs;
-
+    list<Capteur *> listeCapteurs;
 };
 
 //-------------------------------- Autres définitions dépendantes de <AgenceGouvernementale>
 
 #endif // AGENCEGOUVERNEMENTALE_H
-

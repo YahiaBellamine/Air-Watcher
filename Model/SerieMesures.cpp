@@ -88,7 +88,7 @@ Mesure SerieMesures::getMesure(string type) const
             return *it;
         }
     }
-    return Mesure(5, "");
+    return Mesure(1000, "");
 }
 
 Temps SerieMesures::getDate()
