@@ -5,10 +5,12 @@
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
-#include "Attribut.h"
+#include <iostream>
+using namespace std;
+
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if !defined(MESURE_H)
-#define MESURE_H
+#if !defined(TESTUNIT_H)
+#define TESTUNIT_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,58 +19,26 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Mesure>
+// Rôle de la classe <Xxx>
 //
 //
-//------------------------------------------------------------------------
 
-class Mesure
+class TestUnit
 {
     //----------------------------------------------------------------- PUBLIC
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    //------------------------------------------------------------------------
+    static bool Test1();
 
-    //------------------------------------------------- Surcharge d'opérateurs
-    // Xxx &operator=(const Xxx &unXxx);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    //-------------------------------------------- Constructeurs - destructeur
-    // Xxx(const Xxx &unXxx);
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    Mesure(float valeur, string idAttribut);
-
-    virtual ~Mesure();
-    // Inutile
-
-    float getValeur() const;
-
-    void setValeur(float valeur);
-
-    string getAttribut();
-
-    void setAttribut(string idAttribut);
-
+    static bool AllTests();
     //------------------------------------------------------------------ PRIVE
 
 protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
-    float valeur;
-    string idAttribut;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>

@@ -7,6 +7,10 @@
 *************************************************************************/
 #include <iostream>
 #include <ctime>
+#include <list>
+#include "../Model/Temps.h"
+#include "../Model/Capteur.h"
+#include "../Model/SerieMesures.h"
 using namespace std;
 
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
@@ -31,8 +35,9 @@ class ActionQualiteAir
 public:
     //----------------------------------------------------- Méthodes publiques
     //------------------------------------------------------------------------
-    static float moyenneQualiteAir(/*Measurement measure, Date date*/);
+    static float *moyenneQualiteAir(float centre_lat, float centre_long, float rayon, list<SerieMesures> *toutesLesMesures, list<Capteur> *tousLesCapteurs, Temps dateDebutMesures);
     // static float moyenneQualiteAir(Measurement measure, Date dateDebut, Date dateFin);
+    static list<Capteur> *capteursDansAire(float centre_long, float centre_lat, float rayon, list<Capteur> *tousLesCapteurs);
 
     //------------------------------------------------------------------ PRIVE
 
