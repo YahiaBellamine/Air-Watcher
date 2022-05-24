@@ -88,10 +88,10 @@ bool TestUnit::Test1()
     }
 
     cout << "..... Etape 2 : vérification de la fonctionnalité de zone" << endl;
-    Mesure *m9 = new Mesure(-1.0, "SO2");
-    Mesure *m10 = new Mesure(-5.0, "O3");
-    Mesure *m11 = new Mesure(-20.0, "NO2");
-    Mesure *m12 = new Mesure(-50.0, "PM10");
+    Mesure *m9 = new Mesure(30.0, "SO2");
+    Mesure *m10 = new Mesure(30.0, "O3");
+    Mesure *m11 = new Mesure(30.0, "NO2");
+    Mesure *m12 = new Mesure(30.0, "PM10");
     Capteur *cap3 = new Capteur(3, 5.5, 5.5);
     SerieMesures *sm3 = new SerieMesures(cap3, Temps(0, 0, 0, 0, 0, 0));
     sm3->ajouterMesure(m9);
@@ -99,22 +99,35 @@ bool TestUnit::Test1()
     sm3->ajouterMesure(m11);
     sm3->ajouterMesure(m12);
 
+    Mesure *m13 = new Mesure(1.0, "SO2");
+    Mesure *m14 = new Mesure(5.0, "O3");
+    Mesure *m15 = new Mesure(20.0, "NO2");
+    Mesure *m16 = new Mesure(50.0, "PM10");
+    Capteur *cap4 = new Capteur(1, 0.5, 0.5);
+    SerieMesures *sm4 = new SerieMesures(cap4, Temps(0, 0, 0, 0, 0, 0));
+    sm4->ajouterMesure(m13);
+    sm4->ajouterMesure(m14);
+    sm4->ajouterMesure(m15);
+    sm4->ajouterMesure(m16);
+
     list<SerieMesures> *testMoyenneAireSerie2 = new list<SerieMesures>;
-    testMoyenneAireSerie2->insert(testMoyenneAireSerie2->begin(), *sm1);
+    testMoyenneAireSerie2->insert(testMoyenneAireSerie2->begin(), *sm4);
     testMoyenneAireSerie2->insert(testMoyenneAireSerie2->begin(), *sm3);
     list<Capteur> *testMoyenneAireCap2 = new list<Capteur>;
-    testMoyenneAireCap2->insert(testMoyenneAireCap2->begin(), *cap);
+    testMoyenneAireCap2->insert(testMoyenneAireCap2->begin(), *cap4);
     testMoyenneAireCap2->insert(testMoyenneAireCap2->begin(), *cap3);
+
     float *moyenneTest2 = ActionQualiteAir::moyenneQualiteAir(0.5, 0.5, 5, testMoyenneAireSerie2, testMoyenneAireCap2, Temps(0, 0, 0, 0, 0, 0));
+    cout << moyenneTest2[0] << " : " << moyenneTest2[1] << " : " << moyenneTest2[2] << " : " << moyenneTest2[3] << endl;
     if (moyenneTest2[0] == (float)1.0 && moyenneTest2[1] == (float)5.0 && moyenneTest2[2] == (float)20.0 && moyenneTest2[3] == (float)50.0)
     {
         cout << "...... ETAPE 2 PASSEE" << endl;
-        test1 = true;
+        test2 = true;
     }
     else
     {
         cout << "...... /!\\ ETAPE 2 NON PASSEE /!\\" << endl;
-        test1 = false;
+        test2 = false;
     }
     cout << "..... Etape 3 : vérification de la fonctionnalité de temps" << endl;
 

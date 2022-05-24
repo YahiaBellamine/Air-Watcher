@@ -62,7 +62,7 @@ public:
     virtual ~SerieMesures();
     // Inutile
 
-    Mesure getMesure(string type);
+    Mesure *getMesure(string type);
 
     Temps getDate();
 
@@ -74,7 +74,7 @@ public:
 
 protected:
     //----------------------------------------------------- Méthodes protégées
-    list<Mesure> *listeMesures;
+    list<Mesure *> *listeMesures;
     Temps date;
     Capteur *capteur;
     //----------------------------------------------------- Attributs protégés

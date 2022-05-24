@@ -81,10 +81,10 @@ float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, 
         list<SerieMesures>::iterator it;
         for (it = listeMesuresDansAire->begin(); it != listeMesuresDansAire->end(); it++)
         {
-            resultat[0] += (*it).getMesure("SO2").getValeur();
-            resultat[1] += (*it).getMesure("O3").getValeur();
-            resultat[2] += (*it).getMesure("NO2").getValeur();
-            resultat[3] += (*it).getMesure("PM10").getValeur();
+            resultat[0] += it->getMesure("SO2")->getValeur();
+            resultat[1] += it->getMesure("O3")->getValeur();
+            resultat[2] += it->getMesure("NO2")->getValeur();
+            resultat[3] += it->getMesure("PM10")->getValeur();
         }
     }
     float nbMesures = (float)listeMesuresDansAire->size();

@@ -45,7 +45,7 @@ SerieMesures::SerieMesures(Capteur *capteur, Temps date)
 {
     this->capteur = capteur;
     this->date = date;
-    this->listeMesures = new list<Mesure>;
+    this->listeMesures = new list<Mesure *>;
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
@@ -63,32 +63,32 @@ SerieMesures::~SerieMesures()
 
 bool SerieMesures::ajouterMesure(Mesure *mesure)
 {
-    list<Mesure>::iterator it = listeMesures->begin();
-    listeMesures->insert(it, *mesure);
+    list<Mesure *>::iterator it = listeMesures->begin();
+    listeMesures->insert(it, mesure);
     return true;
 }
 
 bool SerieMesures::atmo()
 {
-    if (this->getMesure("O3").getValeur() < 104 && this->getMesure("SO2").getValeur() < 159 && this->getMesure("NO2").getValeur() < 109 && this->getMesure("PM10").getValeur() < 27)
+    if (this->getMesure("O3")->getValeur() < 104 && this->getMesure("SO2")->getValeur() < 159 && this->getMesure("NO2")->getValeur() < 109 && this->getMesure("PM10")->getValeur() < 27)
     {
         return true;
     }
     return false;
 }
 
-Mesure SerieMesures::getMesure(string type)
+Mesure *SerieMesures::getMesure(string type)
 {
-    list<Mesure>::iterator it = listeMesures->begin();
+    list<Mesure *>::iterator it = listeMesures->begin();
     for (it = listeMesures->begin(); it != listeMesures->end(); it++)
     {
 
-        if ((*it).getAttribut() == type)
+        if ((*it)->getAttribut() == type)
         {
-            return *it;
+            return (*it);
         }
     }
-    return Mesure(1000, "");
+    return nullptr;
 }
 
 Temps SerieMesures::getDate()
