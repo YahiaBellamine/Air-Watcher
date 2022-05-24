@@ -16,7 +16,7 @@
 #include <list>
 #include <iterator>
 //------------------------------------------------------------- Constantes
-
+const float SIMILARITE_MAX_ADMISSIBLE = 10.0;
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
@@ -37,7 +37,7 @@ public:
     // Contrat :
     //
 
-    list<Capteur> comparerCapteur(Capteur capteurSelectionne, list<Capteur> listeCapteurs, list<SerieMesures> listeSerieMesures);
+    static list<Capteur*>* comparerCapteur(Capteur *capteurSelectionne, list<Capteur*> *listeCapteurs, list<SerieMesures*> *listeSerieMesures);
     // Mode d'emploi :
     //
     // Contrat :

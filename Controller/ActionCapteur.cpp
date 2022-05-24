@@ -31,19 +31,19 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, list<Capteur> listeCapteurs, list<SerieMesures> listeSerieMesures)
+list<Capteur*>* ActionCapteur::comparerCapteur(Capteur *capteurSelectionne, list<Capteur*> *listeCapteurs, list<SerieMesures*> *listeSerieMesures)
 {
-	list<Capteur> capteursSimilaires;
+	list<Capteur*> *capteursSimilaires = new list<Capteur *>();
 	
-	double moyenneO3 = 0;
-	double moyenneSO2 = 0;
-	double moyenneNO2 = 0;
-	double moyennePM10 = 0;
+	float moyenneO3 = 0;
+	float moyenneSO2 = 0;
+	float moyenneNO2 = 0;
+	float moyennePM10 = 0;
 
-	double moyenneCapteurO3 = 0;
-	double moyenneCapteurSO2 = 0;
-	double moyenneCapteurNO2 = 0;
-	double moyenneCapteurPM10 = 0;
+	float moyenneCapteurO3 = 0;
+	float moyenneCapteurSO2 = 0;
+	float moyenneCapteurNO2 = 0;
+	float moyenneCapteurPM10 = 0;
 
 	int nombreDeMesuresO3 = 0;
 	int nombreDeMesuresSO2 = 0;
@@ -51,20 +51,20 @@ list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, list<Ca
 	int nombreDeMesuresPM10 = 0;
 	
 
-	for(SerieMesures sm : listeSerieMesures)
+	for(SerieMesures* sm : *listeSerieMesures)
 	{
-		if(*sm.getCapteur() == capteurSelectionne /* && sm.getDate() > 7 JOURS */)
+		if(*(sm->getCapteur()) == *capteurSelectionne /* && sm.getDate() > 7 JOURS */)
 		{
-			moyenneCapteurO3 += sm.getMesure("O3").getValeur();
+			moyenneCapteurO3 += sm->getMesure("O3").getValeur();
 			nombreDeMesuresO3 ++;
 			
-			moyenneCapteurSO2 += sm.getMesure("SO2").getValeur();
+			moyenneCapteurSO2 += sm->getMesure("SO2").getValeur();
 			nombreDeMesuresSO2 ++;
 		
-			moyenneCapteurNO2 += sm.getMesure("NO2").getValeur();
+			moyenneCapteurNO2 += sm->getMesure("NO2").getValeur();
 			nombreDeMesuresNO2 ++;
 		
-			moyenneCapteurPM10 += sm.getMesure("PM10").getValeur();
+			moyenneCapteurPM10 += sm->getMesure("PM10").getValeur();
 			nombreDeMesuresPM10 ++;			
 		}
 	}
@@ -79,24 +79,28 @@ list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, list<Ca
 	nombreDeMesuresNO2 = 0;
 	nombreDeMesuresPM10 = 0;
 
-	for(Capteur c : listeCapteurs)
+	for(Capteur* c : *listeCapteurs)
 	{
-		if(!(c == capteurSelectionne))
+		if(!(*c == *capteurSelectionne))
 		{
-			for(SerieMesures sm : listeSerieMesures)
+			for(SerieMesures* sm : *listeSerieMesures)
 			{
-				// if(sm.getDate())
-				moyenneO3 += sm.getMesure("O3").getValeur();
-				nombreDeMesuresO3 ++;
+				if(sm->getCapteur() == c /* && ->getDate()*/)
+				{
+					// cout << *sm; 
+
+					moyenneO3 += sm->getMesure("O3").getValeur();
+					nombreDeMesuresO3 ++;
+					
+					moyenneSO2 += sm->getMesure("SO2").getValeur();
+					nombreDeMesuresSO2 ++;
 				
-				moyenneSO2 += sm.getMesure("SO2").getValeur();
-				nombreDeMesuresSO2 ++;
-			
-				moyenneNO2 += sm.getMesure("NO2").getValeur();
-				nombreDeMesuresNO2 ++;
-			
-				moyennePM10 += sm.getMesure("PM10").getValeur();
-				nombreDeMesuresPM10 ++;		
+					moyenneNO2 += sm->getMesure("NO2").getValeur();
+					nombreDeMesuresNO2 ++;
+				
+					moyennePM10 += sm->getMesure("PM10").getValeur();
+					nombreDeMesuresPM10 ++;	
+				}
 			}
 
 			moyenneO3 /= nombreDeMesuresO3;
@@ -107,8 +111,8 @@ list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, list<Ca
 			if(sqrt(pow((moyenneO3 - moyenneCapteurO3), 2.0)
 				+ pow((moyenneSO2 - moyenneCapteurSO2), 2.0)
 				+ pow((moyenneNO2 - moyenneCapteurNO2), 2.0) 
-				+ pow((moyennePM10 - moyenneCapteurPM10), 2.0)) < 1.0){
-					capteursSimilaires.push_back(c);
+				+ pow((moyennePM10 - moyenneCapteurPM10), 2.0)) < SIMILARITE_MAX_ADMISSIBLE){
+					capteursSimilaires->push_back(c);
 			}
 			
 			nombreDeMesuresO3 = 0;
@@ -122,9 +126,9 @@ list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, list<Ca
 		}
 	}
 
-	for(Capteur c : capteursSimilaires)
+	for(Capteur *c : *capteursSimilaires)
 	{
-		cout << c; 
+		cout << *c; 
 	}
 
 	return capteursSimilaires;
