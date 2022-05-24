@@ -2,6 +2,8 @@
 #define ACTIONMESURE_H
 using namespace std;
 #include <list>
+#include "../Model/Mesure.h"
+
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
@@ -27,8 +29,6 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    String identifiantUtilisateur;
-    String motDePasse;
 
 };
 

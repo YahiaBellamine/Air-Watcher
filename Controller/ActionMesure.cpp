@@ -16,22 +16,23 @@ list<Mesure> initialisationMesure(){
     ifstream fic;
     fic.open("../dataset/measurements.csv");
     if(!fic){
-        cout << " *****  LE FICHIER EST INTROUVABLE"
+        cout << " *****  LE FICHIER EST INTROUVABLE" << endl;
     }
     char * buffer = new char[100];
-    while(!monfic.eof()){
+    while(!fic.eof()){
         
-        monfic.getline(buffer,100, ';'); 
-        monfic.getline(buffer,100, ';');  
-        monfic.getline(buffer,100, ';');  
+        fic.getline(buffer,100, ';'); 
+        fic.getline(buffer,100, ';');  
+        fic.getline(buffer,100, ';');  
         float valeurMesure = stof(buffer);
-        monfic.getline(buffer,100, ';');  
+        fic.getline(buffer,100, ';');  
         string idMesure = buffer;
-        Mesure nouvelleMesure = new Mesure (valeurMesure, idMesure);
+        Mesure nouvelleMesure = Mesure (valeurMesure, idMesure);
         toutesLesMesures.insert (it,nouvelleMesure);
         it++;
     }
     fic.close();
+    return toutesLesMesures;
 }
 //------------------------------------------------- Surcharge d'opérateurs
 
