@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-int Capteur::getIdCapteur() const
+string Capteur::getIdCapteur() const
 {
     return this->idCapteur;
 }
@@ -54,7 +54,7 @@ ostream & operator << (ostream & out, const Capteur & c)
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Capteur::Capteur(int id, float lat, float lon)
+Capteur::Capteur(string id, float lat, float lon)
 // Algorithme :
 //
 {

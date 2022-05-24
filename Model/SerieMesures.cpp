@@ -39,13 +39,18 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(Capteur *capteur, Temps date)
+SerieMesures::SerieMesures(string idCapteur, Temps date, list<Mesure*> mesures4)
 // Algorithme :
 //
 {
     this->capteur = capteur;
-    this->date = date;
-    this->listeMesures = new list<Mesure>;
+    this->date.annee = date.annee;
+    this->date.mois = date.mois;
+    this->date.jour = date.jour;
+    this->date.jour = date.jour;
+    this->date.heure = date.heure;
+    this->date.sec = date.sec;
+    this->listeMesures = new list<Mesure*>();
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
@@ -63,8 +68,8 @@ SerieMesures::~SerieMesures()
 
 bool SerieMesures::ajouterMesure(Mesure *mesure)
 {
-    list<Mesure>::iterator it = listeMesures->begin();
-    listeMesures->insert(it, *mesure);
+    list<Mesure*>::iterator it = listeMesures->begin();
+    listeMesures->insert(it, mesure);
     return true;
 }
 
@@ -77,18 +82,17 @@ bool SerieMesures::atmo()
     return false;
 }
 
-Mesure SerieMesures::getMesure(string type) const
+Mesure * SerieMesures::getMesure(string type)
 {
-    list<Mesure>::iterator it = listeMesures->begin();
-    for (it = listeMesures->begin(); it != listeMesures->end(); it++)
+    for (list<Mesure*>::iterator it = listeMesures->begin(); it != listeMesures->end(); it++)
     {
 
         if ((*it).getAttribut() == type)
         {
-            return *it;
+            return it;
         }
     }
-    return Mesure(1000, "");
+    return nullptr;
 }
 
 Temps SerieMesures::getDate()
@@ -104,16 +108,6 @@ Capteur *SerieMesures::getCapteur()
 bool SerieMesures::operator==(const SerieMesures &sm) const
 {
     return (*sm.capteur == *capteur && sm.date.difftime(sm.date, date) == 0);
-}
-
-ostream & operator << (ostream & out, const SerieMesures & sm)
-{
-    cout << *(sm.capteur); 
-    cout << "O3 : " << sm.getMesure("O3").getValeur() << endl;
-    cout << "SO2 : " << sm.getMesure("SO2").getValeur() << endl;
-    cout << "NO2 : " << sm.getMesure("NO2").getValeur() << endl;
-    cout << "PM10 : " << sm.getMesure("PM10").getValeur() << endl << endl;
-    return out;
 }
 //------------------------------------------------------------------ PRIVE
 
