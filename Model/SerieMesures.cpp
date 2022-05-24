@@ -77,7 +77,7 @@ bool SerieMesures::atmo()
     return false;
 }
 
-Mesure SerieMesures::getMesure(string type)
+Mesure SerieMesures::getMesure(string type) const
 {
     list<Mesure>::iterator it = listeMesures->begin();
     for (it = listeMesures->begin(); it != listeMesures->end(); it++)
@@ -104,6 +104,16 @@ Capteur *SerieMesures::getCapteur()
 bool SerieMesures::operator==(const SerieMesures &sm) const
 {
     return (*sm.capteur == *capteur && sm.date.difftime(sm.date, date) == 0);
+}
+
+ostream & operator << (ostream & out, const SerieMesures & sm)
+{
+    cout << *(sm.capteur); 
+    cout << "O3 : " << sm.getMesure("O3").getValeur() << endl;
+    cout << "SO2 : " << sm.getMesure("SO2").getValeur() << endl;
+    cout << "NO2 : " << sm.getMesure("NO2").getValeur() << endl;
+    cout << "PM10 : " << sm.getMesure("PM10").getValeur() << endl << endl;
+    return out;
 }
 //------------------------------------------------------------------ PRIVE
 

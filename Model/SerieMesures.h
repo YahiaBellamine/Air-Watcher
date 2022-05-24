@@ -17,7 +17,7 @@ using namespace std;
 #define SERIEMESURE_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <iostream>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -62,13 +62,15 @@ public:
     virtual ~SerieMesures();
     // Inutile
 
-    Mesure getMesure(string type);
+    Mesure getMesure(string type) const;
 
     Temps getDate();
 
     Capteur *getCapteur();
 
     bool operator==(const SerieMesures &sm) const;
+
+    friend ostream & operator << (ostream & out, const SerieMesures & sm);
 
     //------------------------------------------------------------------ PRIVE
 
