@@ -31,7 +31,7 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-vector<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, vector<Capteur> listeCapteurs, vector<SerieMesures> listeSerieMesures)
+vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs, vector<SerieMesures> &listeSerieMesures)
 {
 	vector<Capteur> capteursSimilaires;
 	
@@ -51,28 +51,32 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, vecto
 	int nombreDeMesuresPM10 = 0;
 	
 
-	for(SerieMesures sm : listeSerieMesures)
+	for(SerieMesures sm : capteurSelectionne.getSeriesMesures())
 	{
-		if(sm.getCapteur() == capteurSelectionne.getIdCapteur() /* && sm.getDate() > 7 JOURS */)
-		{
-			moyenneCapteurO3 += sm.getMesure("O3").getValeur();
-			nombreDeMesuresO3 ++;
-			
-			moyenneCapteurSO2 += sm.getMesure("SO2").getValeur();
-			nombreDeMesuresSO2 ++;
+		/* if(sm.getDate > ...){} */
+		moyenneCapteurO3 += sm.getMesure("O3").getValeur();
+		nombreDeMesuresO3 ++;
 		
-			moyenneCapteurNO2 += sm.getMesure("NO2").getValeur();
-			nombreDeMesuresNO2 ++;
-		
-			moyenneCapteurPM10 += sm.getMesure("PM10").getValeur();
-			nombreDeMesuresPM10 ++;			
-		}
+		moyenneCapteurSO2 += sm.getMesure("SO2").getValeur();
+		nombreDeMesuresSO2 ++;
+	
+		moyenneCapteurNO2 += sm.getMesure("NO2").getValeur();
+		nombreDeMesuresNO2 ++;
+	
+		moyenneCapteurPM10 += sm.getMesure("PM10").getValeur();
+		nombreDeMesuresPM10 ++;
 	}
+
 
 	moyenneCapteurO3 /= nombreDeMesuresO3;
 	moyenneCapteurSO2 /= nombreDeMesuresSO2;
 	moyenneCapteurNO2 /= nombreDeMesuresNO2;
 	moyenneCapteurPM10 /= nombreDeMesuresPM10;
+
+	cout << "moyenne : " << moyenneCapteurO3 << endl;
+	cout << "moyenne : " << moyenneCapteurSO2 << endl;
+	cout << "moyenne : " << moyenneCapteurNO2 << endl;
+	cout << "moyenne : " << moyenneCapteurPM10 << endl;
 
 	nombreDeMesuresO3 = 0;
 	nombreDeMesuresSO2 = 0;
@@ -83,32 +87,35 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, vecto
 	/* Parcours de la liste de SM du capteur !!! */
 	for(Capteur c : listeCapteurs)
 	{
-		if(!(c == capteurSelectionne))
+		if(c.getIdCapteur() != capteurSelectionne.getIdCapteur())
 		{
-			for(SerieMesures sm : listeSerieMesures)
+			for(SerieMesures sm : c.getSeriesMesures())
 			{
-				if(sm.getCapteur() == c.getIdCapteur() /* && .getDate()*/)
-				{
-					// cout << *sm; 
+				/* if(sm.getDate()){} */
 
-					moyenneO3 += sm.getMesure("O3").getValeur();
-					nombreDeMesuresO3 ++;
-					
-					moyenneSO2 += sm.getMesure("SO2").getValeur();
-					nombreDeMesuresSO2 ++;
+				moyenneO3 += sm.getMesure("O3").getValeur();
+				nombreDeMesuresO3 ++;
 				
-					moyenneNO2 += sm.getMesure("NO2").getValeur();
-					nombreDeMesuresNO2 ++;
+				moyenneSO2 += sm.getMesure("SO2").getValeur();
+				nombreDeMesuresSO2 ++;
+			
+				moyenneNO2 += sm.getMesure("NO2").getValeur();
+				nombreDeMesuresNO2 ++;
+			
+				moyennePM10 += sm.getMesure("PM10").getValeur();
+				nombreDeMesuresPM10 ++;	
 				
-					moyennePM10 += sm.getMesure("PM10").getValeur();
-					nombreDeMesuresPM10 ++;	
-				}
 			}
 
 			moyenneO3 /= nombreDeMesuresO3;
 			moyenneSO2 /= nombreDeMesuresSO2;
 			moyenneNO2 /= nombreDeMesuresNO2;
 			moyennePM10 /= nombreDeMesuresPM10;
+
+			cout << "CCC :" << moyenneO3 << endl;
+			cout << "CCC :" << moyenneSO2 << endl;
+			cout << "CCC :" << moyenneNO2 << endl;
+			cout << "CCC :" << moyennePM10 << endl;
 
 			if(sqrt(pow((moyenneO3 - moyenneCapteurO3), 2.0)
 				+ pow((moyenneSO2 - moyenneCapteurSO2), 2.0)

@@ -39,7 +39,7 @@ public:
     // Contrat :
     //
 
-    static vector<Capteur> comparerCapteur(Capteur capteurSelectionne, vector<Capteur> listeCapteurs, vector<SerieMesures> listeSerieMesures);
+    static vector<Capteur> comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs, vector<SerieMesures> &listeSerieMesures);
     // Mode d'emploi :
     //
     // Contrat :

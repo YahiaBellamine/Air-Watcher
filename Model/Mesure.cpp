@@ -38,12 +38,12 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-Mesure::Mesure(float valeur, string idAttribut)
+Mesure::Mesure(float lavaleur, string lidAttribut)
 // Algorithme :
 //
 {
-    valeur = valeur;
-    idAttribut = idAttribut;
+    valeur = lavaleur;
+    idAttribut = lidAttribut;
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
