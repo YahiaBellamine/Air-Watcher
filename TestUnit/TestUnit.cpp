@@ -25,6 +25,7 @@ using namespace std;
 #include "../Model/Capteur.h"
 #include "../Model/SerieMesures.h"
 #include "../Controller/ActionQualiteAir.h"
+#include "../Controller/ActionCapteur.h"
 #include <math.h>
 #include <iterator>
 #include <algorithm>
@@ -137,7 +138,84 @@ bool TestUnit::Test1()
 
 bool TestUnit::Test2()
 {
-    return false;
+    bool test1, testGeneral;
+    cout << ".. Test 2 : Comparer les similarités entre capteurs" << endl;
+    cout << endl
+         << "..... Etape 1 : Vérification de la bonne exclusion des capteurs non ressemblants" << endl;
+
+    Mesure m1 = Mesure(1.0, "SO2");
+    Mesure m2 = Mesure(5.0, "O3");
+    Mesure m3 = Mesure(20.0, "NO2");
+    Mesure m4 = Mesure(50.0, "PM10");
+    Capteur cap = Capteur("1", 0.5, 0.5);
+    SerieMesures sm1 = SerieMesures(Temps(10, 0, 0, 0, 0, 0));
+    sm1.ajouterMesure(m1);
+    sm1.ajouterMesure(m2);
+    sm1.ajouterMesure(m3);
+    sm1.ajouterMesure(m4);
+    cap.ajouterSerieMesures(sm1);
+
+    Mesure m5 = Mesure(2.0, "SO2");
+    Mesure m6 = Mesure(8.0, "O3");
+    Mesure m7 = Mesure(26.0, "NO2");
+    Mesure m8 = Mesure(48.1, "PM10");
+    Capteur cap2 = Capteur("2", 0.5, 0.5);
+    SerieMesures sm2 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
+
+    sm2.ajouterMesure(m5);
+    sm2.ajouterMesure(m6);
+    sm2.ajouterMesure(m7);
+    sm2.ajouterMesure(m8);
+    cap2.ajouterSerieMesures(sm2);
+
+    Mesure m9 = Mesure(6.0, "SO2");
+    Mesure m10 = Mesure(14.0, "O3");
+    Mesure m11 = Mesure(35.0, "NO2");
+    Mesure m12 = Mesure(48.1, "PM10");
+    Capteur cap3 = Capteur("3", 0.5, 0.5);
+    SerieMesures sm3 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
+
+    sm3.ajouterMesure(m9);
+    sm3.ajouterMesure(m10);
+    sm3.ajouterMesure(m11);
+    sm3.ajouterMesure(m12);
+    cap3.ajouterSerieMesures(sm3);
+
+    vector<Capteur> testMoyenneAireCap;
+    testMoyenneAireCap.push_back(cap2);
+    testMoyenneAireCap.push_back(cap3);
+    vector<SerieMesures> testMoyenneAireSerie;
+    testMoyenneAireSerie.push_back(sm1);
+    testMoyenneAireSerie.push_back(sm2);
+    testMoyenneAireSerie.push_back(sm3);
+    vector<Capteur> resultat1 = ActionCapteur::comparerCapteur(cap, testMoyenneAireCap, testMoyenneAireSerie);
+    cout << endl
+         << resultat1.size() << endl;
+    if (resultat1.size() == 1 && resultat1.begin()->getIdCapteur() == "1")
+    {
+        cout << "...... ETAPE 1 PASSEE" << endl;
+        test1 = true;
+    }
+    else
+    {
+        cout << "...... /!\\ ETAPE 1 NON PASSEE /!\\" << endl;
+        test1 = false;
+    }
+
+    // cout << endl << "..... Etape 2 : vérification de la fonctionnalité de zone" << endl;
+
+    testGeneral = test1;
+    if (testGeneral)
+    {
+        cout << endl
+             << ".. TEST 1 PASSE" << endl;
+    }
+    else
+    {
+        cout << endl
+             << ".. /!\\ TEST 1 NON PASSE /!\\" << endl;
+    }
+    return testGeneral;
 }
 
 bool TestUnit::AllTests()
