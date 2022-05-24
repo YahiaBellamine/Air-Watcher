@@ -7,11 +7,11 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Nettoyeur> (fichier Nettoyeur.h) ----------------
-#if !defined(NETTOYEUR_H)
+#if ! defined ( NETTOYEUR_H )
 #define NETTOYEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Fournisseur.h"
+
 #include "Temps.h"
 //------------------------------------------------------------- Constantes
 
@@ -23,39 +23,40 @@
 //
 //------------------------------------------------------------------------
 class Fournisseur;
-
 class Nettoyeur
 {
-    //----------------------------------------------------------------- PUBLIC
+//----------------------------------------------------------------- PUBLIC
 
 public:
-    //-------------------------------------------- Constructeurs - destructeur
-    Nettoyeur(int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur *f);
+//-------------------------------------------- Constructeurs - destructeur
+    Nettoyeur(string id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur *f);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Nettoyeur();
+    virtual ~Nettoyeur ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    //------------------------------------------------------------------ PRIVE
+//------------------------------------------------------------------ PRIVE
 
 private:
-    //----------------------------------------------------- Méthodes protégées
-    int idNettoyeur;
+//----------------------------------------------------- Méthodes protégées
+    string idNettoyeur;
     float latitude;
     float longitude;
     Temps timeStart;
     Temps timeStop;
     Fournisseur *fournisseur;
 
-    //----------------------------------------------------- Attributs protégés
+//----------------------------------------------------- Attributs protégés
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <Nettoyeur>
 
 #endif // NETTOYEUR_H
+

@@ -15,13 +15,15 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
+
+
 #include "Fournisseur.h"
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool Fournisseur::ajouterNettoyeur(Nettoyeur nettoyeur)
+bool Fournisseur::ajouterNettoyeur (Nettoyeur nettoyeur)
 // Algorithme :
 //
 {
@@ -36,12 +38,12 @@ bool Fournisseur::ajouterNettoyeur(Nettoyeur nettoyeur)
     return added;
 } //----- Fin de Méthode
 
-list<Nettoyeur *> Fournisseur::getListeNettoyeurs() const
+vector<Nettoyeur> Fournisseur::getListeNettoyeurs() const
 // Algorithme :
 //
 {
-    return this->listeNettoyeur;
-} //----- Fin de Méthode
+    return listeNettoyeur;
+}//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)

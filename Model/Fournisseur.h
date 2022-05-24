@@ -12,8 +12,9 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
-#include <list>
+#include <vector>
 #include "Utilisateur.h"
+#include "Capteur.h"
 #include "Nettoyeur.h"
 #include "Capteur.h"
 //------------------------------------------------------------- Constantes
@@ -25,17 +26,15 @@
 //
 //
 //------------------------------------------------------------------------
-
 class Nettoyeur;
-
 class Fournisseur : public Utilisateur
 {
     //----------------------------------------------------------------- PUBLIC
 
 public:
-    //----------------------------------------------------- Méthodes publiques
-    bool ajouterNettoyeur(Nettoyeur nettoyeur);
-    list<Nettoyeur *> getListeNettoyeurs() const;
+//----------------------------------------------------- Méthodes publiques
+    bool ajouterNettoyeur (Nettoyeur nettoyeur);
+    vector<Nettoyeur> getListeNettoyeurs() const;
 
     //-------------------------------------------- Constructeurs - destructeur
     Fournisseur(string login, string mdp);
@@ -53,9 +52,10 @@ public:
     //------------------------------------------------------------------ PRIVE
 
 private:
-    //----------------------------------------------------- Méthodes protégées
-    list<Nettoyeur *> listeNettoyeur;
-    //----------------------------------------------------- Attributs protégés
+//----------------------------------------------------- Méthodes protégées
+    vector<Nettoyeur> listeNettoyeur;
+//----------------------------------------------------- Attributs protégés
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <Fournisseur>

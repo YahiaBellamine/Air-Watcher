@@ -42,8 +42,8 @@ Mesure::Mesure(float valeur, string idAttribut)
 // Algorithme :
 //
 {
-    this->valeur = valeur;
-    this->idAttribut = idAttribut;
+    valeur = valeur;
+    idAttribut = idAttribut;
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
@@ -65,17 +65,17 @@ float Mesure::getValeur() const
 
 void Mesure::setValeur(float valeur)
 {
-    this->valeur = valeur;
+    valeur = valeur;
 }
 
-string Mesure::getAttribut()
+string Mesure::getAttribut() const
 {
     return idAttribut;
 }
 
 void Mesure::setAttribut(string idAttribut)
 {
-    this->idAttribut = idAttribut;
+    idAttribut = idAttribut;
 }
 
 //------------------------------------------------------------------ PRIVE

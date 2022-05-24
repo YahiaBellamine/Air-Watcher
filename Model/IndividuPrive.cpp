@@ -15,8 +15,9 @@ bool IndividuPrive::ajouterPoints(int points)
 // Algorithme :
 //
 {
-    nombrePoints += points;
-} //----- Fin de Méthode
+    //A developper
+    return true;
+}//----- Fin de Méthode
 
 bool IndividuPrive::ajouterCapteur(Capteur capteur)
 // Algorithme :
@@ -24,10 +25,9 @@ bool IndividuPrive::ajouterCapteur(Capteur capteur)
 {
     bool added = false;
     int sizeBeforeAdd = listeCapteurs.size();
-    listeCapteurs.push_back(&capteur);
+    listeCapteurs.push_back(capteur);
     int sizeAfterAdd = listeCapteurs.size();
-    if (sizeAfterAdd == sizeBeforeAdd + 1)
-    {
+    if(sizeAfterAdd==sizeBeforeAdd+1){
         added = true;
     }
     return added;
@@ -37,42 +37,42 @@ int IndividuPrive::getNombrePoints() const
 // Algorithme :
 //
 {
-    return this->nombrePoints;
-} //----- Fin de Méthode
+    return nombrePoints;
+}//----- Fin de Méthode
 
 void IndividuPrive::setNombrePoints(int points)
 // Algorithme :
 //
 {
-    this->nombrePoints = points;
-} //----- Fin de Méthode
+    nombrePoints = points;
+}//----- Fin de Méthode
 
 Fiabilite IndividuPrive::getFiabilite() const
 // Algorithme :
 //
 {
-    return this->fiabilite;
-} //----- Fin de Méthode
+    return fiabilite;
+}//----- Fin de Méthode
 
 void IndividuPrive::setFiabilite(Fiabilite fiabilite)
 // Algorithme :
 //
 {
-    this->fiabilite = fiabilite;
-} //----- Fin de Méthode
+    fiabilite = fiabilite;
+}//----- Fin de Méthode
 
-list<Capteur *> IndividuPrive::getListeCapteurs() const
+vector<Capteur> IndividuPrive::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return this->listeCapteurs;
-} //----- Fin de Méthode
+    return listeCapteurs;
+}//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 IndividuPrive::IndividuPrive(string login, string mdp) : Utilisateur(login, mdp)
 {
-    this->nombrePoints = 0;
-    this->fiabilite = Fiabilite::Fiable;
+    nombrePoints = 0;
+    fiabilite = Fiabilite::Fiable;
 #ifdef MAP
     cout << "Appel au constructeur de <Xxx>" << endl;
 #endif
