@@ -36,11 +36,11 @@ bool AgenceGouvernementale::ajouterCapteur(Capteur capteur)
     return added;
 } //----- Fin de Méthode
 
-vector<Capteur*> AgenceGouvernementale::getListeCapteurs() const
+vector<Capteur> AgenceGouvernementale::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return this->listeCapteur;
+    return listeCapteur;
 }//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur

@@ -29,7 +29,7 @@ class Nettoyeur
 
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    Nettoyeur(int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f);
+    Nettoyeur(int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur f);
     // Mode d'emploi :
     //
     // Contrat :
@@ -50,7 +50,7 @@ private:
     float longitude;
     Temps timeStart;
     Temps timeStop;
-    Fournisseur * fournisseur;
+    Fournisseur fournisseur;
 
 //----------------------------------------------------- Attributs protégés
 

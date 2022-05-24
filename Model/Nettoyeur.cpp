@@ -22,19 +22,19 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //-------------------------------------------- Constructeurs - destructeur
-Nettoyeur::Nettoyeur (int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f)
+Nettoyeur::Nettoyeur (int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur f)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Nettoyeur>" << endl;
 #endif
-    this->idNettoyeur = id;
-    this->latitude = lat;
-    this->longitude = lon;
-    this->timeStart = tDeb;
-    this->timeStop = tFin;
-    this->fournisseur = f;
+    idNettoyeur = id;
+    latitude = lat;
+    longitude = lon;
+    timeStart = tDeb;
+    timeStop = tFin;
+    fournisseur = f;
 } //----- Fin de Nettoyeur
 
 

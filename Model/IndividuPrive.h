@@ -25,7 +25,7 @@ public:
     void setNombrePoints(int points);
     Fiabilite getFiabilite() const;
     void setFiabilite(Fiabilite fiabilite);
-    vector<Capteur*> getListeCapteurs() const;
+    vector<Capteur> getListeCapteurs() const;
     
     //-------------------------------------------- Constructeurs - destructeur
     IndividuPrive(string login, string mdp);
@@ -38,7 +38,7 @@ protected:
 
     //----------------------------------------------------- Attributs protégés
     int nombrePoints;
-    vector<Capteur*> listeCapteurs;
+    vector<Capteur> listeCapteurs;
     Fiabilite fiabilite;
 };
 

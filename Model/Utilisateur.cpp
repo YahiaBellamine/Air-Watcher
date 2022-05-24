@@ -18,8 +18,8 @@ using namespace std;
 //-------------------------------------------- Constructeurs - destructeur
 Utilisateur::Utilisateur(string login, string mdp)
 {
-    this->identifiantUtilisateur = login;
-    this->motDePasse = mdp;
+    identifiantUtilisateur = login;
+    motDePasse = mdp;
 #ifdef MAP
     cout << "Appel au constructeur de <Xxx>" << endl;
 #endif
@@ -27,12 +27,12 @@ Utilisateur::Utilisateur(string login, string mdp)
 
 string Utilisateur::getIdentifiantUtilisateur() const
 {
-    return this->identifiantUtilisateur;
+    return identifiantUtilisateur;
 }
 
 string Utilisateur::getMotDePasse() const
 {
-    return this->motDePasse;
+    return motDePasse;
 }
 
 Utilisateur::~Utilisateur()

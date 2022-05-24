@@ -9,7 +9,7 @@
 #include "Temps.h"
 #include "Capteur.h"
 #include <iterator>
-#include <list>
+#include <vector>
 #include <string>
 using namespace std;
 //---------- Interface de la classe <SerieMesures> (fichier SerieMesures.h) ----------------
@@ -42,7 +42,7 @@ public:
 
     bool atmo();
 
-    bool ajouterMesure(Mesure *mesure);
+    bool ajouterMesure(Mesure mesure);
     //------------------------------------------------- Surcharge d'opérateurs
     // Xxx &operator=(const Xxx &unXxx);
     // Mode d'emploi :
@@ -57,7 +57,7 @@ public:
     // Contrat :
     //
 
-    SerieMesures(Capteur *capteur, Temps date);
+    SerieMesures(const string &capteur, const Temps &date);
 
     virtual ~SerieMesures();
     // Inutile
@@ -66,7 +66,7 @@ public:
 
     Temps getDate();
 
-    Capteur *getCapteur();
+    string getCapteur();
 
     bool operator==(const SerieMesures &sm) const;
 
@@ -76,9 +76,9 @@ public:
 
 protected:
     //----------------------------------------------------- Méthodes protégées
-    list<Mesure> *listeMesures;
+    vector<Mesure> listeMesures;
     Temps date;
-    Capteur *capteur;
+    string capteur;
     //----------------------------------------------------- Attributs protégés
 };
 

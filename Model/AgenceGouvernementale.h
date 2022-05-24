@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
+#include <vector>
 #include "Utilisateur.h"
 #include "Capteur.h"
 //------------------------------------------------------------- Constantes
@@ -31,7 +32,7 @@ class AgenceGouvernementale : public Utilisateur
 public:
 //----------------------------------------------------- Méthodes publiques
     bool ajouterCapteur(Capteur capteur);
-    vector<Capteur*> getListeCapteurs() const;
+    vector<Capteur> getListeCapteurs() const;
 
 //-------------------------------------------- Constructeurs - destructeur
     AgenceGouvernementale(string login, string mdp);
@@ -49,7 +50,7 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 private:
-    list<Capteur*> listeCapteurs;
+    vector<Capteur> listeCapteurs;
 
 };
 

@@ -36,11 +36,11 @@ bool ajouterNettoyeur (Nettoyeur nettoyeur)
     return added;
 } //----- Fin de Méthode
 
-vector<Capteur*> IndividuPrive::getListeNettoyeurs() const
+vector<Capteur> IndividuPrive::getListeNettoyeurs() const
 // Algorithme :
 //
 {
-    return this->listeNettoyeur;
+    return listeNettoyeur;
 }//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur

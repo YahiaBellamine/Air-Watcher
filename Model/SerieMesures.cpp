@@ -39,13 +39,12 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(Capteur *capteur, Temps date)
+SerieMesures::SerieMesures(const string &leCapteur, const Temps &laDate)
 // Algorithme :
 //
 {
-    this->capteur = capteur;
-    this->date = date;
-    this->listeMesures = new list<Mesure>;
+    capteur = leCapteur;
+    date = laDate;
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
@@ -55,22 +54,21 @@ SerieMesures::~SerieMesures()
 // Algorithme :
 //
 {
-    listeMesures->clear();
 #ifdef MAP
     cout << "Appel au destructeur de <Mesure>" << endl;
 #endif
 } //----- Fin de ~Xxx
 
-bool SerieMesures::ajouterMesure(Mesure *mesure)
+bool SerieMesures::ajouterMesure(Mesure mesure)
 {
-    list<Mesure>::iterator it = listeMesures->begin();
-    listeMesures->insert(it, *mesure);
+    vector<Mesure>::iterator it = listeMesures.begin();
+    listeMesures.insert(it, mesure);
     return true;
 }
 
 bool SerieMesures::atmo()
 {
-    if (this->getMesure("O3").getValeur() < 104 && this->getMesure("SO2").getValeur() < 159 && this->getMesure("NO2").getValeur() < 109 && this->getMesure("PM10").getValeur() < 27)
+    if (getMesure("O3").getValeur() < 104 && getMesure("SO2").getValeur() < 159 && getMesure("NO2").getValeur() < 109 && getMesure("PM10").getValeur() < 27)
     {
         return true;
     }
@@ -79,8 +77,7 @@ bool SerieMesures::atmo()
 
 Mesure SerieMesures::getMesure(string type) const
 {
-    list<Mesure>::iterator it = listeMesures->begin();
-    for (it = listeMesures->begin(); it != listeMesures->end(); it++)
+    for (vector<Mesure>::const_iterator it = listeMesures.begin(); it != listeMesures.end(); it++)
     {
 
         if ((*it).getAttribut() == type)
@@ -96,23 +93,23 @@ Temps SerieMesures::getDate()
     return date;
 }
 
-Capteur *SerieMesures::getCapteur()
+string SerieMesures::getCapteur()
 {
     return capteur;
 }
 
 bool SerieMesures::operator==(const SerieMesures &sm) const
 {
-    return (*sm.capteur == *capteur && sm.date.difftime(sm.date, date) == 0);
+    return (sm.capteur == capteur && sm.date.difftime(sm.date, date) == 0);
 }
 
 ostream & operator << (ostream & out, const SerieMesures & sm)
 {
-    cout << *(sm.capteur); 
-    cout << "O3 : " << sm.getMesure("O3")->getValeur() << endl;
-    cout << "SO2 : " << sm.getMesure("SO2")->getValeur() << endl;
-    cout << "NO2 : " << sm.getMesure("NO2")->getValeur() << endl;
-    cout << "PM10 : " << sm.getMesure("PM10")->getValeur() << endl << endl;
+    cout << sm.capteur; 
+    cout << "O3 : " << sm.getMesure("O3").getValeur() << endl;
+    cout << "SO2 : " << sm.getMesure("SO2").getValeur() << endl;
+    cout << "NO2 : " << sm.getMesure("NO2").getValeur() << endl;
+    cout << "PM10 : " << sm.getMesure("PM10").getValeur() << endl << endl;
     return out;
 }
 //------------------------------------------------------------------ PRIVE

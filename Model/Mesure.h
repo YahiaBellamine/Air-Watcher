@@ -57,7 +57,7 @@ public:
 
     void setValeur(float valeur);
 
-    string getAttribut();
+    string getAttribut() const;
 
     void setAttribut(string idAttribut);
 

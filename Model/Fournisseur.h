@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
+#include <vector>
 #include "Utilisateur.h"
 #include "Nettoyeur.h"
 //------------------------------------------------------------- Constantes
@@ -31,7 +32,7 @@ class Fournisseur : public Utilisateur
 public:
 //----------------------------------------------------- Méthodes publiques
     bool ajouterNettoyeur (Nettoyeur nettoyeur);
-    vector<Capteur*> getListeNettoyeurs() const;
+    vector<Capteur> getListeNettoyeurs() const;
 
 //-------------------------------------------- Constructeurs - destructeur
     Fournisseur(string login, string mdp);
@@ -50,7 +51,7 @@ public:
 
 private:
 //----------------------------------------------------- Méthodes protégées
-    list<Nettoyeur*> listeNettoyeur;
+    vector<Nettoyeur> listeNettoyeur;
 //----------------------------------------------------- Attributs protégés
 
 };
