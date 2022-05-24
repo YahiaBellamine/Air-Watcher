@@ -64,7 +64,7 @@ SerieMesures::~SerieMesures()
 bool SerieMesures::ajouterMesure(Mesure *mesure)
 {
     list<Mesure>::iterator it = listeMesures->begin();
-    .listeMesures->insert(it, *mesure);
+    listeMesures->insert(it, *mesure);
     return true;
 }
 
@@ -88,7 +88,7 @@ Mesure SerieMesures::getMesure(string type)
             return *it;
         }
     }
-    return Mesure(5, "");
+    return Mesure(1000, "");
 }
 
 Temps SerieMesures::getDate()
