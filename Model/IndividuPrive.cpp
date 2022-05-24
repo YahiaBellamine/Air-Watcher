@@ -16,6 +16,7 @@ bool IndividuPrive::ajouterPoints(int points)
 //
 {
     //A developper
+    return true;
 }//----- Fin de Méthode
 
 bool IndividuPrive::ajouterCapteur(Capteur capteur)
@@ -64,7 +65,7 @@ vector<Capteur> IndividuPrive::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return listeCapteur;
+    return listeCapteurs;
 }//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -77,7 +78,7 @@ IndividuPrive::IndividuPrive(string login, string mdp) : Utilisateur(login, mdp)
 #endif
 }
 
-Utilisateur::~Utilisateur()
+IndividuPrive::~IndividuPrive()
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Xxx>" << endl;

@@ -12,6 +12,10 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <iostream>
+#include <string>
+#include <vector>
+#include "SerieMesures.h"
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -29,11 +33,12 @@ class Capteur
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    int getIdCapteur() const;
+    string getIdCapteur() const;
     float getLatitudeCapteur() const;
     void setLatitudeCapteur(float lat);
     float getLongitudeCapteur() const;
     void setLongitudeCapteur(float lon);
+    vector<SerieMesures> getSeriesMesures();
 
     //------------------------------------------------- Surcharge d'opérateurs
     Capteur &operator=(const Capteur &unXxx);
@@ -43,7 +48,7 @@ public:
     //
 
     //-------------------------------------------- Constructeurs - destructeur
-    Capteur(int id, float lat, float lon);
+    Capteur(string id, float lat, float lon);
     // Mode d'emploi :
     //
     // Contrat :
@@ -60,9 +65,10 @@ public:
 
 private:
     //----------------------------------------------------- Méthodes protégées
-    int idCapteur;
+    string idCapteur;
     float latitude;
     float longitude;
+    vector<SerieMesures> seriesMesures;
     //----------------------------------------------------- Attributs protégés
 };
 

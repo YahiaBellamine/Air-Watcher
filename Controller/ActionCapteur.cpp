@@ -53,7 +53,7 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, vecto
 
 	for(SerieMesures sm : listeSerieMesures)
 	{
-		if(sm.getCapteur() == capteurSelectionne /* && sm.getDate() > 7 JOURS */)
+		if(sm.getCapteur() == capteurSelectionne.getIdCapteur() /* && sm.getDate() > 7 JOURS */)
 		{
 			moyenneCapteurO3 += sm.getMesure("O3").getValeur();
 			nombreDeMesuresO3 ++;
@@ -87,7 +87,7 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, vecto
 		{
 			for(SerieMesures sm : listeSerieMesures)
 			{
-				if(sm.getCapteur() == c /* && .getDate()*/)
+				if(sm.getCapteur() == c.getIdCapteur() /* && .getDate()*/)
 				{
 					// cout << *sm; 
 

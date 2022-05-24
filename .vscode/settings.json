@@ -7,6 +7,8 @@
     "initializer_list": "cpp",
     "vector": "cpp",
     "iostream": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "iosfwd": "cpp",
+    "cstring": "cpp"
   }
 }

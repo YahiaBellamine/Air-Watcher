@@ -15,6 +15,8 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
+
+
 #include "Fournisseur.h"
 
 //------------------------------------------------------------- Constantes
@@ -22,7 +24,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool ajouterNettoyeur (Nettoyeur nettoyeur)
+bool Fournisseur::ajouterNettoyeur (Nettoyeur nettoyeur)
 // Algorithme :
 //
 {
@@ -36,7 +38,7 @@ bool ajouterNettoyeur (Nettoyeur nettoyeur)
     return added;
 } //----- Fin de Méthode
 
-vector<Capteur> IndividuPrive::getListeNettoyeurs() const
+vector<Nettoyeur> Fournisseur::getListeNettoyeurs() const
 // Algorithme :
 //
 {

@@ -16,13 +16,14 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Nettoyeur.h"
+#include "Fournisseur.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //-------------------------------------------- Constructeurs - destructeur
-Nettoyeur::Nettoyeur (int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur f)
+Nettoyeur::Nettoyeur (string id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur *f)
 // Algorithme :
 //
 {

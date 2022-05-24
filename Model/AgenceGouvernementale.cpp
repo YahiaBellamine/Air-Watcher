@@ -40,7 +40,7 @@ vector<Capteur> AgenceGouvernementale::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return listeCapteur;
+    return listeCapteurs;
 }//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
