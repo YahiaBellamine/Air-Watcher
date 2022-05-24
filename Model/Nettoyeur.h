@@ -35,6 +35,8 @@ public:
     // Contrat :
     //
 
+    Nettoyeur(string id, float lat, float lon, Temps tDeb, Temps tFin);
+
     virtual ~Nettoyeur ( );
     // Mode d'emploi :
     //
