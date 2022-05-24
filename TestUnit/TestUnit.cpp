@@ -72,14 +72,19 @@ bool TestUnit::Test1()
     testMoyenneAireCap.push_back(cap);
     testMoyenneAireCap.push_back(cap2);
     float *moyenneTest = ActionQualiteAir::moyenneQualiteAir(0.5, 0.5, 100, testMoyenneAireCap, Temps(0, 0, 0, 0, 0, 0));
+
+    cout << "........... Moyenne entre SO2 : " << m1.getValeur() << ", O3 : " << m2.getValeur() << ", NO2 : " << m3.getValeur() << ", PM10 : " << m4.getValeur() << endl;
+    cout << "........... Et SO2 : " << m5.getValeur() << ", O3 : " << m6.getValeur() << ", NO2 : " << m7.getValeur() << ", PM10 : " << m8.getValeur() << endl;
+    cout << "........... Resultat attendu : SO2 : 1.5, O3 : 10.0, NO2 : 25.0, PM10 ; 50.05" << endl;
+    cout << "........... Resultat obtenu : SO2 : " << moyenneTest[0] << ", O3 : " << moyenneTest[1] << ", NO2 : " << moyenneTest[2] << ", PM10 : " << moyenneTest[3] << endl;
     if (moyenneTest[0] == (float)1.5 && moyenneTest[1] == (float)10 && moyenneTest[2] == (float)25 && moyenneTest[3] == (float)50.05)
     {
-        cout << "...... ETAPE 1 PASSEE" << endl;
+        cout << "..... ETAPE 1 PASSEE" << endl;
         test1 = true;
     }
     else
     {
-        cout << "...... /!\\ ETAPE 1 NON PASSEE /!\\" << endl;
+        cout << "..... /!\\ ETAPE 1 NON PASSEE /!\\" << endl;
         test1 = false;
     }
 
@@ -93,14 +98,19 @@ bool TestUnit::Test1()
     testMoyenneAireCap2.push_back(cap2);
 
     float *moyenneTest2 = ActionQualiteAir::moyenneQualiteAir(0.5, 0.5, 5, testMoyenneAireCap2, Temps(0, 0, 0, 0, 0, 0));
+    cout << "........... Valeur acceptée entre capteur à LAT : " << cap.getLatitudeCapteur() << ", LONG : " << cap.getLongitudeCapteur() << ", SO2 = " << sm1.getMesure("SO2").getValeur() << endl;
+    cout << "........... Et capteur à LAT : " << cap2.getLatitudeCapteur() << ", LONG : " << cap2.getLongitudeCapteur() << ", SO2 = " << sm2.getMesure("SO2").getValeur() << endl;
+    cout << "........... Pour rayon d'acceptation de : 5" << endl;
+    cout << "........... Resultat attendu : SO2 = " << sm1.getMesure("SO2").getValeur() << endl;
+    cout << "........... Resultat obtenu : SO2 = " << moyenneTest2[0] << endl;
     if (moyenneTest2[0] == (float)1.0 && moyenneTest2[1] == (float)5.0 && moyenneTest2[2] == (float)20.0 && moyenneTest2[3] == (float)50.0)
     {
-        cout << "...... ETAPE 2 PASSEE" << endl;
+        cout << "..... ETAPE 2 PASSEE" << endl;
         test2 = true;
     }
     else
     {
-        cout << "...... /!\\ ETAPE 2 NON PASSEE /!\\" << endl;
+        cout << "..... /!\\ ETAPE 2 NON PASSEE /!\\" << endl;
         test2 = false;
     }
     cout << endl
@@ -111,14 +121,19 @@ bool TestUnit::Test1()
     testMoyenneAireCap3.push_back(cap2);
 
     float *moyenneTest3 = ActionQualiteAir::moyenneQualiteAir(0.5, 0.5, 100, testMoyenneAireCap3, Temps(5, 0, 0, 0, 0, 0));
+    cout << "........... Valeur acceptée entre capteur à DATE : 10 secondes et SO2 = " << sm1.getMesure("SO2").getValeur() << endl;
+    cout << "........... Et capteur à DATE : 0 secondes et SO2 = 2" << endl;
+    cout << "........... Pour date minimum de : 5 secondes" << endl;
+    cout << "........... Resultat attendu : SO2 = " << sm1.getMesure("SO2").getValeur() << endl;
+    cout << "........... Resultat obtenu : SO2 = " << moyenneTest3[0] << endl;
     if (moyenneTest3[0] == (float)1.0 && moyenneTest3[1] == (float)5.0 && moyenneTest3[2] == (float)20.0 && moyenneTest3[3] == (float)50.0)
     {
-        cout << "...... ETAPE 3 PASSEE" << endl;
+        cout << "..... ETAPE 3 PASSEE" << endl;
         test3 = true;
     }
     else
     {
-        cout << "...... /!\\ ETAPE 3 NON PASSEE /!\\" << endl;
+        cout << "..... /!\\ ETAPE 3 NON PASSEE /!\\" << endl;
         test3 = false;
     }
 
@@ -189,11 +204,20 @@ bool TestUnit::Test2()
     testMoyenneAireSerie.push_back(sm2);
     testMoyenneAireSerie.push_back(sm3);
     vector<Capteur> resultat1 = ActionCapteur::comparerCapteur(cap, testMoyenneAireCap, testMoyenneAireSerie);
-    cout << endl
-         << resultat1.size() << endl;
-    if (resultat1.size() == 1 && resultat1.begin()->getIdCapteur() == "1")
+
+    cout << "........... Capteur le plus proche de Capteur" << cap.getIdCapteur() << " avec pour valeurs SO2 : " << m1.getValeur() << ", O3 : " << m2.getValeur() << ", NO2 : " << m3.getValeur() << ", PM10 : " << m4.getValeur() << endl;
+    cout << "........... Entre Capteur" << cap2.getIdCapteur() << " avec pour valeurs SO2 : " << m5.getValeur() << ", O3 : " << m6.getValeur() << ", NO2 : " << m7.getValeur() << ", PM10 : " << m8.getValeur() << endl;
+    cout << "........... Et Capteur" << cap3.getIdCapteur() << " avec pour valeurs SO2 : " << m9.getValeur() << ", O3 : " << m10.getValeur() << ", NO2 : " << m11.getValeur() << ", PM10 : " << m12.getValeur() << endl;
+    cout << "........... Resultat attendu : Nb de Capteurs ressemblants : 1 qui sont Capteur" << cap2.getIdCapteur() << endl;
+    string s = "........... Resultat obtenu : Nb de Capteurs ressemblants : " + to_string(resultat1.size()) + " qui sont";
+    for (Capteur res : resultat1)
     {
-        cout << "...... ETAPE 1 PASSEE" << endl;
+        s += " Capteur" + resultat1.begin()->getIdCapteur();
+    }
+    cout << s << endl;
+    if (resultat1.size() == 1 && resultat1.begin()->getIdCapteur() == "2")
+    {
+        cout << "..... ETAPE 1 PASSEE" << endl;
         test1 = true;
     }
     else
@@ -208,12 +232,12 @@ bool TestUnit::Test2()
     if (testGeneral)
     {
         cout << endl
-             << ".. TEST 1 PASSE" << endl;
+             << ".. TEST 2 PASSE" << endl;
     }
     else
     {
         cout << endl
-             << ".. /!\\ TEST 1 NON PASSE /!\\" << endl;
+             << ".. /!\\ TEST 2 NON PASSE /!\\" << endl;
     }
     return testGeneral;
 }

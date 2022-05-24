@@ -70,11 +70,6 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 	moyenneCapteurNO2 /= nombreDeMesuresNO2;
 	moyenneCapteurPM10 /= nombreDeMesuresPM10;
 
-	cout << "moyenne : " << moyenneCapteurO3 << endl;
-	cout << "moyenne : " << moyenneCapteurSO2 << endl;
-	cout << "moyenne : " << moyenneCapteurNO2 << endl;
-	cout << "moyenne : " << moyenneCapteurPM10 << endl;
-
 	nombreDeMesuresO3 = 0;
 	nombreDeMesuresSO2 = 0;
 	nombreDeMesuresNO2 = 0;
@@ -107,11 +102,6 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 			moyenneNO2 /= nombreDeMesuresNO2;
 			moyennePM10 /= nombreDeMesuresPM10;
 
-			cout << "CCC :" << moyenneO3 << endl;
-			cout << "CCC :" << moyenneSO2 << endl;
-			cout << "CCC :" << moyenneNO2 << endl;
-			cout << "CCC :" << moyennePM10 << endl;
-
 			if (sqrt(pow((moyenneO3 - moyenneCapteurO3), 2.0) + pow((moyenneSO2 - moyenneCapteurSO2), 2.0) + pow((moyenneNO2 - moyenneCapteurNO2), 2.0) + pow((moyennePM10 - moyenneCapteurPM10), 2.0)) < SIMILARITE_MAX_ADMISSIBLE)
 			{
 				capteursSimilaires.push_back(c);
@@ -126,11 +116,6 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 			moyenneNO2 = 0;
 			moyennePM10 = 0;
 		}
-	}
-
-	for (Capteur c : capteursSimilaires)
-	{
-		cout << c;
 	}
 
 	return capteursSimilaires;
