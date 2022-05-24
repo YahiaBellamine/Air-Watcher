@@ -11,7 +11,7 @@
 #define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <cstring>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -58,7 +58,7 @@ public:
 
 private:
     //----------------------------------------------------- Méthodes protégées
-    int idCapteur;
+    string idCapteur;
     float latitude;
     float longitude;
     //----------------------------------------------------- Attributs protégés

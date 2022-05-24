@@ -31,7 +31,7 @@ class AgenceGouvernementale : public Utilisateur
 public:
 //----------------------------------------------------- Méthodes publiques
     bool ajouterCapteur(Capteur capteur);
-    vector<Capteur*> getListeCapteurs() const;
+    static vector<Capteur*> getListeCapteurs() const;
 
 //-------------------------------------------- Constructeurs - destructeur
     AgenceGouvernementale(string login, string mdp);
@@ -49,7 +49,7 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 private:
-    list<Capteur*> listeCapteurs;
+    static vector<Capteur*> listeCapteurs;
 
 };
 

@@ -15,7 +15,7 @@ bool IndividuPrive::ajouterPoints(int points)
 // Algorithme :
 //
 {
-    //A developper
+    ++this->nombrePoints;
 }//----- Fin de Méthode
 
 bool IndividuPrive::ajouterCapteur(Capteur capteur)

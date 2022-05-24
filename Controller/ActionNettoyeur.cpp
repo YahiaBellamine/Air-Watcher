@@ -22,83 +22,75 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur leNettoyeur, int longitude, int latitude, int rayon)
+bool ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur leNettoyeur, float longitude, float latitude, float rayon)
 // Algorithme :
 //
 {
-    /*int resultat[4];
-    int moyennesConcentrationAvantT[4];
-    int moyennesConcentrationApresT[4];
-    int i=0;
-    for(i=0; i<4; i++){
-        resultat[i] = 0;
-        moyennesConcentrationAvantT[i] = 0;
-        moyennesConcentrationApresT[i] = 0;
-    }
+    /*Fonction evaluerImpactNettoyeur(nettoyeur, longitude, latitude, rayon)
+	Entrée : Nettoyeur nettoyeur
+					 réel longitude
+					 réel latitude
+					 réel rayon
+	Précondition : nettoyeur est une instance d'objet contenant des attributs de latitude, 
+								 longitude, timeStart et timeStop non nuls
+	Postcondition : Renvoie la valeur du rayon de la zone nettoyée par nettoyeur 
+	Déclaration : List<Capteur> capteurs
+								reel rayonMaxNettoyeur
+								List <Nettoyeur> listeNettoyeurs
+								List<SerieMesures> listeSerieMesures
+								Date dateSerieMesures
+								reel moyenneAvant
+								reel moyenneApres
+								reel sommeAvant
+								reel sommeApres
+								entier nbMesuresAvant
+								entier nbMesuresApres
+								reel rayonMaxNettoyeur
+								reel rayonZoneNettoyee
+	
+	// On récupère tous les capteurs
+	vector<Capteur*> capteurs = AgenceGouvernementale::getListeCapteurs();
+	vector<Capteur*> c = IndividuPrive::getListeCapteurs();
+	vector < int >::const_iterator iv;
+	for ( iv = c.cbegin ( ) ; iv != c.cend ( ) ; ++iv )
+	{
+		capteurs.push_back(c);
+	}
+	
+	// On calcule le rayon maximal d'un nettoyeur qui délimite une aire prise par aucun 
+	// nettoyeur
+	rayonMaxNettoyeur <- distance(listeNettoyeur[1], nettoyeur)/2
+	Pour chaque n dans listeNettoyeurs
+		si distance(n, nettoyeur)/2 < rayonMaxNettoyeur
+			rayonMaxNettoyeur <- distance(n, nettoyeur)/2
 
-	int nombreDeMesuresO3AvantT = 0;
-	int nombreDeMesuresSO2AvantT = 0; 
-	int nombreDeMesuresNO2AvantT = 0; 
-	int nombreDeMesuresPM10AvantT = 0;
-	int nombreDeMesuresO3ApresT = 0;
-	int nombreDeMesuresSO2ApresT = 0; 
-	int nombreDeMesuresNO2ApresT = 0; 
-	int nombreDeMesuresPM10ApresT = 0;
+	// On calcule la moyenne des mesures de chaque capteur dans la zone du nettoyeur
+	// avant et après le fonctionnement du nettoyeur et on prend la plus grande distance
+	// entre le nettoyeur et la capteur qui detécté une amélioration dans cette zone 
+	rayonZoneNettoyee <- 0
+	Pour chaque capteur dans capteurs faire
+		si distance(capteur, nettoyeur) <= rayonMaxNettoyeur
+			listeSerieMesures <- capteur.getListeSerieMesures()
+			sommeAvant <- 0
+			sommeApres <- 0
+			nbMesuresAvant <- 0
+			nbMesuresApres <- 0
+			Pour chaque serieMesure dans listeSerieMesures
+				si serieMesure.dateSerieMesure < nettoyeur.timeStart
+					sommeAvant <- sommeAvant + somme(serieMesure.mesures)
+					nbMesuresAvant <- nbMesuresAvant + 1
+				sinon si serieMesure.dateSerieMesure > nettoyeur.timeStop
+					sommeApres <- sommeApres + somme(serieMesure.mesures)
+					nbMesuresApres <- nbMesuresApres + 1
+			
+			moyenneAvant <- sommeAvant/nbMesuresAvant
+			moyenneApres <- sommeApres/nbMesuresApres
+		
+			si moyenneApres < moyenneAvant et distance(capteur, Nettoyeur) > rayonZoneNettoyee
+				rayonZoneNettoyee <- distance(capteur, nettoyeur)		
+	 
+	retourne rayonZoneNettoyee */
 
-	Pour chaque capteur dans capteurs: 
-		Si (capteur.x-centre.x)^2+(capteur.y-centre.y)^2 < rayon^2:
-			capteursDansAire.ajouter(capteur)
-			nombreCapteurs++;
-		Fin Si
-	Fin Pour
-
-	Pour chaque mesure dans mesures:
-		Pour i allant de 0 à nombreCapteurs:
-			Si capteur.idCapteur == mesure.idCapteur :
-				Si mesure.getDateMesure() < nettoyeur.getTimeStart()
-					Si mesure.getType() = O3
-						moyennesConcentrationAvantT[0] += mesure.getValeur() 
-						nombreDeMesureO3AvantT++
-					Sinon mesure.getType() = SO2
-						moyennesConcentrationAvantT[1] += mesure.getValeur() 
-						nombreDeMesureSO2AvantT++
-					Sinon Si mesure.getType() = NO2
-						moyennesConcentrationAvantT[2] += mesure.getValeur() 
-						nombreDeMesureNO2AvantT++
-					Sinon Si mesure.getType() = PM10
-						moyennesConcentrationAvantT[3] += mesure.getValeur() 
-						nombreDeMesurePM10AvantT++
-				Si mesure.getDateMesure() > nettoyeur.getTimeEnd()
-					Si mesure.getType() = O3
-						moyennesConcentrationApresT[0] += mesure.getValeur() 
-						nombreDeMesureO3ApresT++
-					Sinon mesure.getType() = SO2
-						moyennesConcentrationApresT[1] += mesure.getValeur() 
-						nombreDeMesureSO2ApresT++
-					Sinon Si mesure.getType() = NO2
-						moyennesConcentrationApresT[2] += mesure.getValeur() 
-						nombreDeMesureNO2ApresT++
-					Sinon Si mesure.getType() = PM10
-						moyennesConcentrationApresT[3] += mesure.getValeur() 
-						nombreDeMesurePM10ApresT++
-		Fin pour 
-	Fin pour
-
-	moyennesConcentrationAvantT[0] /= nombreDeMesuresO3AvantT
-	moyennesConcentrationAvantT[1] /= nombreDeMesuresSO2AvantT
-	moyennesConcentrationAvantT[2] /= nombreDeMesuresNO2AvantT
-	moyennesConcentrationAvantT[3] /= nombreDeMesuresPM10AvantT
-
-	moyennesConcentrationApresT[0] /= nombreDeMesuresO3ApresT
-	moyennesConcentrationApresT[1] /= nombreDeMesuresSO2ApresT
-	moyennesConcentrationApresT[2] /= nombreDeMesuresNO2ApresT
-	moyennesConcentrationApresT[3] /= nombreDeMesuresPM10ApresT
-
-	Pour i allant de 0 à 3:
-		resultat[i] = (moyennesConcentrationAvantT[i] - moyennesConcentrationApresT[i])/ moyennesConcentrationAvantT[i]
-
-return resultat
-Fin*/
 } //----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
