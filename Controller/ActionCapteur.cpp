@@ -16,7 +16,8 @@ using namespace std;
 #include <math.h>
 //------------------------------------------------------ Include personnel
 #include "ActionCapteur.h"
-#include "Mesure.h"
+#include "../Model/Mesure.h"
+#include "../Model/SerieMesures.h"
 
 
 //------------------------------------------------------------- Constantes
@@ -30,7 +31,7 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne)
+list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne, list<Capteur> listeCapteurs, list<SerieMesures> listeSerieMesures)
 {
 	list<Capteur> capteursSimilaires;
 	
@@ -44,43 +45,27 @@ list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne)
 	double moyenneCapteurNO2 = 0;
 	double moyenneCapteurPM10 = 0;
 
-	int nombreDeMesuresO3 = 0
-	int nombreDeMesuresSO2 = 0 
-	int nombreDeMesuresNO2 = 0 
-	int nombreDeMesuresPM10 = 0
+	int nombreDeMesuresO3 = 0;
+	int nombreDeMesuresSO2 = 0;
+	int nombreDeMesuresNO2 = 0;
+	int nombreDeMesuresPM10 = 0;
 	
 
-	for(Mesure mesure : listeMesures)
+	for(SerieMesures sm : listeSerieMesures)
 	{
-		if(mesure.getCapteur() == capteurSelectionne.getIdCapteur() && /* mesure.getDate > 7 JOURS */)
+		if(*sm.getCapteur() == capteurSelectionne /* && sm.getDate() > 7 JOURS */)
 		{
-			switch(mesure.getAttribut())
-			{
-				case "O3" :
-				{
-					moyenneCapteurO3 += mesure.getValeur();
-					nombreDeMesureO3 ++;
-					break;
-				}
-				case "SO2" : 
-				{
-					moyenneCapteurSO2 += mesure.getValeur();
-					nombreDeMesureSO2 ++;
-					break;
-				}
-				case "NO2" :
-				{
-					moyenneCapteurNO2 += mesure.getValeur();
-					nombreDeMesureNO2 ++;
-					break;
-				}
-				case "PM10" : 
-				{
-					moyenneCapteurPM10 += mesure.getValeur();
-					nombreDeMesurePM10 ++;
-					break;
-				}
-			}
+			moyenneCapteurO3 += sm.getMesure("O3").getValeur();
+			nombreDeMesuresO3 ++;
+			
+			moyenneCapteurSO2 += sm.getMesure("SO2").getValeur();
+			nombreDeMesuresSO2 ++;
+		
+			moyenneCapteurNO2 += sm.getMesure("NO2").getValeur();
+			nombreDeMesuresNO2 ++;
+		
+			moyenneCapteurPM10 += sm.getMesure("PM10").getValeur();
+			nombreDeMesuresPM10 ++;			
 		}
 	}
 
@@ -96,40 +81,22 @@ list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne)
 
 	for(Capteur c : listeCapteurs)
 	{
-		if(c.getIdCapteur() != capteurSelectionne.getIdCapteur)
+		if(!(c == capteurSelectionne))
 		{
-			for(Mesure m : listeMesures)
+			for(SerieMesures sm : listeSerieMesures)
 			{
-				if(m.getCapteur() == c.getIdCapteur() /* && mesure.getDate() > IL Y A 7 JOURS */)
-				{
-					switch(mesure.getAttribut())
-					{
-						case "O3" :
-						{
-							moyenneO3 += mesure.getValeur();
-							nombreDeMesureO3 ++;
-							break;
-						}
-						case "SO2" : 
-						{
-							moyenneSO2 += mesure.getValeur();
-							nombreDeMesureSO2 ++;
-							break;
-						}
-						case "NO2" :
-						{
-							moyenneNO2 += mesure.getValeur();
-							nombreDeMesureNO2 ++;
-							break;
-						}
-						case "PM10" : 
-						{
-							moyennePM10 += mesure.getValeur();
-							nombreDeMesurePM10 ++;
-							break;
-						}
-					}
-				}
+				// if(sm.getDate())
+				moyenneO3 += sm.getMesure("O3").getValeur();
+				nombreDeMesuresO3 ++;
+				
+				moyenneSO2 += sm.getMesure("SO2").getValeur();
+				nombreDeMesuresSO2 ++;
+			
+				moyenneNO2 += sm.getMesure("NO2").getValeur();
+				nombreDeMesuresNO2 ++;
+			
+				moyennePM10 += sm.getMesure("PM10").getValeur();
+				nombreDeMesuresPM10 ++;		
 			}
 
 			moyenneO3 /= nombreDeMesuresO3;
@@ -137,24 +104,27 @@ list<Capteur> ActionCapteur::comparerCapteur(Capteur capteurSelectionne)
 			moyenneNO2 /= nombreDeMesuresNO2;
 			moyennePM10 /= nombreDeMesuresPM10;
 
-			if(sqrt(pow(moyenne03 - moyenneCapteur03), 2.0)
+			if(sqrt(pow((moyenneO3 - moyenneCapteurO3), 2.0)
 				+ pow((moyenneSO2 - moyenneCapteurSO2), 2.0)
 				+ pow((moyenneNO2 - moyenneCapteurNO2), 2.0) 
-				+ pow((moyennePM10 - moyenneCapteurPM10), 2.0)
-				< 1.0) 
-				{
+				+ pow((moyennePM10 - moyenneCapteurPM10), 2.0)) < 1.0){
 					capteursSimilaires.push_back(c);
-				}
+			}
 			
 			nombreDeMesuresO3 = 0;
 			nombreDeMesuresSO2 = 0;
 			nombreDeMesuresNO2 = 0;
 			nombreDeMesuresPM10 = 0;
-			moyenne03 = 0;
+			moyenneO3 = 0;
 			moyenneSO2 = 0;
 			moyenneNO2 = 0;
 			moyennePM10 = 0;
 		}
+	}
+
+	for(Capteur c : capteursSimilaires)
+	{
+		cout << c; 
 	}
 
 	return capteursSimilaires;

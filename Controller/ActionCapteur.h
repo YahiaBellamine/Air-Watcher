@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "../Model/Capteur.h"
+#include "../Model/SerieMesures.h"
 #include <list>
 #include <iterator>
 //------------------------------------------------------------- Constantes
@@ -36,7 +37,7 @@ public:
     // Contrat :
     //
 
-    list <Capteur> comparerCapteur(Capteur capteur);
+    list<Capteur> comparerCapteur(Capteur capteurSelectionne, list<Capteur> listeCapteurs, list<SerieMesures> listeSerieMesures);
     // Mode d'emploi :
     //
     // Contrat :

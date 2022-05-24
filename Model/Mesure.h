@@ -53,7 +53,7 @@ public:
     virtual ~Mesure();
     // Inutile
 
-    float getValeur();
+    float getValeur() const;
 
     void setValeur(float valeur);
 
