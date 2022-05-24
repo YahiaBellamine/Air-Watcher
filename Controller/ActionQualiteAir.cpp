@@ -44,13 +44,13 @@ vector<Capteur> ActionQualiteAir::capteursDansAire(float centre_long, float cent
         distanceCentre = sqrt(pow((it->getLatitudeCapteur() - centre_lat), 2.0) + pow((it->getLongitudeCapteur() - centre_long), 2.0));
         if (rayon - distanceCentre > 0)
         {
-            vecteurRetour.insert(vecteurRetour.begin(), *it);
+            vecteurRetour.push_back(*it);
         }
     }
     return vecteurRetour;
 }
 
-float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, float rayon, vector<SerieMesures> toutesLesMesures, vector<Capteur> tousLesCapteurs, Temps dateDebutMesures)
+float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, float rayon, vector<Capteur> tousLesCapteurs, Temps dateDebutMesures)
 {
     float *resultat = new float[4];
     resultat[0] = 0;
@@ -60,25 +60,30 @@ float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, 
     vector<Capteur> vecteurCapteursDansAire = capteursDansAire(centre_lat, centre_long, rayon, tousLesCapteurs);
 
     vector<SerieMesures> vecteurMesuresDansAire;
-    vector<SerieMesures>::iterator it;
+    for (Capteur capteur : vecteurCapteursDansAire)
+    {
+        for (SerieMesures sm : capteur.getSeriesMesures())
+        {
+            if (dateDebutMesures.difftime(sm.getDate(), dateDebutMesures) != -1)
+                vecteurMesuresDansAire.push_back(sm);
+        }
+    }
+    /*vector<SerieMesures>::iterator it;
     // for (SerieMesures serieMesures : *toutesLesMesures)
     SerieMesures serieMesures = *toutesLesMesures.begin();
     for (it = toutesLesMesures.begin(); it != toutesLesMesures.end(); it++)
     {
         serieMesures = *it;
-        /*if ((find(vecteurCapteursDansAire.begin(), vecteurCapteursDansAire.end(), serieMesures.getCapteur()) != vecteurCapteursDansAire.end()) && (dateDebutMesures.difftime(serieMesures.getDate(), dateDebutMesures) != -1))
-        {
-            vecteurMesuresDansAire.insert(vecteurMesuresDansAire.begin(), serieMesures);
-        }*/
+
 
         for (Capteur capteur : vecteurCapteursDansAire)
         {
-            if (serieMesures.getCapteur() == capteur.getIdCapteur())
+            if ((find(capteur.getSeriesMesures().begin(), capteur.getSeriesMesures().end(), serieMesures) != capteur.getSeriesMesures().end()) && (dateDebutMesures.difftime(serieMesures.getDate(), dateDebutMesures) != -1))
             {
-                vecteurMesuresDansAire.push_back(serieMesures);
+                vecteurMesuresDansAire.insert(vecteurMesuresDansAire.begin(), serieMesures);
             }
         }
-    }
+    }*/
 
     if (vecteurMesuresDansAire.size() == 0)
     {

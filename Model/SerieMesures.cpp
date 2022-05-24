@@ -39,11 +39,10 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(const string &leCapteur, const Temps &laDate)
+SerieMesures::SerieMesures(const Temps &laDate)
 // Algorithme :
 //
 {
-    capteur = leCapteur;
     date = laDate;
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;

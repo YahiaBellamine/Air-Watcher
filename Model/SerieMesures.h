@@ -57,7 +57,7 @@ public:
     // Contrat :
     //
 
-    SerieMesures(const string &capteur, const Temps &date);
+    SerieMesures(const Temps &date);
 
     virtual ~SerieMesures();
     // Inutile
