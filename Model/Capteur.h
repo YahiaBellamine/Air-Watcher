@@ -11,7 +11,8 @@
 #define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <iostream>
+using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -54,6 +55,7 @@ public:
     // Contrat :
     //
     bool operator==(const Capteur &cap) const;
+    friend ostream & operator << (ostream & out, const Capteur & c);
     //------------------------------------------------------------------ PRIVE
 
 private:

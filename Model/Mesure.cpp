@@ -58,7 +58,7 @@ Mesure::~Mesure()
 #endif
 } //----- Fin de ~Xxx
 
-float Mesure::getValeur()
+float Mesure::getValeur() const
 {
     return valeur;
 }
