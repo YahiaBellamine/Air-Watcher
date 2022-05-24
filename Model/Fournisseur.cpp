@@ -29,7 +29,7 @@ bool Fournisseur::ajouterNettoyeur (Nettoyeur nettoyeur)
 {
     bool added = false;
     int sizeBeforeAdd = listeNettoyeur.size();
-    listeNettoyeur.push_back(&nettoyeur);
+    listeNettoyeur.push_back(nettoyeur);
     int sizeAfterAdd = listeNettoyeur.size();
     if (sizeAfterAdd == sizeBeforeAdd + 1)
     {
@@ -50,7 +50,6 @@ Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)
 // Algorithme :
 //
 {
-    listeNettoyeur = *(new list<Nettoyeur *>);
 #ifdef MAP
     cout << "Appel au constructeur de <Fournisseur>" << endl;
 #endif

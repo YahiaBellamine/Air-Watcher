@@ -59,11 +59,9 @@ SerieMesures::~SerieMesures()
 #endif
 } //----- Fin de ~Xxx
 
-bool SerieMesures::ajouterMesure(Mesure mesure)
+void SerieMesures::ajouterMesure(Mesure mesure)
 {
-    vector<Mesure>::iterator it = listeMesures.begin();
-    listeMesures.insert(it, mesure);
-    return true;
+    listeMesures.push_back(mesure);
 }
 
 bool SerieMesures::atmo()
@@ -96,6 +94,11 @@ Temps SerieMesures::getDate()
 string SerieMesures::getCapteur()
 {
     return capteur;
+}
+
+vector<Mesure> SerieMesures::getListeMesures()
+{
+    return listeMesures;
 }
 
 bool SerieMesures::operator==(const SerieMesures &sm) const

@@ -21,3 +21,6 @@ clean:
 	rm Controller/*.o
 	rm View/*.o
 	rm Model/*.o
+
+loading:
+	g++ -o loading Loading.cpp Model/SerieMesures.cpp Model/Capteur.cpp Model/Fournisseur.cpp Model/Attribut.cpp Model/Mesure.cpp Model/Temps.cpp Model/Nettoyeur.cpp Model/Utilisateur.cpp

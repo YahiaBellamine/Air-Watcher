@@ -49,7 +49,7 @@ public:
     //
 
     Mesure(float valeur, string idAttribut);
-
+    Mesure();
     virtual ~Mesure();
     // Inutile
 

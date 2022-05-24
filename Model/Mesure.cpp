@@ -49,6 +49,17 @@ Mesure::Mesure(float valeur, string idAttribut)
 #endif
 } //----- Fin de Xxx
 
+Mesure::Mesure()
+// Algorithme :
+//
+{
+    valeur = 0;
+    idAttribut = "";
+#ifdef MAP
+    cout << "Appel au constructeur de <Mesure>" << endl;
+#endif
+} //----- Fin de Xxx
+
 Mesure::~Mesure()
 // Algorithme :
 //

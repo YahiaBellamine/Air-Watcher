@@ -42,7 +42,7 @@ public:
 
     bool atmo();
 
-    bool ajouterMesure(Mesure mesure);
+    void ajouterMesure(Mesure mesure);
     //------------------------------------------------- Surcharge d'opérateurs
     // Xxx &operator=(const Xxx &unXxx);
     // Mode d'emploi :
@@ -65,8 +65,8 @@ public:
     Mesure getMesure(string type) const;
 
     Temps getDate();
-
     string getCapteur();
+    vector<Mesure> getListeMesures();
 
     bool operator==(const SerieMesures &sm) const;
 
