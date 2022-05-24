@@ -16,45 +16,45 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Fournisseur.h"
-
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool ajouterNettoyeur (Nettoyeur nettoyeur)
+bool Fournisseur::ajouterNettoyeur(Nettoyeur nettoyeur)
 // Algorithme :
 //
 {
     bool added = false;
     int sizeBeforeAdd = listeNettoyeur.size();
-    listeNettoyeur.push_back(nettoyeur);
+    listeNettoyeur.push_back(&nettoyeur);
     int sizeAfterAdd = listeNettoyeur.size();
-    if(sizeAfterAdd==sizeBeforeAdd+1){
+    if (sizeAfterAdd == sizeBeforeAdd + 1)
+    {
         added = true;
     }
     return added;
 } //----- Fin de Méthode
 
-vector<Capteur*> IndividuPrive::getListeNettoyeurs() const
+list<Nettoyeur *> Fournisseur::getListeNettoyeurs() const
 // Algorithme :
 //
 {
     return this->listeNettoyeur;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)
 // Algorithme :
 //
 {
+    listeNettoyeur = *(new list<Nettoyeur *>);
 #ifdef MAP
     cout << "Appel au constructeur de <Fournisseur>" << endl;
 #endif
 } //----- Fin de Fournisseur
 
-
-Fournisseur::~Fournisseur ( )
+Fournisseur::~Fournisseur()
 // Algorithme :
 //
 {
@@ -63,8 +63,6 @@ Fournisseur::~Fournisseur ( )
 #endif
 } //----- Fin de ~Fournisseur
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

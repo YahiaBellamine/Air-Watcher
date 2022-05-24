@@ -11,9 +11,11 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
-#include <iostream>
 
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
 //------------------------------------------------------ Include personnel
 #include "AgenceGouvernementale.h"
 
@@ -28,20 +30,21 @@ bool AgenceGouvernementale::ajouterCapteur(Capteur capteur)
 {
     bool added = false;
     int sizeBeforeAdd = listeCapteurs.size();
-    listeCapteurs.push_back(capteur);
+    listeCapteurs.push_back(&capteur);
     int sizeAfterAdd = listeCapteurs.size();
-    if(sizeAfterAdd==sizeBeforeAdd+1){
+    if (sizeAfterAdd == sizeBeforeAdd + 1)
+    {
         added = true;
     }
     return added;
 } //----- Fin de Méthode
 
-vector<Capteur*> AgenceGouvernementale::getListeCapteurs() const
+list<Capteur *> AgenceGouvernementale::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return this->listeCapteur;
-}//----- Fin de Méthode
+    return this->listeCapteurs;
+} //----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 AgenceGouvernementale::AgenceGouvernementale(string login, string mdp) : Utilisateur(login, mdp)
@@ -53,8 +56,7 @@ AgenceGouvernementale::AgenceGouvernementale(string login, string mdp) : Utilisa
 #endif
 } //----- Fin de AgenceGouvernementale
 
-
-AgenceGouvernementale::~AgenceGouvernementale ( )
+AgenceGouvernementale::~AgenceGouvernementale()
 // Algorithme :
 //
 {
@@ -63,8 +65,6 @@ AgenceGouvernementale::~AgenceGouvernementale ( )
 #endif
 } //----- Fin de ~AgenceGouvernementale
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

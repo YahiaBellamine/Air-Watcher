@@ -15,8 +15,8 @@ bool IndividuPrive::ajouterPoints(int points)
 // Algorithme :
 //
 {
-    //A developper
-}//----- Fin de Méthode
+    nombrePoints += points;
+} //----- Fin de Méthode
 
 bool IndividuPrive::ajouterCapteur(Capteur capteur)
 // Algorithme :
@@ -24,9 +24,10 @@ bool IndividuPrive::ajouterCapteur(Capteur capteur)
 {
     bool added = false;
     int sizeBeforeAdd = listeCapteurs.size();
-    listeCapteurs.push_back(capteur);
+    listeCapteurs.push_back(&capteur);
     int sizeAfterAdd = listeCapteurs.size();
-    if(sizeAfterAdd==sizeBeforeAdd+1){
+    if (sizeAfterAdd == sizeBeforeAdd + 1)
+    {
         added = true;
     }
     return added;
@@ -37,35 +38,35 @@ int IndividuPrive::getNombrePoints() const
 //
 {
     return this->nombrePoints;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 void IndividuPrive::setNombrePoints(int points)
 // Algorithme :
 //
 {
     this->nombrePoints = points;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 Fiabilite IndividuPrive::getFiabilite() const
 // Algorithme :
 //
 {
     return this->fiabilite;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 void IndividuPrive::setFiabilite(Fiabilite fiabilite)
 // Algorithme :
 //
 {
     this->fiabilite = fiabilite;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
-vector<Capteur*> IndividuPrive::getListeCapteurs() const
+list<Capteur *> IndividuPrive::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return this->listeCapteur;
-}//----- Fin de Méthode
+    return this->listeCapteurs;
+} //----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 IndividuPrive::IndividuPrive(string login, string mdp) : Utilisateur(login, mdp)
@@ -77,7 +78,7 @@ IndividuPrive::IndividuPrive(string login, string mdp) : Utilisateur(login, mdp)
 #endif
 }
 
-Utilisateur::~Utilisateur()
+IndividuPrive::~IndividuPrive()
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Xxx>" << endl;

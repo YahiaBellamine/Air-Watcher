@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //-------------------------------------------- Constructeurs - destructeur
-Nettoyeur::Nettoyeur (int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur * f)
+Nettoyeur::Nettoyeur(int id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur *f)
 // Algorithme :
 //
 {
@@ -37,8 +37,7 @@ Nettoyeur::Nettoyeur (int id, float lat, float lon, Temps tDeb, Temps tFin, Four
     this->fournisseur = f;
 } //----- Fin de Nettoyeur
 
-
-Nettoyeur::~Nettoyeur ( )
+Nettoyeur::~Nettoyeur()
 // Algorithme :
 //
 {
@@ -47,8 +46,6 @@ Nettoyeur::~Nettoyeur ( )
 #endif
 } //----- Fin de ~Nettoyeur
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

@@ -7,13 +7,15 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Fournisseur> (fichier Fournisseur.h) ----------------
-#if ! defined ( FOURNISSEUR_H )
+#if !defined(FOURNISSEUR_H)
 #define FOURNISSEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
+#include <list>
 #include "Utilisateur.h"
 #include "Nettoyeur.h"
+#include "Capteur.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -24,38 +26,38 @@
 //
 //------------------------------------------------------------------------
 
+class Nettoyeur;
+
 class Fournisseur : public Utilisateur
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
-    bool ajouterNettoyeur (Nettoyeur nettoyeur);
-    vector<Capteur*> getListeNettoyeurs() const;
+    //----------------------------------------------------- Méthodes publiques
+    bool ajouterNettoyeur(Nettoyeur nettoyeur);
+    list<Nettoyeur *> getListeNettoyeurs() const;
 
-//-------------------------------------------- Constructeurs - destructeur
+    //-------------------------------------------- Constructeurs - destructeur
     Fournisseur(string login, string mdp);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Fournisseur ( );
+    virtual ~Fournisseur();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 private:
-//----------------------------------------------------- Méthodes protégées
-    list<Nettoyeur*> listeNettoyeur;
-//----------------------------------------------------- Attributs protégés
-
+    //----------------------------------------------------- Méthodes protégées
+    list<Nettoyeur *> listeNettoyeur;
+    //----------------------------------------------------- Attributs protégés
 };
 
 //-------------------------------- Autres définitions dépendantes de <Fournisseur>
 
 #endif // FOURNISSEUR_H
-

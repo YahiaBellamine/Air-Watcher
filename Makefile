@@ -6,11 +6,10 @@ else
 	CXXFLAGS=-ansi -pedantic -Wall -std=c++11 -g
 endif
 EXEC=main
-OBJECTS=Model/Attribut.o Model/SerieMesures.o Model/Mesure.o
+OBJECTS=Model/Attribut.o Model/SerieMesures.o Model/Mesure.o Model/AgenceGouvernementale.o Model/Capteur.o Model/Fournisseur.o Model/IndividuPrive.o Model/Nettoyeur.o  Model/Utilisateur.o Controller/ActionQualiteAir.o
 
 all: $(OBJECTS)
 	$(CXX) -o $(EXEC) $(OBJECTS)
-	cp $(EXEC) bin/
 
 %.o : %.cpp
 	$(CXX) -o $@ -c $< $(CXXFLAGS) 
