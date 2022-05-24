@@ -11,9 +11,9 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
-#include <iostream>
 
+#include <iostream>
+using namespace std;
 //------------------------------------------------------ Include personnel
 #include "ActionQualiteAir.h"
 
@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// Xxx::Méthode ( liste des paramètres )
+// Xxx::Méthode ( vectore des paramètres )
 // Algorithme :
 //
 //{
@@ -31,63 +31,71 @@ using namespace std;
 #include <math.h>
 #include <iterator>
 #include <algorithm>
-#include <string>
+#include <vector>
 using namespace std;
 
-list<Capteur> *ActionQualiteAir::capteursDansAire(float centre_long, float centre_lat, float rayon, list<Capteur> *tousLesCapteurs)
+vector<Capteur> ActionQualiteAir::capteursDansAire(float centre_long, float centre_lat, float rayon, vector<Capteur> tousLesCapteurs)
 {
-    list<Capteur> *listeRetour = new list<Capteur>;
+    vector<Capteur> vecteurRetour;
     float distanceCentre;
-    list<Capteur>::iterator it;
-    for (it = tousLesCapteurs->begin(); it != tousLesCapteurs->end(); it++)
+    vector<Capteur>::iterator it;
+    for (it = tousLesCapteurs.begin(); it != tousLesCapteurs.end(); it++)
     {
         distanceCentre = sqrt(pow((it->getLatitudeCapteur() - centre_lat), 2.0) + pow((it->getLongitudeCapteur() - centre_long), 2.0));
         if (rayon - distanceCentre > 0)
         {
-            listeRetour->insert(listeRetour->begin(), *it);
+            vecteurRetour.insert(vecteurRetour.begin(), *it);
         }
     }
-    return listeRetour;
+    return vecteurRetour;
 }
 
-float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, float rayon, list<SerieMesures> *toutesLesMesures, list<Capteur> *tousLesCapteurs, Temps dateDebutMesures)
+float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, float rayon, vector<SerieMesures> toutesLesMesures, vector<Capteur> tousLesCapteurs, Temps dateDebutMesures)
 {
     float *resultat = new float[4];
     resultat[0] = 0;
     resultat[1] = 0;
     resultat[2] = 0;
     resultat[3] = 0;
-    list<Capteur> *listeCapteursDansAire = capteursDansAire(centre_lat, centre_long, rayon, tousLesCapteurs);
+    vector<Capteur> vecteurCapteursDansAire = capteursDansAire(centre_lat, centre_long, rayon, tousLesCapteurs);
 
-    list<SerieMesures> *listeMesuresDansAire = new list<SerieMesures>;
-    list<SerieMesures>::iterator it;
+    vector<SerieMesures> vecteurMesuresDansAire;
+    vector<SerieMesures>::iterator it;
     // for (SerieMesures serieMesures : *toutesLesMesures)
-    SerieMesures serieMesures = *toutesLesMesures->begin();
-    for (it = toutesLesMesures->begin(); it != toutesLesMesures->end(); it++)
+    SerieMesures serieMesures = *toutesLesMesures.begin();
+    for (it = toutesLesMesures.begin(); it != toutesLesMesures.end(); it++)
     {
         serieMesures = *it;
-        if ((find(listeCapteursDansAire->begin(), listeCapteursDansAire->end(), *serieMesures.getCapteur()) != listeCapteursDansAire->end()) && (dateDebutMesures.difftime(serieMesures.getDate(), dateDebutMesures) != -1))
+        /*if ((find(vecteurCapteursDansAire.begin(), vecteurCapteursDansAire.end(), serieMesures.getCapteur()) != vecteurCapteursDansAire.end()) && (dateDebutMesures.difftime(serieMesures.getDate(), dateDebutMesures) != -1))
         {
-            listeMesuresDansAire->insert(listeMesuresDansAire->begin(), serieMesures);
+            vecteurMesuresDansAire.insert(vecteurMesuresDansAire.begin(), serieMesures);
+        }*/
+
+        for (Capteur capteur : vecteurCapteursDansAire)
+        {
+            if (serieMesures.getCapteur() == capteur.getIdCapteur())
+            {
+                vecteurMesuresDansAire.push_back(serieMesures);
+            }
         }
     }
 
-    if (listeMesuresDansAire->size() == 0)
+    if (vecteurMesuresDansAire.size() == 0)
     {
         return resultat;
     }
     else
     {
-        list<SerieMesures>::iterator it;
-        for (it = listeMesuresDansAire->begin(); it != listeMesuresDansAire->end(); it++)
+        vector<SerieMesures>::iterator it;
+        for (it = vecteurMesuresDansAire.begin(); it != vecteurMesuresDansAire.end(); it++)
         {
-            resultat[0] += it->getMesure("SO2")->getValeur();
-            resultat[1] += it->getMesure("O3")->getValeur();
-            resultat[2] += it->getMesure("NO2")->getValeur();
-            resultat[3] += it->getMesure("PM10")->getValeur();
+            resultat[0] += (*it).getMesure("SO2").getValeur();
+            resultat[1] += (*it).getMesure("O3").getValeur();
+            resultat[2] += (*it).getMesure("NO2").getValeur();
+            resultat[3] += (*it).getMesure("PM10").getValeur();
         }
     }
-    float nbMesures = (float)listeMesuresDansAire->size();
+    float nbMesures = (float)vecteurMesuresDansAire.size();
     resultat[0] = resultat[0] / nbMesures;
     resultat[1] = resultat[1] / nbMesures;
     resultat[2] = resultat[2] / nbMesures;

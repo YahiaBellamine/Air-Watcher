@@ -80,7 +80,7 @@ Mesure SerieMesures::getMesure(string type) const
     for (vector<Mesure>::const_iterator it = listeMesures.begin(); it != listeMesures.end(); it++)
     {
 
-        if ((*it)->getAttribut() == type)
+        if (it->getAttribut() == type)
         {
             return *it;
         }

@@ -35,9 +35,9 @@ class ActionQualiteAir
 public:
     //----------------------------------------------------- Méthodes publiques
     //------------------------------------------------------------------------
-    static float *moyenneQualiteAir(float centre_lat, float centre_long, float rayon, list<SerieMesures> *toutesLesMesures, list<Capteur> *tousLesCapteurs, Temps dateDebutMesures);
+    static float *moyenneQualiteAir(float centre_lat, float centre_long, float rayon, vector<SerieMesures> toutesLesMesures, vector<Capteur> tousLesCapteurs, Temps dateDebutMesures);
     // static float moyenneQualiteAir(Measurement measure, Date dateDebut, Date dateFin);
-    static list<Capteur> *capteursDansAire(float centre_long, float centre_lat, float rayon, list<Capteur> *tousLesCapteurs);
+    static vector<Capteur> capteursDansAire(float centre_long, float centre_lat, float rayon, vector<Capteur> tousLesCapteurs);
 
     //------------------------------------------------------------------ PRIVE
 
