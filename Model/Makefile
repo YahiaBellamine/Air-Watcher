@@ -1,7 +1,9 @@
 mainColin: mainColin.o Mesure.o SerieMesures.o Attribut.o
-	g++ -o mainColin mainColin.o Mesure.o SerieMesures.o Attribut.o
+	g++ -o mainColin mainColin.o Mesure.o SerieMesures.o Attribut.o Capteur.o
 Mesure.o: Mesure.cpp
 	g++ -o Mesure.o -c Mesure.cpp
+Capteur.o: Capteur.cpp
+	g++ -o Capteur.o -c Capteur.cpp
 SerieMesures.o: SerieMesures.cpp
 	g++ -o SerieMesures.o -c SerieMesures.cpp
 mainColin.o: mainColin.cpp	
