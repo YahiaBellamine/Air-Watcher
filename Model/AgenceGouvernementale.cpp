@@ -39,12 +39,12 @@ bool AgenceGouvernementale::ajouterCapteur(Capteur capteur)
     return added;
 } //----- Fin de Méthode
 
-list<Capteur *> AgenceGouvernementale::getListeCapteurs() const
+vector<Capteur> AgenceGouvernementale::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return this->listeCapteurs;
-} //----- Fin de Méthode
+    return listeCapteurs;
+}//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 AgenceGouvernementale::AgenceGouvernementale(string login, string mdp) : Utilisateur(login, mdp)

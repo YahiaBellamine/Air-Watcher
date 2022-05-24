@@ -13,8 +13,10 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "../Model/Capteur.h"
 #include "../Model/SerieMesures.h"
-#include <list>
+#include <vector>
 #include <iterator>
+
+using namespace std;
 //------------------------------------------------------------- Constantes
 const float SIMILARITE_MAX_ADMISSIBLE = 10.0;
 //------------------------------------------------------------------ Types
@@ -37,7 +39,7 @@ public:
     // Contrat :
     //
 
-    static list<Capteur*>* comparerCapteur(Capteur *capteurSelectionne, list<Capteur*> *listeCapteurs, list<SerieMesures*> *listeSerieMesures);
+    static vector<Capteur> comparerCapteur(Capteur capteurSelectionne, vector<Capteur> listeCapteurs, vector<SerieMesures> listeSerieMesures);
     // Mode d'emploi :
     //
     // Contrat :

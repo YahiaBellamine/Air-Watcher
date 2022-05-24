@@ -4,7 +4,6 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
 #include <vector>
-#include <list>
 #include "Utilisateur.h"
 #include "Capteur.h"
 #include "Fiabilite.h"
@@ -26,8 +25,8 @@ public:
     void setNombrePoints(int points);
     Fiabilite getFiabilite() const;
     void setFiabilite(Fiabilite fiabilite);
-    list<Capteur *> getListeCapteurs() const;
-
+    vector<Capteur> getListeCapteurs() const;
+    
     //-------------------------------------------- Constructeurs - destructeur
     IndividuPrive(string login, string mdp);
     virtual ~IndividuPrive();
@@ -39,7 +38,7 @@ protected:
 
     //----------------------------------------------------- Attributs protégés
     int nombrePoints;
-    list<Capteur *> listeCapteurs;
+    vector<Capteur> listeCapteurs;
     Fiabilite fiabilite;
 };
 

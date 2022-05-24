@@ -12,6 +12,10 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <iostream>
+#include <string>
+#include <vector>
+#include "SerieMesures.h"
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -34,6 +38,7 @@ public:
     void setLatitudeCapteur(float lat);
     float getLongitudeCapteur() const;
     void setLongitudeCapteur(float lon);
+    vector<SerieMesures> getSeriesMesures();
 
     //------------------------------------------------- Surcharge d'opérateurs
     Capteur &operator=(const Capteur &unXxx);
@@ -63,6 +68,7 @@ private:
     string idCapteur;
     float latitude;
     float longitude;
+    vector<SerieMesures> seriesMesures;
     //----------------------------------------------------- Attributs protégés
 };
 

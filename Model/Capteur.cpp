@@ -24,27 +24,32 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 string Capteur::getIdCapteur() const
 {
-    return this->idCapteur;
+    return idCapteur;
 }
 
 float Capteur::getLatitudeCapteur() const
 {
-    return this->latitude;
+    return latitude;
 }
 
 void Capteur::setLatitudeCapteur(float lat)
 {
-    this->latitude = lat;
+    latitude = lat;
 }
 
 float Capteur::getLongitudeCapteur() const
 {
-    return this->longitude;
+    return longitude;
 }
 
 void Capteur::setLongitudeCapteur(float lon)
 {
-    this->longitude = lon;
+    longitude = lon;
+}
+
+vector<SerieMesures> Capteur::getSeriesMesures()
+{
+    return seriesMesures;
 }
 
 ostream & operator << (ostream & out, const Capteur & c)
@@ -61,9 +66,9 @@ Capteur::Capteur(string id, float lat, float lon)
 #ifdef MAP
     cout << "Appel au constructeur de <Capteur>" << endl;
 #endif
-    this->idCapteur = id;
-    this->latitude = lat;
-    this->longitude = lon;
+    idCapteur = id;
+    latitude = lat;
+    longitude = lon;
 } //----- Fin de Capteur
 
 Capteur::~Capteur()
