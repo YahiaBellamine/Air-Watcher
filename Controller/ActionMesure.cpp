@@ -14,6 +14,7 @@ list<Mesure> initialisationMesure(){
     list<Mesure>::iterator it;
     it = toutesLesMesures.begin();
     ifstream fic;
+    
     fic.open("../dataset/measurements.csv");
     if(!fic){
         cout << " *****  LE FICHIER EST INTROUVABLE" << endl;

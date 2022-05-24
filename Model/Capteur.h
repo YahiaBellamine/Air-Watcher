@@ -21,14 +21,14 @@
 //
 //
 //------------------------------------------------------------------------
-
+#include <cstring>
 class Capteur
 {
     //----------------------------------------------------------------- PUBLIC
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    int getIdCapteur() const;
+    string getIdCapteur() const;
     float getLatitudeCapteur() const;
     void setLatitudeCapteur(float lat);
     float getLongitudeCapteur() const;
@@ -42,7 +42,7 @@ public:
     //
 
     //-------------------------------------------- Constructeurs - destructeur
-    Capteur(int id, float lat, float lon);
+    Capteur(string id, float lat, float lon);
     // Mode d'emploi :
     //
     // Contrat :
@@ -58,7 +58,7 @@ public:
 
 private:
     //----------------------------------------------------- Méthodes protégées
-    int idCapteur;
+    string idCapteur;
     float latitude;
     float longitude;
     //----------------------------------------------------- Attributs protégés

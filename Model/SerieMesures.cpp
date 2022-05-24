@@ -39,13 +39,18 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(Capteur *capteur, Temps date)
+SerieMesures::SerieMesures(string idCapteur, Temps date, list<Mesure*> mesures4)
 // Algorithme :
 //
 {
     this->capteur = capteur;
-    this->date = date;
-    this->listeMesures = new list<Mesure>;
+    this->date.annee = date.annee;
+    this->date.mois = date.mois;
+    this->date.jour = date.jour;
+    this->date.jour = date.jour;
+    this->date.heure = date.heure;
+    this->date.sec = date.sec;
+    this->listeMesures = new list<Mesure*>();
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
@@ -63,8 +68,8 @@ SerieMesures::~SerieMesures()
 
 bool SerieMesures::ajouterMesure(Mesure *mesure)
 {
-    list<Mesure>::iterator it = listeMesures->begin();
-    .listeMesures->insert(it, *mesure);
+    list<Mesure*>::iterator it = listeMesures->begin();
+    listeMesures->insert(it, mesure);
     return true;
 }
 
@@ -77,18 +82,17 @@ bool SerieMesures::atmo()
     return false;
 }
 
-Mesure SerieMesures::getMesure(string type)
+Mesure * SerieMesures::getMesure(string type)
 {
-    list<Mesure>::iterator it = listeMesures->begin();
-    for (it = listeMesures->begin(); it != listeMesures->end(); it++)
+    for (list<Mesure*>::iterator it = listeMesures->begin(); it != listeMesures->end(); it++)
     {
 
         if ((*it).getAttribut() == type)
         {
-            return *it;
+            return it;
         }
     }
-    return Mesure(5, "");
+    return nullptr;
 }
 
 Temps SerieMesures::getDate()

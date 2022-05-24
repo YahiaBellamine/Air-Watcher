@@ -1,11 +1,9 @@
 {
   "C_Cpp.errorSquiggles": "Disabled",
   "files.associations": {
-    "xlocale": "cpp",
-    "xstring": "cpp",
     "list": "cpp",
-    "initializer_list": "cpp",
-    "vector": "cpp",
+    "*.tcc": "cpp",
+    "iosfwd": "cpp",
     "iostream": "cpp",
     "ostream": "cpp"
   }
