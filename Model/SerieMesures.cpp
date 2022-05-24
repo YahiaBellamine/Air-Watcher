@@ -109,10 +109,10 @@ bool SerieMesures::operator==(const SerieMesures &sm) const
 ostream & operator << (ostream & out, const SerieMesures & sm)
 {
     cout << *(sm.capteur); 
-    cout << "O3 : " << sm.getMesure("O3").getValeur() << endl;
-    cout << "SO2 : " << sm.getMesure("SO2").getValeur() << endl;
-    cout << "NO2 : " << sm.getMesure("NO2").getValeur() << endl;
-    cout << "PM10 : " << sm.getMesure("PM10").getValeur() << endl << endl;
+    cout << "O3 : " << sm.getMesure("O3")->getValeur() << endl;
+    cout << "SO2 : " << sm.getMesure("SO2")->getValeur() << endl;
+    cout << "NO2 : " << sm.getMesure("NO2")->getValeur() << endl;
+    cout << "PM10 : " << sm.getMesure("PM10")->getValeur() << endl << endl;
     return out;
 }
 //------------------------------------------------------------------ PRIVE

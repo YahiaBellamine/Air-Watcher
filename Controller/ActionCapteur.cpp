@@ -55,16 +55,16 @@ list<Capteur*>* ActionCapteur::comparerCapteur(Capteur *capteurSelectionne, list
 	{
 		if(*(sm->getCapteur()) == *capteurSelectionne /* && sm.getDate() > 7 JOURS */)
 		{
-			moyenneCapteurO3 += sm->getMesure("O3").getValeur();
+			moyenneCapteurO3 += sm->getMesure("O3")->getValeur();
 			nombreDeMesuresO3 ++;
 			
-			moyenneCapteurSO2 += sm->getMesure("SO2").getValeur();
+			moyenneCapteurSO2 += sm->getMesure("SO2")->getValeur();
 			nombreDeMesuresSO2 ++;
 		
-			moyenneCapteurNO2 += sm->getMesure("NO2").getValeur();
+			moyenneCapteurNO2 += sm->getMesure("NO2")->getValeur();
 			nombreDeMesuresNO2 ++;
 		
-			moyenneCapteurPM10 += sm->getMesure("PM10").getValeur();
+			moyenneCapteurPM10 += sm->getMesure("PM10")->getValeur();
 			nombreDeMesuresPM10 ++;			
 		}
 	}
@@ -91,16 +91,16 @@ list<Capteur*>* ActionCapteur::comparerCapteur(Capteur *capteurSelectionne, list
 				{
 					// cout << *sm; 
 
-					moyenneO3 += sm->getMesure("O3").getValeur();
+					moyenneO3 += sm->getMesure("O3")->getValeur();
 					nombreDeMesuresO3 ++;
 					
-					moyenneSO2 += sm->getMesure("SO2").getValeur();
+					moyenneSO2 += sm->getMesure("SO2")->getValeur();
 					nombreDeMesuresSO2 ++;
 				
-					moyenneNO2 += sm->getMesure("NO2").getValeur();
+					moyenneNO2 += sm->getMesure("NO2")->getValeur();
 					nombreDeMesuresNO2 ++;
 				
-					moyennePM10 += sm->getMesure("PM10").getValeur();
+					moyennePM10 += sm->getMesure("PM10")->getValeur();
 					nombreDeMesuresPM10 ++;	
 				}
 			}
