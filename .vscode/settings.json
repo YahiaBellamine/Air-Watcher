@@ -6,7 +6,11 @@
     "iosfwd": "cpp",
     "iostream": "cpp",
     "ostream": "cpp",
-    "iosfwd": "cpp",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "initializer_list": "cpp",
+    "vector": "cpp",
+    "xstring": "cpp",
+    "xutility": "cpp",
+    "map": "cpp"
   }
 }

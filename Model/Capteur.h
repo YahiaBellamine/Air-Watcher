@@ -34,12 +34,18 @@ class Capteur
 public:
     //----------------------------------------------------- Méthodes publiques
     string getIdCapteur() const;
+
     float getLatitudeCapteur() const;
+
     void setLatitudeCapteur(float lat);
+
     float getLongitudeCapteur() const;
+
     void setLongitudeCapteur(float lon);
-    vector<SerieMesures> getSeriesMesures();
-    void ajouterSerieMesures(SerieMesures &sm);
+
+    vector<SerieMesures> & getSeriesMesures();
+
+    void ajouterSerieMesures(SerieMesures &m);
 
     //------------------------------------------------- Surcharge d'opérateurs
     Capteur &operator=(const Capteur &unXxx);
@@ -55,13 +61,15 @@ public:
     // Contrat :
     //
 
+    void ajouterSerieMesures(SerieMesures &sm);
+
     virtual ~Capteur();
     // Mode d'emploi :
     //
     // Contrat :
     //
     bool operator==(const Capteur &cap) const;
-    friend ostream & operator << (ostream & out, const Capteur & c);
+    friend ostream &operator<<(ostream &out, const Capteur &c);
     //------------------------------------------------------------------ PRIVE
 
 private:

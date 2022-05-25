@@ -42,7 +42,7 @@ public:
 
     bool atmo();
 
-    void ajouterMesure(Mesure mesure);
+    void ajouterMesure(Mesure &mesure);
     //------------------------------------------------- Surcharge d'opérateurs
     // Xxx &operator=(const Xxx &unXxx);
     // Mode d'emploi :
@@ -57,7 +57,7 @@ public:
     // Contrat :
     //
 
-    SerieMesures(const string &capteur, const Temps &date);
+    SerieMesures(const Temps &date);
 
     virtual ~SerieMesures();
     // Inutile
@@ -66,11 +66,11 @@ public:
 
     Temps getDate();
     string getCapteur();
-    vector<Mesure> getListeMesures();
+    vector<Mesure> getListeMesures() const;
 
-    bool operator==(const SerieMesures &sm) const;
+    // bool operator==(const SerieMesures &sm) const;
 
-    friend ostream & operator << (ostream & out, const SerieMesures & sm);
+    friend ostream &operator<<(ostream &out, const SerieMesures &sm);
 
     //------------------------------------------------------------------ PRIVE
 
@@ -78,7 +78,6 @@ protected:
     //----------------------------------------------------- Méthodes protégées
     vector<Mesure> listeMesures;
     Temps date;
-    string capteur;
     //----------------------------------------------------- Attributs protégés
 };
 

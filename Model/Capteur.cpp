@@ -47,12 +47,12 @@ void Capteur::setLongitudeCapteur(float lon)
     longitude = lon;
 }
 
-vector<SerieMesures> Capteur::getSeriesMesures()
+vector<SerieMesures> &Capteur::getSeriesMesures()
 {
     return seriesMesures;
 }
 
-ostream & operator << (ostream & out, const Capteur & c)
+ostream &operator<<(ostream &out, const Capteur &c)
 {
     out << "Capteur " << c.idCapteur << endl;
     return out;

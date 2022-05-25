@@ -16,14 +16,13 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 
-
 #include "Fournisseur.h"
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool Fournisseur::ajouterNettoyeur (Nettoyeur nettoyeur)
+bool Fournisseur::ajouterNettoyeur(Nettoyeur nettoyeur)
 // Algorithme :
 //
 {
@@ -43,7 +42,7 @@ vector<Nettoyeur> Fournisseur::getListeNettoyeurs() const
 //
 {
     return listeNettoyeur;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)
