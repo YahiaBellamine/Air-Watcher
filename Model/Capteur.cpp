@@ -85,6 +85,11 @@ bool Capteur::operator==(const Capteur &cap) const
     return (cap.idCapteur == idCapteur);
 }
 
+void Capteur::ajouterSerieMesures(SerieMesures &sm)
+{
+    seriesMesures.push_back(sm);
+}
+
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées

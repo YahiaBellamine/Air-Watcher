@@ -55,6 +55,16 @@ Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)
 #endif
 } //----- Fin de Fournisseur
 
+Fournisseur::Fournisseur(string id)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Fournisseur>" << endl;
+#endif
+    idFournisseur = id;
+} //----- Fin de Fournisseur
+
 Fournisseur::~Fournisseur()
 // Algorithme :
 //

@@ -39,6 +39,7 @@ public:
     float getLongitudeCapteur() const;
     void setLongitudeCapteur(float lon);
     vector<SerieMesures> getSeriesMesures();
+    void ajouterSerieMesures(SerieMesures &sm);
 
     //------------------------------------------------- Surcharge d'opérateurs
     Capteur &operator=(const Capteur &unXxx);

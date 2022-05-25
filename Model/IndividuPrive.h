@@ -29,14 +29,16 @@ public:
     
     //-------------------------------------------- Constructeurs - destructeur
     IndividuPrive(string login, string mdp);
+    IndividuPrive(string id);
     virtual ~IndividuPrive();
 
     //------------------------------------------------------------------ PRIVE
 
-protected:
+private:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    string idUser;
     int nombrePoints;
     vector<Capteur> listeCapteurs;
     Fiabilite fiabilite;

@@ -78,6 +78,16 @@ IndividuPrive::IndividuPrive(string login, string mdp) : Utilisateur(login, mdp)
 #endif
 }
 
+IndividuPrive::IndividuPrive(string id)
+{
+    idUser = id;
+    nombrePoints = 0;
+    fiabilite = Fiabilite::Fiable;
+#ifdef MAP
+    cout << "Appel au constructeur de <Xxx>" << endl;
+#endif
+}
+
 IndividuPrive::~IndividuPrive()
 {
 #ifdef MAP
