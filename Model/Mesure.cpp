@@ -63,9 +63,9 @@ float Mesure::getValeur() const
     return valeur;
 }
 
-void Mesure::setValeur(float valeur)
+void Mesure::setValeur(float lavaleur)
 {
-    valeur = valeur;
+    valeur = lavaleur;
 }
 
 string Mesure::getAttribut() const
@@ -73,9 +73,9 @@ string Mesure::getAttribut() const
     return idAttribut;
 }
 
-void Mesure::setAttribut(string idAttribut)
+void Mesure::setAttribut(string lidAttribut)
 {
-    idAttribut = idAttribut;
+    idAttribut = lidAttribut;
 }
 
 //------------------------------------------------------------------ PRIVE

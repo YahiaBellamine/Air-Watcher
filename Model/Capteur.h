@@ -61,13 +61,15 @@ public:
     // Contrat :
     //
 
+    void ajouterSerieMesures(SerieMesures &sm);
+
     virtual ~Capteur();
     // Mode d'emploi :
     //
     // Contrat :
     //
     bool operator==(const Capteur &cap) const;
-    friend ostream & operator << (ostream & out, const Capteur & c);
+    friend ostream &operator<<(ostream &out, const Capteur &c);
     //------------------------------------------------------------------ PRIVE
 
 private:

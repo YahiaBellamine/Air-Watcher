@@ -52,12 +52,7 @@ vector<SerieMesures> &Capteur::getSeriesMesures()
     return seriesMesures;
 }
 
-void Capteur::ajouterSerieMesures(SerieMesures &sm)
-{
-    seriesMesures.push_back(sm);
-}
-
-ostream & operator << (ostream & out, const Capteur & c)
+ostream &operator<<(ostream &out, const Capteur &c)
 {
     out << "Capteur " << c.idCapteur << endl;
     return out;
@@ -88,6 +83,11 @@ Capteur::~Capteur()
 bool Capteur::operator==(const Capteur &cap) const
 {
     return (cap.idCapteur == idCapteur);
+}
+
+void Capteur::ajouterSerieMesures(SerieMesures &sm)
+{
+    seriesMesures.push_back(sm);
 }
 
 //------------------------------------------------------------------ PRIVE

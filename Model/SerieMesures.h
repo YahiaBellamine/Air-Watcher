@@ -70,7 +70,7 @@ public:
 
     // bool operator==(const SerieMesures &sm) const;
 
-    friend ostream & operator << (ostream & out, const SerieMesures & sm);
+    friend ostream &operator<<(ostream &out, const SerieMesures &sm);
 
     //------------------------------------------------------------------ PRIVE
 

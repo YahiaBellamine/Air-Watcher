@@ -30,7 +30,7 @@ bool AgenceGouvernementale::ajouterCapteur(Capteur capteur)
 {
     bool added = false;
     int sizeBeforeAdd = listeCapteurs.size();
-    listeCapteurs.push_back(&capteur);
+    listeCapteurs.push_back(capteur);
     int sizeAfterAdd = listeCapteurs.size();
     if (sizeAfterAdd == sizeBeforeAdd + 1)
     {
@@ -44,7 +44,7 @@ vector<Capteur> AgenceGouvernementale::getListeCapteurs() const
 //
 {
     return listeCapteurs;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 AgenceGouvernementale::AgenceGouvernementale(string login, string mdp) : Utilisateur(login, mdp)
