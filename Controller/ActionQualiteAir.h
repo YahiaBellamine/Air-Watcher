@@ -8,6 +8,8 @@
 #include <iostream>
 #include <ctime>
 #include <list>
+#include <string>
+#include <map>
 #include "../Model/Temps.h"
 #include "../Model/Capteur.h"
 #include "../Model/SerieMesures.h"
@@ -35,9 +37,9 @@ class ActionQualiteAir
 public:
     //----------------------------------------------------- Méthodes publiques
     //------------------------------------------------------------------------
-    static float *moyenneQualiteAir(float centre_lat, float centre_long, float rayon, vector<Capteur> tousLesCapteurs, Temps dateDebutMesures);
+    static float *moyenneQualiteAir(float centre_lat, float centre_long, float rayon, map<string, Capteur> tousLesCapteurs, Temps dateDebutMesures);
     // static float moyenneQualiteAir(Measurement measure, Date dateDebut, Date dateFin);
-    static vector<Capteur> capteursDansAire(float centre_long, float centre_lat, float rayon, vector<Capteur> tousLesCapteurs);
+    static map<string, Capteur> capteursDansAire(float centre_long, float centre_lat, float rayon, map<string, Capteur> tousLesCapteurs);
 
     //------------------------------------------------------------------ PRIVE
 

@@ -30,7 +30,7 @@ using namespace std;
 #include <iterator>
 #include <algorithm>
 #include <string>
-#include <vector>
+#include <map>
 using namespace std;
 
 bool TestUnit::Test1()
@@ -68,9 +68,9 @@ bool TestUnit::Test1()
     sm2.ajouterMesure(m8);
     cap2.ajouterSerieMesures(sm2);
 
-    vector<Capteur> testMoyenneAireCap;
-    testMoyenneAireCap.push_back(cap);
-    testMoyenneAireCap.push_back(cap2);
+    map<string, Capteur> testMoyenneAireCap;
+    testMoyenneAireCap.insert(pair<string, Capteur>(cap.getIdCapteur(), cap));
+    testMoyenneAireCap.insert(pair<string, Capteur>(cap2.getIdCapteur(), cap2));
     float *moyenneTest = ActionQualiteAir::moyenneQualiteAir(0.5, 0.5, 100, testMoyenneAireCap, Temps(0, 0, 0, 0, 0, 0));
 
     cout << "........... Moyenne entre SO2 : " << m1.getValeur() << ", O3 : " << m2.getValeur() << ", NO2 : " << m3.getValeur() << ", PM10 : " << m4.getValeur() << endl;
@@ -93,9 +93,9 @@ bool TestUnit::Test1()
 
     cap2.setLatitudeCapteur(5.5);
     cap2.setLongitudeCapteur(5.5);
-    vector<Capteur> testMoyenneAireCap2;
-    testMoyenneAireCap2.push_back(cap);
-    testMoyenneAireCap2.push_back(cap2);
+    map<string, Capteur> testMoyenneAireCap2;
+    testMoyenneAireCap2.insert(pair<string, Capteur>(cap.getIdCapteur(), cap));
+    testMoyenneAireCap2.insert(pair<string, Capteur>(cap.getIdCapteur(), cap2));
 
     float *moyenneTest2 = ActionQualiteAir::moyenneQualiteAir(0.5, 0.5, 5, testMoyenneAireCap2, Temps(0, 0, 0, 0, 0, 0));
     cout << "........... Valeur acceptée entre capteur à LAT : " << cap.getLatitudeCapteur() << ", LONG : " << cap.getLongitudeCapteur() << ", SO2 = " << sm1.getMesure("SO2").getValeur() << endl;
@@ -116,9 +116,9 @@ bool TestUnit::Test1()
     cout << endl
          << "..... Etape 3 : vérification de la fonctionnalité de temps" << endl;
 
-    vector<Capteur> testMoyenneAireCap3;
-    testMoyenneAireCap3.push_back(cap);
-    testMoyenneAireCap3.push_back(cap2);
+    map<string, Capteur> testMoyenneAireCap3;
+    testMoyenneAireCap3.insert(pair<string, Capteur>(cap.getIdCapteur(), cap));
+    testMoyenneAireCap3.insert(pair<string, Capteur>(cap2.getIdCapteur(), cap2));
 
     float *moyenneTest3 = ActionQualiteAir::moyenneQualiteAir(0.5, 0.5, 100, testMoyenneAireCap3, Temps(5, 0, 0, 0, 0, 0));
     cout << "........... Valeur acceptée entre capteur à DATE : 10 secondes et SO2 = " << sm1.getMesure("SO2").getValeur() << endl;

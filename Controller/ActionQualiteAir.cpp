@@ -32,37 +32,38 @@ using namespace std;
 #include <iterator>
 #include <algorithm>
 #include <vector>
+
 using namespace std;
 
-vector<Capteur> ActionQualiteAir::capteursDansAire(float centre_long, float centre_lat, float rayon, vector<Capteur> tousLesCapteurs)
+map<string, Capteur> ActionQualiteAir::capteursDansAire(float centre_long, float centre_lat, float rayon, map<string, Capteur> tousLesCapteurs)
 {
-    vector<Capteur> vecteurRetour;
+    map<string, Capteur> vecteurRetour;
     float distanceCentre;
-    vector<Capteur>::iterator it;
+    map<string, Capteur>::iterator it;
     for (it = tousLesCapteurs.begin(); it != tousLesCapteurs.end(); it++)
     {
-        distanceCentre = sqrt(pow((it->getLatitudeCapteur() - centre_lat), 2.0) + pow((it->getLongitudeCapteur() - centre_long), 2.0));
+        distanceCentre = sqrt(pow((it->second.getLatitudeCapteur() - centre_lat), 2.0) + pow((it->second.getLongitudeCapteur() - centre_long), 2.0));
         if (rayon - distanceCentre > 0)
         {
-            vecteurRetour.push_back(*it);
+            vecteurRetour.insert(pair<string, Capteur>(*it));
         }
     }
     return vecteurRetour;
 }
 
-float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, float rayon, vector<Capteur> tousLesCapteurs, Temps dateDebutMesures)
+float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, float rayon, map<string, Capteur> tousLesCapteurs, Temps dateDebutMesures)
 {
     float *resultat = new float[4];
     resultat[0] = 0;
     resultat[1] = 0;
     resultat[2] = 0;
     resultat[3] = 0;
-    vector<Capteur> vecteurCapteursDansAire = capteursDansAire(centre_lat, centre_long, rayon, tousLesCapteurs);
+    map<string, Capteur> vecteurCapteursDansAire = capteursDansAire(centre_lat, centre_long, rayon, tousLesCapteurs);
 
     vector<SerieMesures> vecteurMesuresDansAire;
-    for (Capteur capteur : vecteurCapteursDansAire)
+    for (pair<string, Capteur> paire : vecteurCapteursDansAire)
     {
-        for (SerieMesures sm : capteur.getSeriesMesures())
+        for (SerieMesures sm : paire.second.getSeriesMesures())
         {
             if (dateDebutMesures.difftime(sm.getDate(), dateDebutMesures) != -1)
                 vecteurMesuresDansAire.push_back(sm);
