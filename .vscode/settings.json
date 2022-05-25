@@ -1,12 +1,19 @@
 {
   "C_Cpp.errorSquiggles": "Disabled",
   "files.associations": {
+    "xlocale": "cpp",
+    "xstring": "cpp",
     "list": "cpp",
-    "*.tcc": "cpp",
-    "iosfwd": "cpp",
+    "initializer_list": "cpp",
+    "vector": "cpp",
     "iostream": "cpp",
     "ostream": "cpp",
     "iosfwd": "cpp",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "array": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "string_view": "cpp"
   }
 }

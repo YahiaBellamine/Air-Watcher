@@ -34,11 +34,18 @@ class Capteur
 public:
     //----------------------------------------------------- Méthodes publiques
     string getIdCapteur() const;
+
     float getLatitudeCapteur() const;
+
     void setLatitudeCapteur(float lat);
+
     float getLongitudeCapteur() const;
+
     void setLongitudeCapteur(float lon);
-    vector<SerieMesures> getSeriesMesures();
+
+    vector<SerieMesures> & getSeriesMesures();
+
+    void ajouterSerieMesures(SerieMesures &m);
 
     //------------------------------------------------- Surcharge d'opérateurs
     Capteur &operator=(const Capteur &unXxx);

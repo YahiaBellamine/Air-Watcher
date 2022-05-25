@@ -39,11 +39,10 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(const string &leCapteur, const Temps &laDate)
+SerieMesures::SerieMesures(const Temps &laDate)
 // Algorithme :
 //
 {
-    capteur = leCapteur;
     date = laDate;
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
@@ -59,11 +58,9 @@ SerieMesures::~SerieMesures()
 #endif
 } //----- Fin de ~Xxx
 
-bool SerieMesures::ajouterMesure(Mesure mesure)
+void SerieMesures::ajouterMesure(Mesure &mesure)
 {
-    vector<Mesure>::iterator it = listeMesures.begin();
-    listeMesures.insert(it, mesure);
-    return true;
+    listeMesures.push_back(mesure);
 }
 
 bool SerieMesures::atmo()
@@ -93,19 +90,18 @@ Temps SerieMesures::getDate()
     return date;
 }
 
-string SerieMesures::getCapteur()
+vector<Mesure> SerieMesures::getListeMesures() const
 {
-    return capteur;
+    return listeMesures;
 }
 
-bool SerieMesures::operator==(const SerieMesures &sm) const
+/* bool SerieMesures::operator==(const SerieMesures &sm) const
 {
-    return (sm.capteur == capteur && sm.date.difftime(sm.date, date) == 0);
-}
+    return (sm.getListeMesures() == listeMesures && sm.date.difftime(sm.date, date) == 0);
+} */
 
 ostream & operator << (ostream & out, const SerieMesures & sm)
-{
-    cout << sm.capteur; 
+{ 
     cout << "O3 : " << sm.getMesure("O3").getValeur() << endl;
     cout << "SO2 : " << sm.getMesure("SO2").getValeur() << endl;
     cout << "NO2 : " << sm.getMesure("NO2").getValeur() << endl;
