@@ -31,7 +31,7 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs, vector<SerieMesures> &listeSerieMesures)
+vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs)
 {	
 	vector<Capteur> capteursSimilaires;
 	
@@ -65,8 +65,6 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 	
 		moyenneCapteurPM10 += sm.getMesure("PM10").getValeur();
 		nombreDeMesuresPM10 ++;
-
-		cout << sm;
 	}
 
 
@@ -89,8 +87,6 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 			for(SerieMesures sm : serie)
 			{
 				// if(sm.getDate()){}
-
-				cout << sm;
 
 				moyenneO3 += sm.getMesure("O3").getValeur();
 				nombreDeMesuresO3 ++;
@@ -129,9 +125,10 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 		}
 	}
 
+	cout << "Le capteur '" << capteurSelectionne.getIdCapteur() << "' est similaire à/aux capteur(s) : " << endl;
 	for(Capteur c : capteursSimilaires)
 	{
-		cout << c; 
+		cout << "\t► " << c; 
 	}
 
 	return capteursSimilaires;
