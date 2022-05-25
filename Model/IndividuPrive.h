@@ -4,7 +4,6 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
 #include <vector>
-#include "Utilisateur.h"
 #include "Capteur.h"
 #include "Fiabilite.h"
 
@@ -13,7 +12,7 @@ using namespace std;
 
 //------------------------------------------------------------------ Types
 
-class IndividuPrive : public Utilisateur
+class IndividuPrive
 {
     //----------------------------------------------------------------- PUBLIC
 

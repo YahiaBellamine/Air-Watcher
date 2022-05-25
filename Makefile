@@ -24,7 +24,7 @@ clean:
 	rm Model/*.o
 
 loading: Loading.cpp
-	g++ -o loading Loading.cpp Model/SerieMesures.cpp Model/Capteur.cpp Model/Fournisseur.cpp Model/Attribut.cpp Model/Mesure.cpp Model/Temps.cpp Model/Nettoyeur.cpp Model/Utilisateur.cpp
+	g++ -o loading Loading.cpp Model/SerieMesures.cpp Model/Capteur.cpp Model/Fournisseur.cpp Model/Attribut.cpp Model/Mesure.cpp Model/Temps.cpp Model/Nettoyeur.cpp Model/IndividuPrive.cpp
 
 test: $(TEST)
 	$(CXX) -o $(EXEC) $(TEST)

@@ -13,7 +13,6 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include <vector>
-#include "Utilisateur.h"
 #include "Capteur.h"
 #include "Nettoyeur.h"
 #include "Capteur.h"
@@ -27,7 +26,7 @@
 //
 //------------------------------------------------------------------------
 class Nettoyeur;
-class Fournisseur : public Utilisateur
+class Fournisseur
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -35,6 +34,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
     bool ajouterNettoyeur (Nettoyeur nettoyeur);
     vector<Nettoyeur> getListeNettoyeurs() const;
+    string getIdFournisseur() const;
 
     //-------------------------------------------- Constructeurs - destructeur
     Fournisseur(string login, string mdp);

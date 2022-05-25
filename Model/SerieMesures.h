@@ -57,7 +57,7 @@ public:
     // Contrat :
     //
 
-    SerieMesures(const Temps &date);
+    SerieMesures(const string id, const Temps &date);
 
     virtual ~SerieMesures();
     // Inutile
@@ -68,14 +68,15 @@ public:
     string getCapteur();
     vector<Mesure> getListeMesures() const;
 
-    // bool operator==(const SerieMesures &sm) const;
+    //bool operator==(const SerieMesures &sm) const;
 
     friend ostream &operator<<(ostream &out, const SerieMesures &sm);
 
     //------------------------------------------------------------------ PRIVE
 
-protected:
+private:
     //----------------------------------------------------- Méthodes protégées
+    string idCapteur;
     vector<Mesure> listeMesures;
     Temps date;
     //----------------------------------------------------- Attributs protégés

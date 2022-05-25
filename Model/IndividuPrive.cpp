@@ -69,7 +69,7 @@ vector<Capteur> IndividuPrive::getListeCapteurs() const
 }//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
-IndividuPrive::IndividuPrive(string login, string mdp) : Utilisateur(login, mdp)
+IndividuPrive::IndividuPrive(string login, string mdp)
 {
     nombrePoints = 0;
     fiabilite = Fiabilite::Fiable;

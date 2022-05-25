@@ -45,7 +45,7 @@ public:
 
     vector<SerieMesures> & getSeriesMesures();
 
-    void ajouterSerieMesures(SerieMesures &m);
+    void ajouterSerieMesures(SerieMesures &sm);
 
     //------------------------------------------------- Surcharge d'opérateurs
     Capteur &operator=(const Capteur &unXxx);
@@ -60,9 +60,6 @@ public:
     //
     // Contrat :
     //
-
-    void ajouterSerieMesures(SerieMesures &sm);
-
     virtual ~Capteur();
     // Mode d'emploi :
     //

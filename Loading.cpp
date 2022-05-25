@@ -19,7 +19,7 @@ static list<Attribut> listeAttributs;
 static map<string, Capteur> listeCapteurs; 
 static list<Nettoyeur> listeNettoyeurs;
 static map<string, Fournisseur> listeFournisseurs;
-static list<IndividuPrive> listeUtilisateurs;
+static map<string, IndividuPrive> listeUtilisateurs; 
 
 void loadMeasurements(){
     ifstream fic("./dataset/measurements.csv");
@@ -91,23 +91,13 @@ void loadSensors(){
 
     // list<Capteur>::iterator it = maListeDeCapteur.begin();
     // char * buffer = new char[100];
-    string id, buffer; 
-    float lat;
-    float lon; 
-    getline(fic, buffer, ';');
+    string id, lat, lon;
     while(!fic.eof()){
-        
-        id = buffer; 
-        // cout <<"BUFFER id: " <<buffer << endl;
-        getline(fic, buffer, ';');
-        // cout <<"BUFFER lat: " <<buffer << endl;
-        lat = stof(buffer);
-        getline(fic, buffer, ';');
-        // cout <<"BUFFER lon: " <<buffer << endl;
-        lon = stof(buffer);
-        getline(fic, buffer, ';');
-        // cout <<"FIN: " <<buffer << endl;
-        Capteur capteur(id,lat,lon);
+        getline(fic, id, ';');
+        getline(fic, lat, ';');
+        getline(fic, lon, ';');
+        fic.ignore(1, '\n');
+        Capteur capteur(id,stof(lat),stof(lon));
         listeCapteurs.insert(pair<string,Capteur>(id, capteur));
         // it++;
     }
@@ -136,6 +126,8 @@ void loadProviders(){
     string idFournisseur, idNettoyeur;
     while(!fic.eof()){
         getline(fic, idFournisseur, ';');
+        getline(fic, idNettoyeur, ';');
+        fic.ignore(1, '\n');
         Fournisseur fournisseur(idFournisseur);
         listeFournisseurs.insert(pair<string, Fournisseur>(idNettoyeur, fournisseur));
     }
@@ -178,6 +170,7 @@ void loadCleaners(){
         tFin.min = stoi(tmp);
         getline(fic, tmp, ';');
         tFin.sec = stoi(tmp);
+        fic.ignore(1, '\n');
 
         Fournisseur f = listeFournisseurs.find(id)->second;
         Nettoyeur nettoyeur(id, stof(lat), stof(lon), tDeb, tFin, &f);
@@ -195,8 +188,9 @@ void loadUsers(){
     while(!fic.eof()){
         getline(fic, idUser, ';');
         getline(fic, idCapteur, ';');
+        fic.ignore(1, '\n');
         IndividuPrive user(idUser);
-        listeUtilisateurs.push_back(user);
+        listeUtilisateurs.insert(pair<string,IndividuPrive>(idUser, user));
         Capteur capteur = listeCapteurs.find(idCapteur)->second;
         user.ajouterCapteur(capteur);
     }
