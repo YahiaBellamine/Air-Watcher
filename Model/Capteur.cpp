@@ -52,13 +52,20 @@ vector<SerieMesures> Capteur::getSeriesMesures()
     return seriesMesures;
 }
 
-ostream & operator << (ostream & out, const Capteur & c)
+ostream &operator<<(ostream &out, const Capteur &c)
 {
     out << "Capteur " << c.idCapteur << endl;
     return out;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
+Capteur::Capteur()
+{
+    idCapteur = "id";
+    latitude = 0;
+    longitude = 0;
+}
+
 Capteur::Capteur(string id, float lat, float lon)
 // Algorithme :
 //

@@ -39,7 +39,7 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(const string &leCapteur, const Temps &laDate)
+SerieMesures::SerieMesures(const string leCapteur, const Temps &laDate)
 // Algorithme :
 //
 {
@@ -61,8 +61,8 @@ SerieMesures::~SerieMesures()
 
 bool SerieMesures::ajouterMesure(Mesure mesure)
 {
-    vector<Mesure>::iterator it = listeMesures.begin();
-    listeMesures.insert(it, mesure);
+    vector<Mesure>::iterator it = vecMesures.begin();
+    vecMesures.insert(it, mesure);
     return true;
 }
 
@@ -77,7 +77,7 @@ bool SerieMesures::atmo()
 
 Mesure SerieMesures::getMesure(string type) const
 {
-    for (vector<Mesure>::const_iterator it = listeMesures.begin(); it != listeMesures.end(); it++)
+    for (vector<Mesure>::const_iterator it = vecMesures.begin(); it != vecMesures.end(); it++)
     {
 
         if ((*it).getAttribut() == type)
@@ -86,6 +86,11 @@ Mesure SerieMesures::getMesure(string type) const
         }
     }
     return Mesure(5, "");
+}
+
+vector<Mesure> SerieMesures::getVecMesures()
+{
+    return this->vecMesures;
 }
 
 Temps SerieMesures::getDate()
@@ -103,13 +108,14 @@ bool SerieMesures::operator==(const SerieMesures &sm) const
     return (sm.capteur == capteur && sm.date.difftime(sm.date, date) == 0);
 }
 
-ostream & operator << (ostream & out, const SerieMesures & sm)
+ostream &operator<<(ostream &out, const SerieMesures &sm)
 {
-    cout << sm.capteur; 
+    cout << sm.capteur;
     cout << "O3 : " << sm.getMesure("O3").getValeur() << endl;
     cout << "SO2 : " << sm.getMesure("SO2").getValeur() << endl;
     cout << "NO2 : " << sm.getMesure("NO2").getValeur() << endl;
-    cout << "PM10 : " << sm.getMesure("PM10").getValeur() << endl << endl;
+    cout << "PM10 : " << sm.getMesure("PM10").getValeur() << endl
+         << endl;
     return out;
 }
 //------------------------------------------------------------------ PRIVE

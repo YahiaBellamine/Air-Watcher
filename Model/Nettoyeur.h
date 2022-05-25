@@ -7,12 +7,16 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Nettoyeur> (fichier Nettoyeur.h) ----------------
-#if ! defined ( NETTOYEUR_H )
+#if !defined(NETTOYEUR_H)
 #define NETTOYEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
 
 #include "Temps.h"
+#include <string>
+#include <vector>
+
+using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -25,26 +29,32 @@
 class Fournisseur;
 class Nettoyeur
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//-------------------------------------------- Constructeurs - destructeur
+    string getIdNettoyeur();
+    float getLatitude();
+    float getLongitude();
+    Temps getTimeStart();
+    Temps getTimeStop();
+    Fournisseur *getfournisseur();
+    //-------------------------------------------- Constructeurs - destructeur
     Nettoyeur(string id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur *f);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Nettoyeur ( );
+    virtual ~Nettoyeur();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 private:
-//----------------------------------------------------- Méthodes protégées
+    //----------------------------------------------------- Méthodes protégées
     string idNettoyeur;
     float latitude;
     float longitude;
@@ -52,11 +62,9 @@ private:
     Temps timeStop;
     Fournisseur *fournisseur;
 
-//----------------------------------------------------- Attributs protégés
-
+    //----------------------------------------------------- Attributs protégés
 };
 
 //-------------------------------- Autres définitions dépendantes de <Nettoyeur>
 
 #endif // NETTOYEUR_H
-

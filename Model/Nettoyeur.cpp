@@ -21,9 +21,33 @@ using namespace std;
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
+string Nettoyeur::getIdNettoyeur()
+{
+    return this->idNettoyeur;
+}
+
+float Nettoyeur::getLatitude()
+{
+    return this->latitude;
+}
+
+float Nettoyeur::getLongitude()
+{
+    return this->longitude;
+}
+
+Temps Nettoyeur::getTimeStart()
+{
+    return this->timeStart;
+}
+
+Temps Nettoyeur::getTimeStop()
+{
+    return this->timeStop;
+}
 
 //-------------------------------------------- Constructeurs - destructeur
-Nettoyeur::Nettoyeur (string id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur *f)
+Nettoyeur::Nettoyeur(string id, float lat, float lon, Temps tDeb, Temps tFin, Fournisseur *f)
 // Algorithme :
 //
 {
@@ -38,8 +62,7 @@ Nettoyeur::Nettoyeur (string id, float lat, float lon, Temps tDeb, Temps tFin, F
     fournisseur = f;
 } //----- Fin de Nettoyeur
 
-
-Nettoyeur::~Nettoyeur ( )
+Nettoyeur::~Nettoyeur()
 // Algorithme :
 //
 {
@@ -48,8 +71,6 @@ Nettoyeur::~Nettoyeur ( )
 #endif
 } //----- Fin de ~Nettoyeur
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

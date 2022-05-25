@@ -41,13 +41,15 @@ public:
     vector<SerieMesures> getSeriesMesures();
 
     //------------------------------------------------- Surcharge d'opérateurs
-    Capteur &operator=(const Capteur &unXxx);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Capteur &operator=(const Capteur &unXxx);
+    // // Mode d'emploi :
+    // //
+    // // Contrat :
+    // //
 
     //-------------------------------------------- Constructeurs - destructeur
+    Capteur();
+
     Capteur(string id, float lat, float lon);
     // Mode d'emploi :
     //
@@ -60,7 +62,7 @@ public:
     // Contrat :
     //
     bool operator==(const Capteur &cap) const;
-    friend ostream & operator << (ostream & out, const Capteur & c);
+    friend ostream &operator<<(ostream &out, const Capteur &c);
     //------------------------------------------------------------------ PRIVE
 
 private:
