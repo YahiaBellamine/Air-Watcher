@@ -7,7 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Fournisseur> (fichier Fournisseur.h) ----------------
-#if !defined(FOURNISSEUR_H)
+#if ! defined (FOURNISSEUR_H)
 #define FOURNISSEUR_H
 
 //--------------------------------------------------- Interfaces utilisées

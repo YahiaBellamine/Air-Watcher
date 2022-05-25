@@ -7,7 +7,7 @@
 *************************************************************************/
 #include "Attribut.h"
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if !defined(MESURE_H)
+#if ! defined (MESURE_H)
 #define MESURE_H
 
 //--------------------------------------------------- Interfaces utilisées

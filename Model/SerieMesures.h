@@ -13,7 +13,7 @@
 #include <string>
 using namespace std;
 //---------- Interface de la classe <SerieMesures> (fichier SerieMesures.h) ----------------
-#if !defined(SERIEMESURE_H)
+#if ! defined (SERIEMESURE_H)
 #define SERIEMESURE_H
 
 //--------------------------------------------------- Interfaces utilisées

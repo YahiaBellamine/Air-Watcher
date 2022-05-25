@@ -1,4 +1,4 @@
-#if !defined(INDIVIDUPRIVE_H)
+#if ! defined (INDIVIDUPRIVE_H)
 #define INDIVIDUPRIVE_H
 
 //--------------------------------------------------- Interfaces utilisées

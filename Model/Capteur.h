@@ -7,7 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Capteur> (fichier Capteur.h) ----------------
-#if !defined(CAPTEUR_H)
+#if ! defined (CAPTEUR_H)
 #define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
