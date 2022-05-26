@@ -24,8 +24,12 @@ using namespace std;
 #include "../Model/Mesure.h"
 #include "../Model/Capteur.h"
 #include "../Model/SerieMesures.h"
+#include "../Model/Nettoyeur.h"
+
+#include "../Model/Fournisseur.h"
 #include "../Controller/ActionQualiteAir.h"
 #include "../Controller/ActionCapteur.h"
+#include "../Controller/ActionNettoyeur.h"
 #include <math.h>
 #include <iterator>
 #include <algorithm>
@@ -244,7 +248,92 @@ bool TestUnit::Test2()
 
 bool TestUnit::Test3()
 {
-    return false;
+
+    bool test1, testGeneral;
+    cout << ".. Test 3 : Trouver le rayon d'action du nettoyeur" << endl;
+    cout << endl
+         << "..... Etape 1 : Vérification du bon rayon d'action du nettoyeur" << endl;
+
+    Fournisseur *f = new Fournisseur("log", "mdp");
+    Nettoyeur net1 = Nettoyeur("1", 0.5, 0.5, Temps(1, 0, 0, 0, 0, 0), Temps(9, 0, 0, 0, 0, 0), f);
+    Nettoyeur net2 = Nettoyeur("2", 6, 6, Temps(1, 0, 0, 0, 0, 0), Temps(9, 0, 0, 0, 0, 0), f);
+
+    Mesure m1 = Mesure(100.0, "SO2");
+    Mesure m2 = Mesure(100.0, "O3");
+    Mesure m3 = Mesure(100.0, "NO2");
+    Mesure m4 = Mesure(100.0, "PM10");
+    Mesure m5 = Mesure(10.0, "SO2");
+    Mesure m6 = Mesure(10.0, "O3");
+    Mesure m7 = Mesure(10.0, "NO2");
+    Mesure m8 = Mesure(10.0, "PM10");
+    Capteur cap = Capteur("1", 0.7, 0.7);
+    SerieMesures sm1 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
+    SerieMesures sm2 = SerieMesures(Temps(10, 0, 0, 0, 0, 0));
+    sm1.ajouterMesure(m1);
+    sm1.ajouterMesure(m2);
+    sm1.ajouterMesure(m3);
+    sm1.ajouterMesure(m4);
+    sm2.ajouterMesure(m5);
+    sm2.ajouterMesure(m6);
+    sm2.ajouterMesure(m7);
+    sm2.ajouterMesure(m8);
+    cap.ajouterSerieMesures(sm1);
+    cap.ajouterSerieMesures(sm2);
+
+    Mesure m9 = Mesure(100.0, "SO2");
+    Mesure m10 = Mesure(100.0, "O3");
+    Mesure m11 = Mesure(100.0, "NO2");
+    Mesure m12 = Mesure(100.0, "PM10");
+    Mesure m13 = Mesure(101.0, "SO2");
+    Mesure m14 = Mesure(101.0, "O3");
+    Mesure m15 = Mesure(101.0, "NO2");
+    Mesure m16 = Mesure(101.0, "PM10");
+    Capteur cap2 = Capteur("2", 1, 1);
+    SerieMesures sm3 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
+    SerieMesures sm4 = SerieMesures(Temps(10, 0, 0, 0, 0, 0));
+    sm3.ajouterMesure(m9);
+    sm3.ajouterMesure(m10);
+    sm3.ajouterMesure(m11);
+    sm3.ajouterMesure(m12);
+    sm4.ajouterMesure(m13);
+    sm4.ajouterMesure(m14);
+    sm4.ajouterMesure(m15);
+    sm4.ajouterMesure(m16);
+    cap2.ajouterSerieMesures(sm3);
+    cap2.ajouterSerieMesures(sm4);
+
+    vector<Capteur> capteursG;
+    vector<Capteur> capteursI;
+    capteursG.push_back(cap);
+    capteursI.push_back(cap2);
+    vector<Nettoyeur> listeNettoyeurs;
+    listeNettoyeurs.push_back(net1);
+    listeNettoyeurs.push_back(net2);
+
+    float test3 = ActionNettoyeur::evaluerImpactNettoyeur(net1, capteursG, capteursI, listeNettoyeurs);
+    cout << "YEAHFKQJSHDFKJQ : " << test3 << endl;
+
+    cout << "........... Rayon d'action du nettoyeur " << net1.getIdNettoyeur() << " avec pour LAT : " << net1.getLatitude() << ", LONG : " << net1.getLongitude() << ", DEBUT : " << net1.getTimeStart().sec << ", FIN : " << net1.getTimeStop().sec << endl;
+    cout << "........... Entre Capteur" << cap.getIdCapteur() << endl
+         << " avec pour valeurs SO2 : " << m1.getValeur() << ", O3 : " << m2.getValeur() << ", NO2 : " << m3.getValeur() << ", PM10 : " << m4.getValeur() << " à temps : " << sm1.getDate().sec << endl
+         << " avec pour valeurs SO2 : " << m5.getValeur() << ", O3 : " << m6.getValeur() << ", NO2 : " << m7.getValeur() << ", PM10 : " << m8.getValeur() << " à temps : " << sm2.getDate().sec << endl;
+    cout << "........... Et Capteur" << cap2.getIdCapteur() << endl
+         << " avec pour valeurs SO2 : " << m9.getValeur() << ", O3 : " << m10.getValeur() << ", NO2 : " << m11.getValeur() << ", PM10 : " << m12.getValeur() << " à temps : " << sm3.getDate().sec << endl
+         << " avec pour valeurs SO2 : " << m13.getValeur() << ", O3 : " << m14.getValeur() << ", NO2 : " << m15.getValeur() << ", PM10 : " << m16.getValeur() << " à temps : " << sm4.getDate().sec << endl;
+    cout << "........... Resultat attendu : Premier capteur dans le rayon d'action : rayon d'action de sqrt(0.2^2+0.2^2) = 0.282843" << endl;
+    cout << "........... Resultat obtenu : rayon d'action de " << test3 << endl;
+    testGeneral = ((int)(test3 / 0.000001) == (int)(sqrt(pow(0.2, 2.0) + pow(0.2, 2.0)) / 0.000001));
+    if (testGeneral)
+    {
+        cout << endl
+             << ".. TEST 3 PASSE" << endl;
+    }
+    else
+    {
+        cout << endl
+             << ".. /!\\ TEST 3 NON PASSE /!\\" << endl;
+    }
+    return testGeneral;
 }
 
 bool TestUnit::AllTests()
@@ -261,6 +350,18 @@ bool TestUnit::AllTests()
     bool test2 = Test2();
 
     bool test3 = Test3();
+    bool testGeneral = (test1 && test2 && test3);
+    if (testGeneral)
+    {
+        cout << endl
+             << "TOUS LES TESTS PASSES" << endl;
+    }
+    else
+    {
+        cout << endl
+             << "/!\\ CERTAINS TESTS NON PASSE /!\\" << endl;
+    }
+    return testGeneral;
 
     return (test1 && test2 && test3);
 }

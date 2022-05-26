@@ -39,35 +39,40 @@ float ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur unNettoyeur, vector<Capt
 		capteurs.push_back(c);
 	}
 
-	float rayonMaxNettoyeur = ActionNettoyeur::distance(nettoyeurs[0], leNettoyeur) / (2.0);
+	float rayonMaxNettoyeur = 100000000.0;
 	float distanceNN = 0;
 	for (Nettoyeur n : nettoyeurs)
 	{
-		distanceNN = ActionNettoyeur::distance(n, leNettoyeur);
-		if ((distanceNN / (2.0)) < rayonMaxNettoyeur)
+		if (n.getIdNettoyeur() != leNettoyeur.getIdNettoyeur())
 		{
-			rayonMaxNettoyeur = distanceNN / (2.0);
+			distanceNN = ActionNettoyeur::distance(n, leNettoyeur);
+			if ((distanceNN / (2.0)) < rayonMaxNettoyeur)
+			{
+				rayonMaxNettoyeur = distanceNN / (2.0);
+			}
 		}
 	}
 
 	float rayonZoneNettoyee = 0;
-	float sommeAvant = 0;
-	float sommeApres = 0;
-	int nbMesuresAvant = 0;
-	int nbMesuresApres = 0;
-	float moyenneAvant = 0;
-	float moyenneApres = 0;
 
 	for (Capteur c : capteurs)
 	{
+
+		float sommeAvant = 0;
+		float sommeApres = 0;
+		int nbMesuresAvant = 0;
+		int nbMesuresApres = 0;
+		float moyenneAvant = 0;
+		float moyenneApres = 0;
 		float distanceCN = ActionNettoyeur::distanceCN(c, leNettoyeur);
+
 		if (distanceCN <= rayonMaxNettoyeur)
 		{
 			vector<SerieMesures> vectorSerieMesures = c.getSeriesMesures();
 			for (SerieMesures serie : vectorSerieMesures)
 			{
 				// <
-				if (Temps::difftime(serie.getDate(), leNettoyeur.getTimeStart()) == 0)
+				if (Temps::difftime(serie.getDate(), leNettoyeur.getTimeStart()) == -1)
 				{
 					for (Mesure m : serie.getVecMesures())
 					{
@@ -86,7 +91,6 @@ float ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur unNettoyeur, vector<Capt
 			}
 			moyenneAvant = sommeAvant / nbMesuresAvant;
 			moyenneApres = sommeApres / nbMesuresApres;
-
 			if ((moyenneApres < moyenneAvant) && (distanceCN > rayonZoneNettoyee))
 			{
 				rayonZoneNettoyee = distanceCN;
