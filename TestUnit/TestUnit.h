@@ -34,6 +34,8 @@ public:
 
     static bool Test2();
 
+    static bool Test3();
+
     static bool AllTests();
     //------------------------------------------------------------------ PRIVE
 

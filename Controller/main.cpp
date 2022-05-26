@@ -1,7 +1,7 @@
 #include <iostream>
-#include "ActionQualiteAir.cpp"
+#include "../TestUnit/TestUnit.h"
 using namespace std;
 int main()
 {
-    moyenneQualiteAir();
+    TestUnit::AllTests();
 }
