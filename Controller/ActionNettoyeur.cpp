@@ -1,9 +1,9 @@
 /*************************************************************************
-                           ActionNettoyeur  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+						   ActionNettoyeur  -  description
+							 -------------------
+	début                : $DATE$
+	copyright            : (C) $YEAR$ par $AUTHOR$
+	e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Réalisation de la classe <ActionNettoyeur> (fichier ActionNettoyeur.cpp) ------------
@@ -13,116 +13,117 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <math.h>
 
 //------------------------------------------------------ Include personnel
 #include "ActionNettoyeur.h"
-
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur leNettoyeur, int longitude, int latitude, int rayon)
-// Algorithme :
-//
+float ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur unNettoyeur, vector<Capteur> capteursG, vector<Capteur> capteursI, vector<Nettoyeur> listeNettoyeurs)
 {
-    /*int resultat[4];
-    int moyennesConcentrationAvantT[4];
-    int moyennesConcentrationApresT[4];
-    int i=0;
-    for(i=0; i<4; i++){
-        resultat[i] = 0;
-        moyennesConcentrationAvantT[i] = 0;
-        moyennesConcentrationApresT[i] = 0;
-    }
+	Nettoyeur leNettoyeur = unNettoyeur;
+	vector<Capteur> capteursGouvernement = capteursG;
+	vector<Capteur> capteursIndividu = capteursI;
+	vector<Nettoyeur> nettoyeurs = listeNettoyeurs;
 
-	int nombreDeMesuresO3AvantT = 0;
-	int nombreDeMesuresSO2AvantT = 0; 
-	int nombreDeMesuresNO2AvantT = 0; 
-	int nombreDeMesuresPM10AvantT = 0;
-	int nombreDeMesuresO3ApresT = 0;
-	int nombreDeMesuresSO2ApresT = 0; 
-	int nombreDeMesuresNO2ApresT = 0; 
-	int nombreDeMesuresPM10ApresT = 0;
+	vector<Capteur> capteurs(capteursGouvernement.size() + capteursIndividu.size());
+	for (Capteur c : capteursGouvernement)
+	{
+		capteurs.push_back(c);
+	}
+	for (Capteur c : capteursIndividu)
+	{
+		capteurs.push_back(c);
+	}
 
-	Pour chaque capteur dans capteurs: 
-		Si (capteur.x-centre.x)^2+(capteur.y-centre.y)^2 < rayon^2:
-			capteursDansAire.ajouter(capteur)
-			nombreCapteurs++;
-		Fin Si
-	Fin Pour
+	float rayonMaxNettoyeur = ActionNettoyeur::distance(nettoyeurs[0], leNettoyeur) / (2.0);
+	float distanceNN = 0;
+	for (Nettoyeur n : nettoyeurs)
+	{
+		distanceNN = ActionNettoyeur::distance(n, leNettoyeur);
+		if ((distanceNN / (2.0)) < rayonMaxNettoyeur)
+		{
+			rayonMaxNettoyeur = distanceNN / (2.0);
+		}
+	}
 
-	Pour chaque mesure dans mesures:
-		Pour i allant de 0 à nombreCapteurs:
-			Si capteur.idCapteur == mesure.idCapteur :
-				Si mesure.getDateMesure() < nettoyeur.getTimeStart()
-					Si mesure.getType() = O3
-						moyennesConcentrationAvantT[0] += mesure.getValeur() 
-						nombreDeMesureO3AvantT++
-					Sinon mesure.getType() = SO2
-						moyennesConcentrationAvantT[1] += mesure.getValeur() 
-						nombreDeMesureSO2AvantT++
-					Sinon Si mesure.getType() = NO2
-						moyennesConcentrationAvantT[2] += mesure.getValeur() 
-						nombreDeMesureNO2AvantT++
-					Sinon Si mesure.getType() = PM10
-						moyennesConcentrationAvantT[3] += mesure.getValeur() 
-						nombreDeMesurePM10AvantT++
-				Si mesure.getDateMesure() > nettoyeur.getTimeEnd()
-					Si mesure.getType() = O3
-						moyennesConcentrationApresT[0] += mesure.getValeur() 
-						nombreDeMesureO3ApresT++
-					Sinon mesure.getType() = SO2
-						moyennesConcentrationApresT[1] += mesure.getValeur() 
-						nombreDeMesureSO2ApresT++
-					Sinon Si mesure.getType() = NO2
-						moyennesConcentrationApresT[2] += mesure.getValeur() 
-						nombreDeMesureNO2ApresT++
-					Sinon Si mesure.getType() = PM10
-						moyennesConcentrationApresT[3] += mesure.getValeur() 
-						nombreDeMesurePM10ApresT++
-		Fin pour 
-	Fin pour
+	float rayonZoneNettoyee = 0;
+	float sommeAvant = 0;
+	float sommeApres = 0;
+	int nbMesuresAvant = 0;
+	int nbMesuresApres = 0;
+	float moyenneAvant = 0;
+	float moyenneApres = 0;
 
-	moyennesConcentrationAvantT[0] /= nombreDeMesuresO3AvantT
-	moyennesConcentrationAvantT[1] /= nombreDeMesuresSO2AvantT
-	moyennesConcentrationAvantT[2] /= nombreDeMesuresNO2AvantT
-	moyennesConcentrationAvantT[3] /= nombreDeMesuresPM10AvantT
+	for (Capteur c : capteurs)
+	{
+		float distanceCN = ActionNettoyeur::distanceCN(c, leNettoyeur);
+		if (distanceCN <= rayonMaxNettoyeur)
+		{
+			vector<SerieMesures> vectorSerieMesures = c.getSeriesMesures();
+			for (SerieMesures serie : vectorSerieMesures)
+			{
+				// <
+				if (Temps::difftime(serie.getDate(), leNettoyeur.getTimeStart()) == 0)
+				{
+					for (Mesure m : serie.getVecMesures())
+					{
+						sommeAvant = sommeAvant + m.getValeur();
+					}
+					nbMesuresAvant = nbMesuresAvant + 1;
+				}
+				else if (Temps::difftime(serie.getDate(), leNettoyeur.getTimeStart()) == 1)
+				{
+					for (Mesure m : serie.getVecMesures())
+					{
+						sommeApres = sommeApres + m.getValeur();
+					}
+					nbMesuresApres = nbMesuresApres + 1;
+				}
+			}
+			moyenneAvant = sommeAvant / nbMesuresAvant;
+			moyenneApres = sommeApres / nbMesuresApres;
 
-	moyennesConcentrationApresT[0] /= nombreDeMesuresO3ApresT
-	moyennesConcentrationApresT[1] /= nombreDeMesuresSO2ApresT
-	moyennesConcentrationApresT[2] /= nombreDeMesuresNO2ApresT
-	moyennesConcentrationApresT[3] /= nombreDeMesuresPM10ApresT
+			if ((moyenneApres < moyenneAvant) && (distanceCN > rayonZoneNettoyee))
+			{
+				rayonZoneNettoyee = distanceCN;
+			}
+		}
+	}
+	return rayonZoneNettoyee;
 
-	Pour i allant de 0 à 3:
-		resultat[i] = (moyennesConcentrationAvantT[i] - moyennesConcentrationApresT[i])/ moyennesConcentrationAvantT[i]
-
-return resultat
-Fin*/
 } //----- Fin de Méthode
 
+float ActionNettoyeur::distance(Nettoyeur premierNettoyeur, Nettoyeur deuxiemeNettoyeur)
+{
+	float distance = sqrt(pow((premierNettoyeur.getLatitude() - deuxiemeNettoyeur.getLatitude()), 2.0) + pow((premierNettoyeur.getLongitude() - deuxiemeNettoyeur.getLongitude()), 2.0));
+	return distance;
+}
+
+float ActionNettoyeur::distanceCN(Capteur capteur, Nettoyeur nettoyeur)
+{
+	float distance = sqrt(pow((capteur.getLatitudeCapteur() - nettoyeur.getLatitude()), 2.0) + pow((capteur.getLongitudeCapteur() - nettoyeur.getLongitude()), 2.0));
+	return distance;
+}
+
 //-------------------------------------------- Constructeurs - destructeur
-ActionNettoyeur::ActionNettoyeur ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <ActionNettoyeur>" << endl;
-#endif
-} //----- Fin de ActionNettoyeur
+// ActionNettoyeur::ActionNettoyeur()
+// {
+// #ifdef MAP
+// 	cout << "Appel au constructeur de <ActionNettoyeur>" << endl;
+// #endif
+// } //----- Fin de ActionNettoyeur
 
-
-ActionNettoyeur::~ActionNettoyeur ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <ActionNettoyeur>" << endl;
-#endif
-} //----- Fin de ~ActionNettoyeur
-
+// ActionNettoyeur::~ActionNettoyeur()
+// {
+// #ifdef MAP
+// 	cout << "Appel au destructeur de <ActionNettoyeur>" << endl;
+// #endif
+// } //----- Fin de ~ActionNettoyeur
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-
