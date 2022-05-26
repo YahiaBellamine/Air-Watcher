@@ -64,6 +64,8 @@ public:
 
     Mesure getMesure(string type) const;
 
+    vector<Mesure> getVecMesures();
+
     Temps getDate();
 
     string getCapteur();
@@ -76,7 +78,7 @@ public:
 
 protected:
     //----------------------------------------------------- Méthodes protégées
-    vector<Mesure> listeMesures;
+    vector<Mesure> vecMesures;
     Temps date;
     string capteur;
     //----------------------------------------------------- Attributs protégés

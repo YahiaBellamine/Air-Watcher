@@ -59,6 +59,13 @@ ostream &operator<<(ostream &out, const Capteur &c)
 }
 
 //-------------------------------------------- Constructeurs - destructeur
+Capteur::Capteur()
+{
+    idCapteur = "id";
+    latitude = 0;
+    longitude = 0;
+}
+
 Capteur::Capteur(string id, float lat, float lon)
 // Algorithme :
 //

@@ -60,8 +60,8 @@ SerieMesures::~SerieMesures()
 
 bool SerieMesures::ajouterMesure(Mesure mesure)
 {
-    vector<Mesure>::iterator it = listeMesures.begin();
-    listeMesures.insert(it, mesure);
+    vector<Mesure>::iterator it = vecMesures.begin();
+    vecMesures.insert(it, mesure);
     return true;
 }
 
@@ -76,7 +76,7 @@ bool SerieMesures::atmo()
 
 Mesure SerieMesures::getMesure(string type) const
 {
-    for (vector<Mesure>::const_iterator it = listeMesures.begin(); it != listeMesures.end(); it++)
+    for (vector<Mesure>::const_iterator it = vecMesures.begin(); it != vecMesures.end(); it++)
     {
 
         if (it->getAttribut() == type)
@@ -85,6 +85,11 @@ Mesure SerieMesures::getMesure(string type) const
         }
     }
     return Mesure(5, "");
+}
+
+vector<Mesure> SerieMesures::getVecMesures()
+{
+    return this->vecMesures;
 }
 
 Temps SerieMesures::getDate()
