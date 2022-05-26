@@ -15,14 +15,14 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Fournisseur.h"
 
+#include "Fournisseur.h"
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool ajouterNettoyeur (Nettoyeur nettoyeur)
+bool Fournisseur::ajouterNettoyeur(Nettoyeur nettoyeur)
 // Algorithme :
 //
 {
@@ -30,21 +30,27 @@ bool ajouterNettoyeur (Nettoyeur nettoyeur)
     int sizeBeforeAdd = listeNettoyeur.size();
     listeNettoyeur.push_back(nettoyeur);
     int sizeAfterAdd = listeNettoyeur.size();
-    if(sizeAfterAdd==sizeBeforeAdd+1){
+    if (sizeAfterAdd == sizeBeforeAdd + 1)
+    {
         added = true;
     }
     return added;
 } //----- Fin de Méthode
 
-vector<Capteur*> IndividuPrive::getListeNettoyeurs() const
+vector<Nettoyeur> Fournisseur::getListeNettoyeurs() const
 // Algorithme :
 //
 {
-    return this->listeNettoyeur;
-}//----- Fin de Méthode
+    return listeNettoyeur;
+} //----- Fin de Méthode
+
+string Fournisseur::getIdFournisseur() const
+{
+    return idFournisseur;
+}
 
 //-------------------------------------------- Constructeurs - destructeur
-Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)
+Fournisseur::Fournisseur(string login, string mdp)
 // Algorithme :
 //
 {
@@ -53,8 +59,17 @@ Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)
 #endif
 } //----- Fin de Fournisseur
 
+Fournisseur::Fournisseur(string id)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Fournisseur>" << endl;
+#endif
+    idFournisseur = id;
+} //----- Fin de Fournisseur
 
-Fournisseur::~Fournisseur ( )
+Fournisseur::~Fournisseur()
 // Algorithme :
 //
 {
@@ -63,8 +78,6 @@ Fournisseur::~Fournisseur ( )
 #endif
 } //----- Fin de ~Fournisseur
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

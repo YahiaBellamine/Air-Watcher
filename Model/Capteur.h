@@ -7,11 +7,16 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Capteur> (fichier Capteur.h) ----------------
-#if !defined(CAPTEUR_H)
+#if ! defined (CAPTEUR_H)
 #define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <iostream>
+#include <string>
+#include <vector>
+#include "SerieMesures.h"
 
+using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -29,10 +34,18 @@ class Capteur
 public:
     //----------------------------------------------------- Méthodes publiques
     string getIdCapteur() const;
+
     float getLatitudeCapteur() const;
+
     void setLatitudeCapteur(float lat);
+
     float getLongitudeCapteur() const;
+
     void setLongitudeCapteur(float lon);
+
+    vector<SerieMesures> & getSeriesMesures();
+
+    void ajouterSerieMesures(SerieMesures &sm);
 
     //------------------------------------------------- Surcharge d'opérateurs
     Capteur &operator=(const Capteur &unXxx);
@@ -47,13 +60,13 @@ public:
     //
     // Contrat :
     //
-
     virtual ~Capteur();
     // Mode d'emploi :
     //
     // Contrat :
     //
     bool operator==(const Capteur &cap) const;
+    friend ostream &operator<<(ostream &out, const Capteur &c);
     //------------------------------------------------------------------ PRIVE
 
 private:
@@ -61,6 +74,7 @@ private:
     string idCapteur;
     float latitude;
     float longitude;
+    vector<SerieMesures> seriesMesures;
     //----------------------------------------------------- Attributs protégés
 };
 

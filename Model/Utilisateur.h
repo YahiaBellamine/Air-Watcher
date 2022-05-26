@@ -1,4 +1,4 @@
-#if !defined(UTILISATEUR_H)
+#if ! defined (UTILISATEUR_H)
 #define UTULISATEUR_H
 
 //--------------------------------------------------- Interfaces utilisées

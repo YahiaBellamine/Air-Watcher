@@ -38,12 +38,23 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-Mesure::Mesure(float valeur, string idAttribut)
+Mesure::Mesure(float lavaleur, string lIdAttribut)
 // Algorithme :
 //
 {
-    this->valeur = valeur;
-    this->idAttribut = idAttribut;
+    valeur = lavaleur;
+    idAttribut = lIdAttribut;
+#ifdef MAP
+    cout << "Appel au constructeur de <Mesure>" << endl;
+#endif
+} //----- Fin de Xxx
+
+Mesure::Mesure()
+// Algorithme :
+//
+{
+    valeur = 0;
+    idAttribut = "";
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
 #endif
@@ -58,24 +69,24 @@ Mesure::~Mesure()
 #endif
 } //----- Fin de ~Xxx
 
-float Mesure::getValeur()
+float Mesure::getValeur() const
 {
     return valeur;
 }
 
-void Mesure::setValeur(float valeur)
+void Mesure::setValeur(float lavaleur)
 {
-    this->valeur = valeur;
+    valeur = lavaleur;
 }
 
-string Mesure::getAttribut()
+string Mesure::getAttribut() const
 {
     return idAttribut;
 }
 
-void Mesure::setAttribut(string idAttribut)
+void Mesure::setAttribut(string lidAttribut)
 {
-    this->idAttribut = idAttribut;
+    idAttribut = lidAttribut;
 }
 
 //------------------------------------------------------------------ PRIVE

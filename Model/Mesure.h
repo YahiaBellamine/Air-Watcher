@@ -7,11 +7,11 @@
 *************************************************************************/
 #include "Attribut.h"
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if !defined(MESURE_H)
+#if ! defined (MESURE_H)
 #define MESURE_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <string>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -49,15 +49,15 @@ public:
     //
 
     Mesure(float valeur, string idAttribut);
-
+    Mesure();
     virtual ~Mesure();
     // Inutile
 
-    float getValeur();
+    float getValeur() const;
 
     void setValeur(float valeur);
 
-    string getAttribut();
+    string getAttribut() const;
 
     void setAttribut(string idAttribut);
 

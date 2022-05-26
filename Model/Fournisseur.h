@@ -7,13 +7,15 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Fournisseur> (fichier Fournisseur.h) ----------------
-#if ! defined ( FOURNISSEUR_H )
+#if ! defined (FOURNISSEUR_H)
 #define FOURNISSEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <cstring>
-#include "Utilisateur.h"
+#include <string>
+#include <vector>
+#include "Capteur.h"
 #include "Nettoyeur.h"
+#include "Capteur.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -23,34 +25,28 @@
 //
 //
 //------------------------------------------------------------------------
-
-class Fournisseur : public Utilisateur
+class Nettoyeur;
+class Fournisseur
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
     bool ajouterNettoyeur (Nettoyeur nettoyeur);
-    vector<Capteur*> getListeNettoyeurs() const;
+    vector<Nettoyeur> getListeNettoyeurs() const;
+    string getIdFournisseur() const;
 
-//-------------------------------------------- Constructeurs - destructeur
+    //-------------------------------------------- Constructeurs - destructeur
     Fournisseur(string login, string mdp);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    Fournisseur(string idFournisseur);
+    virtual ~Fournisseur();
 
-    virtual ~Fournisseur ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 private:
 //----------------------------------------------------- Méthodes protégées
-    list<Nettoyeur*> listeNettoyeur;
+    string idFournisseur;
+    vector<Nettoyeur> listeNettoyeur;
 //----------------------------------------------------- Attributs protégés
 
 };
@@ -58,4 +54,3 @@ private:
 //-------------------------------- Autres définitions dépendantes de <Fournisseur>
 
 #endif // FOURNISSEUR_H
-

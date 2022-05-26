@@ -16,6 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Nettoyeur.h"
+#include "Fournisseur.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -29,12 +30,12 @@ Nettoyeur::Nettoyeur (string id, float lat, float lon, Temps tDeb, Temps tFin, F
 #ifdef MAP
     cout << "Appel au constructeur de <Nettoyeur>" << endl;
 #endif
-    this->idNettoyeur = id;
-    this->latitude = lat;
-    this->longitude = lon;
-    this->timeStart = tDeb;
-    this->timeStop = tFin;
-    this->fournisseur = f;
+    idNettoyeur = id;
+    latitude = lat;
+    longitude = lon;
+    timeStart = tDeb;
+    timeStop = tFin;
+    fournisseur = f;
 } //----- Fin de Nettoyeur
 
 

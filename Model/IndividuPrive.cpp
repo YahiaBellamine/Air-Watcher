@@ -16,6 +16,7 @@ bool IndividuPrive::ajouterPoints(int points)
 //
 {
     //A developper
+    return true;
 }//----- Fin de Méthode
 
 bool IndividuPrive::ajouterCapteur(Capteur capteur)
@@ -36,48 +37,58 @@ int IndividuPrive::getNombrePoints() const
 // Algorithme :
 //
 {
-    return this->nombrePoints;
+    return nombrePoints;
 }//----- Fin de Méthode
 
 void IndividuPrive::setNombrePoints(int points)
 // Algorithme :
 //
 {
-    this->nombrePoints = points;
+    nombrePoints = points;
 }//----- Fin de Méthode
 
 Fiabilite IndividuPrive::getFiabilite() const
 // Algorithme :
 //
 {
-    return this->fiabilite;
+    return fiabilite;
 }//----- Fin de Méthode
 
 void IndividuPrive::setFiabilite(Fiabilite fiabilite)
 // Algorithme :
 //
 {
-    this->fiabilite = fiabilite;
+    fiabilite = fiabilite;
 }//----- Fin de Méthode
 
-vector<Capteur*> IndividuPrive::getListeCapteurs() const
+vector<Capteur> IndividuPrive::getListeCapteurs() const
 // Algorithme :
 //
 {
-    return this->listeCapteur;
+    return listeCapteurs;
 }//----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
-IndividuPrive::IndividuPrive(string login, string mdp) : Utilisateur(login, mdp)
+IndividuPrive::IndividuPrive(string login, string mdp)
 {
-    this->nombrePoints = 0;
-    this->fiabilite = Fiabilite::Fiable;
+    nombrePoints = 0;
+    fiabilite = Fiabilite::Fiable;
 #ifdef MAP
     cout << "Appel au constructeur de <Xxx>" << endl;
 #endif
 }
 
-Utilisateur::~Utilisateur()
+IndividuPrive::IndividuPrive(string id)
+{
+    idUser = id;
+    nombrePoints = 0;
+    fiabilite = Fiabilite::Fiable;
+#ifdef MAP
+    cout << "Appel au constructeur de <Xxx>" << endl;
+#endif
+}
+
+IndividuPrive::~IndividuPrive()
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Xxx>" << endl;

@@ -9,15 +9,15 @@
 #include "Temps.h"
 #include "Capteur.h"
 #include <iterator>
-#include <list>
+#include <vector>
 #include <string>
 using namespace std;
 //---------- Interface de la classe <SerieMesures> (fichier SerieMesures.h) ----------------
-#if !defined(SERIEMESURE_H)
+#if ! defined (SERIEMESURE_H)
 #define SERIEMESURE_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <iostream>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -42,7 +42,7 @@ public:
 
     bool atmo();
 
-    bool ajouterMesure(Mesure *mesure);
+    void ajouterMesure(Mesure &mesure);
     //------------------------------------------------- Surcharge d'opérateurs
     // Xxx &operator=(const Xxx &unXxx);
     // Mode d'emploi :
@@ -57,26 +57,28 @@ public:
     // Contrat :
     //
 
-    SerieMesures(string idCapteur, Temps date, list<Mesure*> mesures4);
+    SerieMesures(const string id, const Temps &date);
 
     virtual ~SerieMesures();
     // Inutile
 
-    Mesure * getMesure(string type);
+    Mesure getMesure(string type) const;
 
     Temps getDate();
+    string getCapteur();
+    vector<Mesure> getListeMesures() const;
 
-    Capteur *getCapteur();
+    //bool operator==(const SerieMesures &sm) const;
 
-    bool operator==(const SerieMesures &sm) const;
+    friend ostream &operator<<(ostream &out, const SerieMesures &sm);
 
     //------------------------------------------------------------------ PRIVE
 
-protected:
+private:
     //----------------------------------------------------- Méthodes protégées
-    list<Mesure*> * listeMesures;
+    string idCapteur;
+    vector<Mesure> listeMesures;
     Temps date;
-    Capteur *capteur;
     //----------------------------------------------------- Attributs protégés
 };
 

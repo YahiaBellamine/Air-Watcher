@@ -11,7 +11,7 @@
 #define ACTIONNETTOYEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Nettoyeur.h"
+#include "../Model/Nettoyeur.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types

@@ -11,7 +11,7 @@
 #define NETTOYEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Fournisseur.h"
+
 #include "Temps.h"
 #include <cstring>
 //------------------------------------------------------------- Constantes
@@ -23,7 +23,7 @@
 //
 //
 //------------------------------------------------------------------------
-
+class Fournisseur;
 class Nettoyeur
 {
 //----------------------------------------------------------------- PUBLIC
@@ -52,7 +52,7 @@ private:
     float longitude;
     Temps timeStart;
     Temps timeStop;
-    Fournisseur * fournisseur;
+    Fournisseur *fournisseur;
 
 //----------------------------------------------------- Attributs protégés
 
