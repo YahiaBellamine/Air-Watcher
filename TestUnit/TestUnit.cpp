@@ -200,13 +200,10 @@ bool TestUnit::Test2()
     sm3.ajouterMesure(m12);
     cap3.ajouterSerieMesures(sm3);
 
-    vector<Capteur> testMoyenneAireCap;
-    testMoyenneAireCap.push_back(cap2);
-    testMoyenneAireCap.push_back(cap3);
-    vector<SerieMesures> testMoyenneAireSerie;
-    testMoyenneAireSerie.push_back(sm1);
-    testMoyenneAireSerie.push_back(sm2);
-    testMoyenneAireSerie.push_back(sm3);
+    map<string, Capteur> testMoyenneAireCap;
+    testMoyenneAireCap.insert(pair<string, Capteur>(cap.getIdCapteur(), cap));
+    testMoyenneAireCap.insert(pair<string, Capteur>(cap2.getIdCapteur(), cap2));
+    testMoyenneAireCap.insert(pair<string, Capteur>(cap3.getIdCapteur(), cap3));
     vector<Capteur> resultat1 = ActionCapteur::comparerCapteur(cap, testMoyenneAireCap);
 
     cout << "........... Capteur le plus proche de Capteur" << cap.getIdCapteur() << " avec pour valeurs SO2 : " << m1.getValeur() << ", O3 : " << m2.getValeur() << ", NO2 : " << m3.getValeur() << ", PM10 : " << m4.getValeur() << endl;
