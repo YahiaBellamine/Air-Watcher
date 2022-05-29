@@ -7,13 +7,12 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Fournisseur> (fichier Fournisseur.h) ----------------
-#if !defined(FOURNISSEUR_H)
+#if ! defined (FOURNISSEUR_H)
 #define FOURNISSEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <cstring>
+#include <string>
 #include <vector>
-#include "Utilisateur.h"
 #include "Capteur.h"
 #include "Nettoyeur.h"
 #include "Capteur.h"
@@ -27,7 +26,7 @@
 //
 //------------------------------------------------------------------------
 class Nettoyeur;
-class Fournisseur : public Utilisateur
+class Fournisseur
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -35,24 +34,18 @@ public:
 //----------------------------------------------------- Méthodes publiques
     bool ajouterNettoyeur (Nettoyeur nettoyeur);
     vector<Nettoyeur> getListeNettoyeurs() const;
+    string getIdFournisseur() const;
 
     //-------------------------------------------- Constructeurs - destructeur
     Fournisseur(string login, string mdp);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
+    Fournisseur(string idFournisseur);
     virtual ~Fournisseur();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     //------------------------------------------------------------------ PRIVE
 
 private:
 //----------------------------------------------------- Méthodes protégées
+    string idFournisseur;
     vector<Nettoyeur> listeNettoyeur;
 //----------------------------------------------------- Attributs protégés
 

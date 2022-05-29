@@ -7,7 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <ActionCapteur> (fichier ActionCapteur.h) ----------------
-#if !defined(AC_H)
+#if ! defined ( AC_H )
 #define AC_H
 
 //--------------------------------------------------- Interfaces utilisées
@@ -27,32 +27,34 @@ const float SIMILARITE_MAX_ADMISSIBLE = 10.0;
 //
 //------------------------------------------------------------------------
 
-class ActionCapteur
+class ActionCapteur 
 {
-    //----------------------------------------------------------------- PUBLIC
+//----------------------------------------------------------------- PUBLIC
 
 public:
-    //----------------------------------------------------- Méthodes publiques
+//----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    static vector<Capteur> comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs, vector<SerieMesures> &listeSerieMesures);
+    static vector<Capteur> comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs);
     // Mode d'emploi :
     //
     // Contrat :
-    //
+    // 
 
-    //------------------------------------------------------------------ PRIVE
+//------------------------------------------------------------------ PRIVE
 
 private:
-    //----------------------------------------------------- Méthodes protégées
+//----------------------------------------------------- Méthodes protégées
+    
+//----------------------------------------------------- Attributs protégés
 
-    //----------------------------------------------------- Attributs protégés
 };
 
 //-------------------------------- Autres définitions dépendantes de <ActionCapteur>
 
 #endif // AC_H
+

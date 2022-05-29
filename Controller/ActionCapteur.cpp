@@ -19,6 +19,7 @@ using namespace std;
 #include "../Model/Mesure.h"
 #include "../Model/SerieMesures.h"
 
+
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
@@ -30,10 +31,10 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs, vector<SerieMesures> &listeSerieMesures)
-{
+vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs)
+{	
 	vector<Capteur> capteursSimilaires;
-
+	
 	float moyenneO3 = 0;
 	float moyenneSO2 = 0;
 	float moyenneNO2 = 0;
@@ -48,22 +49,24 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 	int nombreDeMesuresSO2 = 0;
 	int nombreDeMesuresNO2 = 0;
 	int nombreDeMesuresPM10 = 0;
+	
 
-	for (SerieMesures sm : capteurSelectionne.getSeriesMesures())
+	for(SerieMesures sm : capteurSelectionne.getSeriesMesures())
 	{
-		/* if(sm.getDate > ...){} */
+		//if(sm.getDate > ...){}
 		moyenneCapteurO3 += sm.getMesure("O3").getValeur();
-		nombreDeMesuresO3++;
-
+		nombreDeMesuresO3 ++;
+		
 		moyenneCapteurSO2 += sm.getMesure("SO2").getValeur();
-		nombreDeMesuresSO2++;
-
+		nombreDeMesuresSO2 ++;
+	
 		moyenneCapteurNO2 += sm.getMesure("NO2").getValeur();
-		nombreDeMesuresNO2++;
-
+		nombreDeMesuresNO2 ++;
+	
 		moyenneCapteurPM10 += sm.getMesure("PM10").getValeur();
-		nombreDeMesuresPM10++;
+		nombreDeMesuresPM10 ++;
 	}
+
 
 	moyenneCapteurO3 /= nombreDeMesuresO3;
 	moyenneCapteurSO2 /= nombreDeMesuresSO2;
@@ -75,26 +78,28 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 	nombreDeMesuresNO2 = 0;
 	nombreDeMesuresPM10 = 0;
 
-	/* Parcours de la liste de SM du capteur !!! */
-	for (Capteur c : listeCapteurs)
+	// Parcours de la liste de SM du capteur !!!
+	for(Capteur c : listeCapteurs)
 	{
-		if (c.getIdCapteur() != capteurSelectionne.getIdCapteur())
+		if(c.getIdCapteur() != capteurSelectionne.getIdCapteur())
 		{
-			for (SerieMesures sm : c.getSeriesMesures())
+			vector<SerieMesures> &serie = c.getSeriesMesures();
+			for(SerieMesures sm : serie)
 			{
-				/* if(sm.getDate()){} */
+				// if(sm.getDate()){}
 
 				moyenneO3 += sm.getMesure("O3").getValeur();
-				nombreDeMesuresO3++;
-
+				nombreDeMesuresO3 ++;
+				
 				moyenneSO2 += sm.getMesure("SO2").getValeur();
-				nombreDeMesuresSO2++;
-
+				nombreDeMesuresSO2 ++;
+			
 				moyenneNO2 += sm.getMesure("NO2").getValeur();
-				nombreDeMesuresNO2++;
-
+				nombreDeMesuresNO2 ++;
+			
 				moyennePM10 += sm.getMesure("PM10").getValeur();
-				nombreDeMesuresPM10++;
+				nombreDeMesuresPM10 ++;	
+				
 			}
 
 			moyenneO3 /= nombreDeMesuresO3;
@@ -102,11 +107,13 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 			moyenneNO2 /= nombreDeMesuresNO2;
 			moyennePM10 /= nombreDeMesuresPM10;
 
-			if (sqrt(pow((moyenneO3 - moyenneCapteurO3), 2.0) + pow((moyenneSO2 - moyenneCapteurSO2), 2.0) + pow((moyenneNO2 - moyenneCapteurNO2), 2.0) + pow((moyennePM10 - moyenneCapteurPM10), 2.0)) < SIMILARITE_MAX_ADMISSIBLE)
-			{
-				capteursSimilaires.push_back(c);
+			if(sqrt(pow((moyenneO3 - moyenneCapteurO3), 2.0)
+				+ pow((moyenneSO2 - moyenneCapteurSO2), 2.0)
+				+ pow((moyenneNO2 - moyenneCapteurNO2), 2.0) 
+				+ pow((moyennePM10 - moyenneCapteurPM10), 2.0)) < SIMILARITE_MAX_ADMISSIBLE){
+					capteursSimilaires.push_back(c);
 			}
-
+			
 			nombreDeMesuresO3 = 0;
 			nombreDeMesuresSO2 = 0;
 			nombreDeMesuresNO2 = 0;
@@ -116,6 +123,12 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 			moyenneNO2 = 0;
 			moyennePM10 = 0;
 		}
+	}
+
+	cout << "Le capteur '" << capteurSelectionne.getIdCapteur() << "' est similaire à/aux capteur(s) : " << endl;
+	for(Capteur c : capteursSimilaires)
+	{
+		cout << "\t► " << c; 
 	}
 
 	return capteursSimilaires;

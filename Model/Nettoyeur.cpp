@@ -62,6 +62,21 @@ Nettoyeur::Nettoyeur(string id, float lat, float lon, Temps tDeb, Temps tFin, Fo
     fournisseur = f;
 } //----- Fin de Nettoyeur
 
+Nettoyeur::Nettoyeur(string id, float lat, float lon, Temps tDeb, Temps tFin)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Nettoyeur>" << endl;
+#endif
+    this->idNettoyeur = id;
+    this->latitude = lat;
+    this->longitude = lon;
+    this->timeStart = tDeb;
+    this->timeStop = tFin;
+    this->fournisseur = nullptr;
+} //----- Fin de Nettoyeur
+
 Nettoyeur::~Nettoyeur()
 // Algorithme :
 //

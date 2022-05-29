@@ -44,14 +44,29 @@ vector<Nettoyeur> Fournisseur::getListeNettoyeurs() const
     return listeNettoyeur;
 } //----- Fin de Méthode
 
+string Fournisseur::getIdFournisseur() const
+{
+    return idFournisseur;
+}
+
 //-------------------------------------------- Constructeurs - destructeur
-Fournisseur::Fournisseur(string login, string mdp) : Utilisateur(login, mdp)
+Fournisseur::Fournisseur(string login, string mdp)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Fournisseur>" << endl;
 #endif
+} //----- Fin de Fournisseur
+
+Fournisseur::Fournisseur(string id)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Fournisseur>" << endl;
+#endif
+    idFournisseur = id;
 } //----- Fin de Fournisseur
 
 Fournisseur::~Fournisseur()
