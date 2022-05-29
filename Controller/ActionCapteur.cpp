@@ -31,7 +31,7 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs)
+vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, map<string, Capteur> &listeCapteurs)
 {	
 	vector<Capteur> capteursSimilaires;
 	
@@ -79,12 +79,11 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 	nombreDeMesuresPM10 = 0;
 
 	// Parcours de la liste de SM du capteur !!!
-	for(Capteur c : listeCapteurs)
+	for(pair<string, Capteur> c : listeCapteurs)
 	{
-		if(c.getIdCapteur() != capteurSelectionne.getIdCapteur())
+		if(c.second.getIdCapteur() != capteurSelectionne.getIdCapteur())
 		{
-			vector<SerieMesures> &serie = c.getSeriesMesures();
-			for(SerieMesures sm : serie)
+			for(SerieMesures sm : c.second.getSeriesMesures())
 			{
 				// if(sm.getDate()){}
 
@@ -111,7 +110,7 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, vect
 				+ pow((moyenneSO2 - moyenneCapteurSO2), 2.0)
 				+ pow((moyenneNO2 - moyenneCapteurNO2), 2.0) 
 				+ pow((moyennePM10 - moyenneCapteurPM10), 2.0)) < SIMILARITE_MAX_ADMISSIBLE){
-					capteursSimilaires.push_back(c);
+					capteursSimilaires.push_back(c.second);
 			}
 			
 			nombreDeMesuresO3 = 0;

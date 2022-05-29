@@ -35,7 +35,7 @@ using namespace std;
 
 using namespace std;
 
-map<string, Capteur> ActionQualiteAir::capteursDansAire(float centre_long, float centre_lat, float rayon, map<string, Capteur> tousLesCapteurs)
+map<string, Capteur> ActionQualiteAir::capteursDansAire(float centre_long, float centre_lat, float rayon, map<string, Capteur> &tousLesCapteurs)
 {
     map<string, Capteur> vecteurRetour;
     float distanceCentre;
@@ -51,7 +51,7 @@ map<string, Capteur> ActionQualiteAir::capteursDansAire(float centre_long, float
     return vecteurRetour;
 }
 
-float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, float rayon, map<string, Capteur> tousLesCapteurs, Temps dateDebutMesures)
+float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, float rayon, map<string, Capteur> &tousLesCapteurs, Temps dateDebutMesures)
 {
     float *resultat = new float[4];
     resultat[0] = 0;
