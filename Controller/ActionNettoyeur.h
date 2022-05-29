@@ -11,6 +11,8 @@
 #define ACTIONNETTOYEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include "map"
+#include "list"
 #include "../Model/Nettoyeur.h"
 #include "../Model/Capteur.h"
 #include "../Model/Temps.h"
@@ -30,7 +32,7 @@ class ActionNettoyeur
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    static float evaluerImpactNettoyeur(Nettoyeur leNettoyeur, vector<Capteur> capteursG, vector<Capteur> capteursI, vector<Nettoyeur> listeNettoyeurs);
+    static float evaluerImpactNettoyeur(Nettoyeur leNettoyeur, map<string, Capteur> &tousLesCapteurs, list<Nettoyeur> listeNettoyeurs);
     // Mode d'emploi :
     //
     // Contrat :

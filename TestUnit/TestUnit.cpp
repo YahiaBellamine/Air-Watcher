@@ -299,15 +299,14 @@ bool TestUnit::Test3()
     cap2.ajouterSerieMesures(sm3);
     cap2.ajouterSerieMesures(sm4);
 
-    vector<Capteur> capteursG;
-    vector<Capteur> capteursI;
-    capteursG.push_back(cap);
-    capteursI.push_back(cap2);
-    vector<Nettoyeur> listeNettoyeurs;
+    map<string, Capteur> capteursG;
+    capteursG.insert(pair<string, Capteur>(cap.getIdCapteur(), cap));
+    capteursG.insert(pair<string, Capteur>(cap2.getIdCapteur(), cap2));
+    list<Nettoyeur> listeNettoyeurs;
     listeNettoyeurs.push_back(net1);
     listeNettoyeurs.push_back(net2);
 
-    float test3 = ActionNettoyeur::evaluerImpactNettoyeur(net1, capteursG, capteursI, listeNettoyeurs);
+    float test3 = ActionNettoyeur::evaluerImpactNettoyeur(net1, capteursG, listeNettoyeurs);
     cout << "YEAHFKQJSHDFKJQ : " << test3 << endl;
 
     cout << "........... Rayon d'action du nettoyeur " << net1.getIdNettoyeur() << " avec pour LAT : " << net1.getLatitude() << ", LONG : " << net1.getLongitude() << ", DEBUT : " << net1.getTimeStart().sec << ", FIN : " << net1.getTimeStop().sec << endl;

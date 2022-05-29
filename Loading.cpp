@@ -15,6 +15,7 @@ using namespace std;
 #include "Model/IndividuPrive.h"
 #include "Controller/ActionNettoyeur.h"
 #include "Controller/ActionQualiteAir.h"
+#include "Controller/ActionCapteur.h"
 
 static list<SerieMesures> listeSeriesMesures;
 static list<Attribut> listeAttributs;
@@ -212,9 +213,9 @@ void loadUsers()
         getline(fic, idCapteur, ';');
         fic.ignore(1, '\n');
         IndividuPrive user(idUser);
-        listeUtilisateurs.insert(pair<string, IndividuPrive>(idUser, user));
         Capteur capteur = listeCapteurs.find(idCapteur)->second;
         user.ajouterCapteur(capteur);
+        listeUtilisateurs.insert(pair<string, IndividuPrive>(idUser, user));
     }
 }
 
@@ -347,9 +348,8 @@ int main()
             type = "agenceGouvernementale";
             cout << "Veuillez choisir parmi les fonctionnalités suivantes :" << endl;
             cout << "" << endl;
-            cout << "   1. Demander la moyenne de la qualité de l'air dans une zone géographique, en moyenne sur une période ou en instantanée" << endl;
+            cout << "   1. Demander la moyenne de la qualité de l'air dans une zone géographique, en moyenne sur une période" << endl;
             cout << "   2. Comparer les similarités entre capteurs" << endl;
-            cout << "   3. Verifier la fiabilité des capteurs et des individus privés et les exclure selon la fiabilité" << endl;
             cout << "" << endl;
             cout << "   0. Se déconnecter" << endl;
             scanf("\r\n%d", &buffer);
@@ -420,11 +420,13 @@ int main()
             {
                 if (identifiant == "User0")
                 {
-                    // cout << "\nNombre de points : "<< listeUtilisateurs["User0"].getNombrePoints() <<"\n"<< endl;
+                    cout << "\nNombre de points : " << listeUtilisateurs["User0"].getNombrePoints() << "\n"
+                         << endl;
                 }
                 else if (identifiant == "User1")
                 {
-                    // cout << "\nNombre de points : "<< listeUtilisateurs["User1"].getNombrePoints() <<"\n"<< endl;
+                    cout << "\nNombre de points : " << listeUtilisateurs["User1"].getNombrePoints() << "\n"
+                         << endl;
                 }
                 else
                 {
@@ -434,16 +436,49 @@ int main()
             }
             else if (type == "fournisseur")
             {
-                // evaluerImpactNettoyeur(listeNettoyeurs.get(0), 0, 0, 100);
+                string idNettoyeurSelectionne;
+                float impactNettoyeur = 0.0;
+                for (pair<string, Fournisseur> f : listeFournisseurs)
+                {
+                    if (f.second.getIdFournisseur() == identifiant)
+                    {
+                        idNettoyeurSelectionne = f.first;
+                    }
+                }
+                for (Nettoyeur n : listeNettoyeurs)
+                {
+                    if (n.getIdNettoyeur() == idNettoyeurSelectionne)
+                    {
+                        impactNettoyeur = ActionNettoyeur::evaluerImpactNettoyeur(n, listeCapteurs, listeNettoyeurs);
+                    }
+                }
+
+                cout << "      L'impact est de : " << impactNettoyeur << endl;
             }
         }
         else if (buffer == 2)
         {
             if (type == "agenceGouvernementale")
             {
+                string idCapteurCompare;
+                cout << "      Choisissez l'ID du capteur à comparer :" << endl;
+                cin >> idCapteurCompare;
+                Capteur cap = listeCapteurs[(idCapteurCompare)];
+                cout << "CAPTEUR : " << cap << endl;
+                cout << "MESURES : " << cap.getSeriesMesures().at(0) << endl;
+                vector<Capteur> resultats = ActionCapteur::comparerCapteur(cap, listeCapteurs);
             }
             else if (type == "individuPrive")
             {
+                cout << "      Vos capteurs : " << endl;
+                for (Capteur c : listeUtilisateurs[identifiant].getListeCapteurs())
+                {
+                    cout << c << endl;
+                    for (SerieMesures sm : c.getSeriesMesures())
+                    {
+                        cout << sm << endl;
+                    }
+                }
             }
             else if (type == "fournisseur")
             {

@@ -1,4 +1,4 @@
-#if ! defined (INDIVIDUPRIVE_H)
+#if !defined(INDIVIDUPRIVE_H)
 #define INDIVIDUPRIVE_H
 
 //--------------------------------------------------- Interfaces utilisées
@@ -25,10 +25,11 @@ public:
     Fiabilite getFiabilite() const;
     void setFiabilite(Fiabilite fiabilite);
     vector<Capteur> getListeCapteurs() const;
-    
+
     //-------------------------------------------- Constructeurs - destructeur
     IndividuPrive(string login, string mdp);
     IndividuPrive(string id);
+    IndividuPrive();
     virtual ~IndividuPrive();
 
     //------------------------------------------------------------------ PRIVE

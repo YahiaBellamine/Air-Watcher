@@ -15,9 +15,9 @@ bool IndividuPrive::ajouterPoints(int points)
 // Algorithme :
 //
 {
-    //A developper
+    // A developper
     return true;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 bool IndividuPrive::ajouterCapteur(Capteur capteur)
 // Algorithme :
@@ -27,7 +27,8 @@ bool IndividuPrive::ajouterCapteur(Capteur capteur)
     int sizeBeforeAdd = listeCapteurs.size();
     listeCapteurs.push_back(capteur);
     int sizeAfterAdd = listeCapteurs.size();
-    if(sizeAfterAdd==sizeBeforeAdd+1){
+    if (sizeAfterAdd == sizeBeforeAdd + 1)
+    {
         added = true;
     }
     return added;
@@ -38,35 +39,35 @@ int IndividuPrive::getNombrePoints() const
 //
 {
     return nombrePoints;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 void IndividuPrive::setNombrePoints(int points)
 // Algorithme :
 //
 {
     nombrePoints = points;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 Fiabilite IndividuPrive::getFiabilite() const
 // Algorithme :
 //
 {
     return fiabilite;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 void IndividuPrive::setFiabilite(Fiabilite fiabilite)
 // Algorithme :
 //
 {
     fiabilite = fiabilite;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 vector<Capteur> IndividuPrive::getListeCapteurs() const
 // Algorithme :
 //
 {
     return listeCapteurs;
-}//----- Fin de Méthode
+} //----- Fin de Méthode
 
 //-------------------------------------------- Constructeurs - destructeur
 IndividuPrive::IndividuPrive(string login, string mdp)
@@ -77,7 +78,9 @@ IndividuPrive::IndividuPrive(string login, string mdp)
     cout << "Appel au constructeur de <Xxx>" << endl;
 #endif
 }
-
+IndividuPrive::IndividuPrive()
+{
+}
 IndividuPrive::IndividuPrive(string id)
 {
     idUser = id;

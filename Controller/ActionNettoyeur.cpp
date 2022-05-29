@@ -22,22 +22,9 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-float ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur unNettoyeur, vector<Capteur> capteursG, vector<Capteur> capteursI, vector<Nettoyeur> listeNettoyeurs)
+float ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur unNettoyeur, map<string, Capteur> &tousLesCapteurs, list<Nettoyeur> nettoyeurs)
 {
 	Nettoyeur leNettoyeur = unNettoyeur;
-	vector<Capteur> capteursGouvernement = capteursG;
-	vector<Capteur> capteursIndividu = capteursI;
-	vector<Nettoyeur> nettoyeurs = listeNettoyeurs;
-
-	vector<Capteur> capteurs(capteursGouvernement.size() + capteursIndividu.size());
-	for (Capteur c : capteursGouvernement)
-	{
-		capteurs.push_back(c);
-	}
-	for (Capteur c : capteursIndividu)
-	{
-		capteurs.push_back(c);
-	}
 
 	float rayonMaxNettoyeur = 100000000.0;
 	float distanceNN = 0;
@@ -55,7 +42,7 @@ float ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur unNettoyeur, vector<Capt
 
 	float rayonZoneNettoyee = 0;
 
-	for (Capteur c : capteurs)
+	for (pair<string, Capteur> c : tousLesCapteurs)
 	{
 
 		float sommeAvant = 0;
@@ -64,11 +51,11 @@ float ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur unNettoyeur, vector<Capt
 		int nbMesuresApres = 0;
 		float moyenneAvant = 0;
 		float moyenneApres = 0;
-		float distanceCN = ActionNettoyeur::distanceCN(c, leNettoyeur);
+		float distanceCN = ActionNettoyeur::distanceCN(c.second, leNettoyeur);
 
 		if (distanceCN <= rayonMaxNettoyeur)
 		{
-			vector<SerieMesures> vectorSerieMesures = c.getSeriesMesures();
+			vector<SerieMesures> vectorSerieMesures = c.second.getSeriesMesures();
 			for (SerieMesures serie : vectorSerieMesures)
 			{
 				// <

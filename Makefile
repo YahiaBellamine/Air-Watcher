@@ -20,7 +20,7 @@ clean:
 	rm -rf $(EXEC)
 	rm -rf bin/$(EXEC)
 	rm Controller/*.o
-	rm View/*.o
+	rm TestUnit/*.o
 	rm Model/*.o
 
 loading: Loading.cpp
