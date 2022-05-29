@@ -207,7 +207,7 @@ bool TestUnit::Test2()
     testMoyenneAireSerie.push_back(sm1);
     testMoyenneAireSerie.push_back(sm2);
     testMoyenneAireSerie.push_back(sm3);
-    vector<Capteur> resultat1 = ActionCapteur::comparerCapteur(cap, testMoyenneAireCap, testMoyenneAireSerie);
+    vector<Capteur> resultat1 = ActionCapteur::comparerCapteur(cap, testMoyenneAireCap);
 
     cout << "........... Capteur le plus proche de Capteur" << cap.getIdCapteur() << " avec pour valeurs SO2 : " << m1.getValeur() << ", O3 : " << m2.getValeur() << ", NO2 : " << m3.getValeur() << ", PM10 : " << m4.getValeur() << endl;
     cout << "........... Entre Capteur" << cap2.getIdCapteur() << " avec pour valeurs SO2 : " << m5.getValeur() << ", O3 : " << m6.getValeur() << ", NO2 : " << m7.getValeur() << ", PM10 : " << m8.getValeur() << endl;

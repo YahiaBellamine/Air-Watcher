@@ -39,11 +39,10 @@ using namespace std;
 // Algorithme :
 // //----- Fin de Xxx (constructeur de copie)
 
-SerieMesures::SerieMesures(const string id, const Temps &laDate)
+SerieMesures::SerieMesures(const Temps &laDate)
 // Algorithme :
 //
 {
-    idCapteur = id;
     date = laDate;
 #ifdef MAP
     cout << "Appel au constructeur de <Mesure>" << endl;
@@ -63,7 +62,6 @@ void SerieMesures::ajouterMesure(Mesure &mesure)
 {
     vector<Mesure>::iterator it = vecMesures.begin();
     vecMesures.insert(it, mesure);
-    return true;
 }
 
 bool SerieMesures::atmo()
@@ -100,7 +98,7 @@ Temps SerieMesures::getDate()
 
 vector<Mesure> SerieMesures::getListeMesures() const
 {
-    return listeMesures;
+    return vecMesures;
 }
 
 /* bool SerieMesures::operator==(const SerieMesures &sm) const

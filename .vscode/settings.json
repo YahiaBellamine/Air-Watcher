@@ -12,6 +12,10 @@
     "xstring": "cpp",
     "xutility": "cpp",
     "map": "cpp",
-    "cmath": "cpp"
+    "cmath": "cpp",
+    "string": "cpp",
+    "type_traits": "cpp",
+    "xtree": "cpp",
+    "utility": "cpp"
   }
 }

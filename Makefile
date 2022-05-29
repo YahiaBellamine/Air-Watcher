@@ -6,7 +6,7 @@ else
 	CXXFLAGS=-ansi -pedantic -Wall -std=c++17 -g
 endif
 EXEC=main
-OBJECTS= Model/Capteur.o Model/SerieMesures.o Model/Mesure.o Controller/ActionCapteur.o Controller/ActionQualiteAir.o Model/AgenceGouvernementale.o Model/Attribut.o Model/Fournisseur.o Model/IndividuPrive.o Model/Nettoyeur.o Model/Utilisateur.o Controller/ServiceUtilisateur.o Controller/ActionNettoyeur.o
+OBJECTS= Loading.o TestUnit/TestUnit.o Model/Capteur.o Model/SerieMesures.o Model/Mesure.o Controller/ActionCapteur.o Controller/ActionQualiteAir.o Model/AgenceGouvernementale.o Model/Attribut.o Model/Fournisseur.o Model/IndividuPrive.o Model/Nettoyeur.o Model/Utilisateur.o Controller/ServiceUtilisateur.o Controller/ActionNettoyeur.o Model/Temps.o
 TEST =  Model/Capteur.o Model/SerieMesures.o Model/Mesure.o Controller/ActionCapteur.o
 
 all: $(OBJECTS)

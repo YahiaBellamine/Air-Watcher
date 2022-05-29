@@ -66,9 +66,12 @@ float *ActionQualiteAir::moyenneQualiteAir(float centre_lat, float centre_long, 
         for (SerieMesures sm : paire.second.getSeriesMesures())
         {
             if (dateDebutMesures.difftime(sm.getDate(), dateDebutMesures) != -1)
+            {
                 vecteurMesuresDansAire.push_back(sm);
+            }
         }
     }
+
     /*vector<SerieMesures>::iterator it;
     // for (SerieMesures serieMesures : *toutesLesMesures)
     SerieMesures serieMesures = *toutesLesMesures.begin();
