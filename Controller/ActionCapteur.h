@@ -13,7 +13,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "../Model/Capteur.h"
 #include "../Model/SerieMesures.h"
-#include <vector>
+#include <map>
 #include <iterator>
 
 using namespace std;
@@ -39,7 +39,7 @@ public:
     // Contrat :
     //
 
-    static vector<Capteur> comparerCapteur(Capteur &capteurSelectionne, vector<Capteur> &listeCapteurs);
+    static vector<Capteur> comparerCapteur(Capteur &capteurSelectionne, map<string, Capteur> &listeCapteurs);
     // Mode d'emploi :
     //
     // Contrat :

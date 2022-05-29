@@ -246,7 +246,7 @@ bool TestUnit::Test2()
 bool TestUnit::Test3()
 {
 
-    bool test1, testGeneral;
+    bool testGeneral;
     cout << ".. Test 3 : Trouver le rayon d'action du nettoyeur" << endl;
     cout << endl
          << "..... Etape 1 : Vérification du bon rayon d'action du nettoyeur" << endl;
