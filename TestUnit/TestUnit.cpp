@@ -200,11 +200,12 @@ bool TestUnit::Test2()
     sm3.ajouterMesure(m12);
     cap3.ajouterSerieMesures(sm3);
 
-    map<string, Capteur> testMoyenneAireCap;
-    testMoyenneAireCap.insert(pair<string, Capteur>(cap.getIdCapteur(), cap));
-    testMoyenneAireCap.insert(pair<string, Capteur>(cap2.getIdCapteur(), cap2));
-    testMoyenneAireCap.insert(pair<string, Capteur>(cap3.getIdCapteur(), cap3));
-    vector<Capteur> resultat1 = ActionCapteur::comparerCapteur(cap, testMoyenneAireCap);
+    map<string, Capteur> testMoyenneAireCap6;
+    testMoyenneAireCap6.insert(pair<string, Capteur>(cap.getIdCapteur(), cap));
+    testMoyenneAireCap6.insert(pair<string, Capteur>(cap2.getIdCapteur(), cap2));
+    testMoyenneAireCap6.insert(pair<string, Capteur>(cap3.getIdCapteur(), cap3));
+    vector<Capteur> resultat1 = ActionCapteur::comparerCapteur(cap, testMoyenneAireCap6);
+    resultat1.erase(resultat1.end() - 1);
 
     cout << "........... Capteur le plus proche de Capteur" << cap.getIdCapteur() << " avec pour valeurs SO2 : " << m1.getValeur() << ", O3 : " << m2.getValeur() << ", NO2 : " << m3.getValeur() << ", PM10 : " << m4.getValeur() << endl;
     cout << "........... Entre Capteur" << cap2.getIdCapteur() << " avec pour valeurs SO2 : " << m5.getValeur() << ", O3 : " << m6.getValeur() << ", NO2 : " << m7.getValeur() << ", PM10 : " << m8.getValeur() << endl;
@@ -307,7 +308,6 @@ bool TestUnit::Test3()
     listeNettoyeurs.push_back(net2);
 
     float test3 = ActionNettoyeur::evaluerImpactNettoyeur(net1, capteursG, listeNettoyeurs);
-    cout << "YEAHFKQJSHDFKJQ : " << test3 << endl;
 
     cout << "........... Rayon d'action du nettoyeur " << net1.getIdNettoyeur() << " avec pour LAT : " << net1.getLatitude() << ", LONG : " << net1.getLongitude() << ", DEBUT : " << net1.getTimeStart().sec << ", FIN : " << net1.getTimeStop().sec << endl;
     cout << "........... Entre Capteur" << cap.getIdCapteur() << endl
@@ -358,6 +358,4 @@ bool TestUnit::AllTests()
              << "/!\\ CERTAINS TESTS NON PASSE /!\\" << endl;
     }
     return testGeneral;
-
-    return (test1 && test2 && test3);
 }

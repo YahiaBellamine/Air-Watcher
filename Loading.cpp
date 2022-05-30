@@ -16,6 +16,8 @@ using namespace std;
 #include "Controller/ActionNettoyeur.h"
 #include "Controller/ActionQualiteAir.h"
 #include "Controller/ActionCapteur.h"
+#include "TestUnit/TestUnit.h"
+#include <time.h>
 
 static list<SerieMesures> listeSeriesMesures;
 static list<Attribut> listeAttributs;
@@ -221,6 +223,10 @@ void loadUsers()
 
 int main()
 {
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock();
+
     cout << "****** Debut test initialisation des capteurs" << endl;
     loadSensors();
     cout << "****** Fin test initialisation des capteurs" << endl;
@@ -239,6 +245,11 @@ int main()
     cout << "****** Debut test initialisation des utilisateurs" << endl;
     loadUsers();
     cout << "****** Fin test initialisation des utilisateurs" << endl;
+
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+    cout << "Temps de chargement : " << cpu_time_used << " secondes." << endl;
 
     cout << "Veuillez choisir le type de compte auquel vous voulez vous connecter :" << endl;
     cout << "   1. Agence gouvernementale" << endl;
@@ -269,6 +280,11 @@ int main()
         {
             type = "fournisseur";
             etape1 = false;
+        }
+        else if (buffer == 4)
+        {
+            TestUnit::AllTests();
+            break;
         }
         else if (buffer == 0)
         {
@@ -412,9 +428,15 @@ int main()
                 cout << "      Seconde :" << endl;
                 scanf("\r\n%d", &seconde);
 
+                start = clock();
                 float *resultats = ActionQualiteAir::moyenneQualiteAir((abscisse), (ordonnee), (rayon), listeCapteurs, Temps((seconde), (minute), (heure), (jour), (mois), (annee)));
                 cout << "      La moyenne de la qualité de l'air sur la zone de centre (" << abscisse << "," << ordonnee << ") de rayon " << rayon << " depuis le " << jour << "/" << mois << "/" << annee << " à " << heure << "h" << minute << "m" << seconde << "s est : " << endl;
                 cout << "     SO2 : " << resultats[0] << ", O3 : " << resultats[1] << ", NO2 : " << resultats[2] << ", PM10 : " << resultats[3] << endl;
+
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+                cout << "Temps de l'algo : " << cpu_time_used << " secondes." << endl;
             }
             else if (type == "individuPrive")
             {
@@ -436,6 +458,7 @@ int main()
             }
             else if (type == "fournisseur")
             {
+                start = clock();
                 string idNettoyeurSelectionne;
                 float impactNettoyeur = 0.0;
                 for (pair<string, Fournisseur> f : listeFournisseurs)
@@ -454,6 +477,11 @@ int main()
                 }
 
                 cout << "      L'impact est de : " << impactNettoyeur << endl;
+
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+                cout << "Temps de l'algo : " << cpu_time_used << " secondes." << endl;
             }
         }
         else if (buffer == 2)
@@ -466,7 +494,12 @@ int main()
                 Capteur cap = listeCapteurs[(idCapteurCompare)];
                 cout << "CAPTEUR : " << cap << endl;
                 cout << "MESURES : " << cap.getSeriesMesures().at(0) << endl;
+                start = clock();
                 vector<Capteur> resultats = ActionCapteur::comparerCapteur(cap, listeCapteurs);
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+                cout << "Temps de l'algo : " << cpu_time_used << " secondes." << endl;
             }
             else if (type == "individuPrive")
             {

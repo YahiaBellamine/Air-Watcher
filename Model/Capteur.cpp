@@ -54,7 +54,7 @@ vector<SerieMesures> &Capteur::getSeriesMesures()
 
 ostream &operator<<(ostream &out, const Capteur &c)
 {
-    out << "Capteur " << c.idCapteur << endl;
+    out << "Capteur '" << c.idCapteur << "' (" << c.latitude << ", " << c.longitude << ")" << endl;
     return out;
 }
 
