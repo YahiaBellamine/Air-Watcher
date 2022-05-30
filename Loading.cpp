@@ -284,7 +284,7 @@ int main()
         else if (buffer == 4)
         {
             TestUnit::AllTests();
-            break;
+            return 0;
         }
         else if (buffer == 0)
         {
