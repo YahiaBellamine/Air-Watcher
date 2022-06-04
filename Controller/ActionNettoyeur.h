@@ -11,8 +11,8 @@
 #define ACTIONNETTOYEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "map"
-#include "list"
+#include <map>
+#include <list>
 #include "../Model/Nettoyeur.h"
 #include "../Model/Capteur.h"
 #include "../Model/Temps.h"

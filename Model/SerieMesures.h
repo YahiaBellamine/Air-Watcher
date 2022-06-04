@@ -9,8 +9,7 @@
 #include "Temps.h"
 #include "Capteur.h"
 #include <iterator>
-#include <vector>
-#include <string>
+#include <map>
 using namespace std;
 //---------- Interface de la classe <SerieMesures> (fichier SerieMesures.h) ----------------
 #if !defined(SERIEMESURE_H)
@@ -64,11 +63,11 @@ public:
 
     Mesure getMesure(string type) const;
 
-    vector<Mesure> getVecMesures();
+    map<string, Mesure> getVecMesures();
 
     Temps getDate();
     string getCapteur();
-    vector<Mesure> getListeMesures() const;
+    map<string, Mesure> getListeMesures() const;
 
     // bool operator==(const SerieMesures &sm) const;
 
@@ -78,7 +77,7 @@ public:
 
 private:
     //----------------------------------------------------- Méthodes protégées
-    vector<Mesure> vecMesures;
+    map<string, Mesure> vecMesures;
     Temps date;
     //----------------------------------------------------- Attributs protégés
 };

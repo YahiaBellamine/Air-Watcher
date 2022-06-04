@@ -18,7 +18,7 @@ using namespace std;
 #include "Controller/ActionCapteur.h"
 
 static list<SerieMesures> listeSeriesMesures;
-static list<Attribut> listeAttributs;
+static map<string, Attribut*> listeAttributs;
 static map<string, Capteur> listeCapteursIntermediaires;
 
 static map<string, Capteur> listeCapteurs;
@@ -51,27 +51,31 @@ void loadMeasurements()
         date.min = stoi(tmp1);
         getline(fic, idCapteur, ';');
         SerieMesures serieMesures(date);
+
         getline(fic, tmp1, ';');
         getline(fic, tmp2, '\n');
-        mesure = Mesure(stof(tmp2), tmp1);
+        mesure = Mesure(stof(tmp2), listeAttributs.at(tmp1));
+        serieMesures.ajouterMesure(mesure);
+
+        fic.ignore(numeric_limits<streamsize>::max(), ';');
+        fic.ignore(numeric_limits<streamsize>::max(), ';');
+        getline(fic, tmp1, ';');
+        getline(fic, tmp2, '\n');
+        mesure = Mesure(stof(tmp2), listeAttributs.at(tmp1));
+        serieMesures.ajouterMesure(mesure);
+
+        fic.ignore(numeric_limits<streamsize>::max(), ';');
+        fic.ignore(numeric_limits<streamsize>::max(), ';');
+        getline(fic, tmp1, ';');
+        getline(fic, tmp2, '\n');
+        mesure = Mesure(stof(tmp2), listeAttributs.at(tmp1));
         serieMesures.ajouterMesure(mesure);
         fic.ignore(numeric_limits<streamsize>::max(), ';');
         fic.ignore(numeric_limits<streamsize>::max(), ';');
+
         getline(fic, tmp1, ';');
         getline(fic, tmp2, '\n');
-        mesure = Mesure(stof(tmp2), tmp1);
-        serieMesures.ajouterMesure(mesure);
-        fic.ignore(numeric_limits<streamsize>::max(), ';');
-        fic.ignore(numeric_limits<streamsize>::max(), ';');
-        getline(fic, tmp1, ';');
-        getline(fic, tmp2, '\n');
-        mesure = Mesure(stof(tmp2), tmp1);
-        serieMesures.ajouterMesure(mesure);
-        fic.ignore(numeric_limits<streamsize>::max(), ';');
-        fic.ignore(numeric_limits<streamsize>::max(), ';');
-        getline(fic, tmp1, ';');
-        getline(fic, tmp2, '\n');
-        mesure = Mesure(stof(tmp2), tmp1);
+        mesure = Mesure(stof(tmp2), listeAttributs.at(tmp1));
         serieMesures.ajouterMesure(mesure);
         listeSeriesMesures.push_back(serieMesures);
         Capteur capteur = listeCapteursIntermediaires.find(idCapteur)->second;
@@ -121,14 +125,17 @@ void loadAttributes()
     {
         cout << " ERREUR D'OUVERTURE DU FICHIER ! " << endl;
     }
-    string id, unite, description;
+    string id, unite, description, buffer;
+    getline(fic, id, '\n');
     while (!fic.eof())
     {
         getline(fic, id, ';');
         getline(fic, unite, ';');
         getline(fic, description, ';');
-        Attribut attribut(id, unite, description);
-        listeAttributs.push_back(attribut);
+        fic.ignore(1, '\n');
+
+        Attribut *attribut = new Attribut(id, unite, description);
+        listeAttributs.insert(pair<string, Attribut*>(id, attribut));
     }
 }
 
@@ -224,6 +231,9 @@ int main()
     cout << "****** Debut test initialisation des capteurs" << endl;
     loadSensors();
     cout << "****** Fin test initialisation des capteurs" << endl;
+      cout << "****** Debut test initialisation des attributs" << endl;
+    loadAttributes();
+    cout << "****** Fin test initialisation des attributs" << endl;
     cout << "****** Debut test initialisation des mesures" << endl;
     loadMeasurements();
     cout << "****** Fin test initialisation des mesures" << endl;
@@ -233,9 +243,6 @@ int main()
     cout << "****** Debut test initialisation des nettoyeurs" << endl;
     loadCleaners();
     cout << "****** Fin test initialisation des nettoyeurs" << endl;
-    cout << "****** Debut test initialisation des attributs" << endl;
-    loadAttributes();
-    cout << "****** Fin test initialisation des attributs" << endl;
     cout << "****** Debut test initialisation des utilisateurs" << endl;
     loadUsers();
     cout << "****** Fin test initialisation des utilisateurs" << endl;
@@ -464,8 +471,6 @@ int main()
                 cout << "      Choisissez l'ID du capteur à comparer :" << endl;
                 cin >> idCapteurCompare;
                 Capteur cap = listeCapteurs[(idCapteurCompare)];
-                cout << "CAPTEUR : " << cap << endl;
-                cout << "MESURES : " << cap.getSeriesMesures().at(0) << endl;
                 vector<Capteur> resultats = ActionCapteur::comparerCapteur(cap, listeCapteurs);
             }
             else if (type == "individuPrive")

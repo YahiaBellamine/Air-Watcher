@@ -48,7 +48,7 @@ public:
     // Contrat :
     //
 
-    Mesure(float valeur, string idAttribut);
+    Mesure(float valeur, Attribut* attribut);
     Mesure();
     virtual ~Mesure();
     // Inutile
@@ -57,9 +57,11 @@ public:
 
     void setValeur(float valeur);
 
-    string getAttribut() const;
+    Attribut* getAttribut() const;
 
-    void setAttribut(string idAttribut);
+    void setAttribut(Attribut* attribut);
+
+    friend ostream &operator<<(ostream &out, const Mesure &sm);
 
     //------------------------------------------------------------------ PRIVE
 
@@ -68,7 +70,7 @@ protected:
 
     //----------------------------------------------------- Attributs protégés
     float valeur;
-    string idAttribut;
+    Attribut *attribut;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>

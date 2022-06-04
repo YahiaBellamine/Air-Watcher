@@ -60,8 +60,7 @@ SerieMesures::~SerieMesures()
 
 void SerieMesures::ajouterMesure(Mesure &mesure)
 {
-    vector<Mesure>::iterator it = vecMesures.begin();
-    vecMesures.insert(it, mesure);
+    vecMesures.insert(pair<string, Mesure>(mesure.getAttribut()->getId(), mesure));
 }
 
 bool SerieMesures::atmo()
@@ -75,20 +74,12 @@ bool SerieMesures::atmo()
 
 Mesure SerieMesures::getMesure(string type) const
 {
-    for (vector<Mesure>::const_iterator it = vecMesures.begin(); it != vecMesures.end(); it++)
-    {
-
-        if ((*it).getAttribut() == type)
-        {
-            return *it;
-        }
-    }
-    return Mesure(5, "");
+    return vecMesures.at(type);
 }
 
-vector<Mesure> SerieMesures::getVecMesures()
+map<string, Mesure> SerieMesures::getVecMesures()
 {
-    return this->vecMesures;
+    return vecMesures;
 }
 
 Temps SerieMesures::getDate()
@@ -96,7 +87,7 @@ Temps SerieMesures::getDate()
     return date;
 }
 
-vector<Mesure> SerieMesures::getListeMesures() const
+map<string, Mesure> SerieMesures::getListeMesures() const
 {
     return vecMesures;
 }
@@ -108,11 +99,10 @@ vector<Mesure> SerieMesures::getListeMesures() const
 
 ostream &operator<<(ostream &out, const SerieMesures &sm)
 {
-    cout << "O3 : " << sm.getMesure("O3").getValeur() << endl;
-    cout << "SO2 : " << sm.getMesure("SO2").getValeur() << endl;
-    cout << "NO2 : " << sm.getMesure("NO2").getValeur() << endl;
-    cout << "PM10 : " << sm.getMesure("PM10").getValeur() << endl
-         << endl;
+    for(pair<string, Mesure> m : sm.getListeMesures())
+    {
+        out << m.second;
+    }
     return out;
 }
 //------------------------------------------------------------------ PRIVE

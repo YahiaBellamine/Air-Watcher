@@ -21,6 +21,7 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+#include "../Model/Attribut.h"
 #include "../Model/Mesure.h"
 #include "../Model/Capteur.h"
 #include "../Model/SerieMesures.h"
@@ -37,6 +38,11 @@ using namespace std;
 #include <map>
 using namespace std;
 
+static Attribut* SO2 = new Attribut("SO2", "µg/m3", "");
+static Attribut* O3 = new Attribut("O2", "µg/m3", "");
+static Attribut* NO2 = new Attribut("NO2", "µg/m3", "");
+static Attribut* PM10 = new Attribut("SO2", "µg/m3", "");
+
 bool TestUnit::Test1()
 {
     bool test1 = false;
@@ -47,10 +53,10 @@ bool TestUnit::Test1()
     cout << endl
          << "..... Etape 1 : calcul de la moyenne de capteurs" << endl;
 
-    Mesure m1 = Mesure(1.0, "SO2");
-    Mesure m2 = Mesure(5.0, "O3");
-    Mesure m3 = Mesure(20.0, "NO2");
-    Mesure m4 = Mesure(50.0, "PM10");
+    Mesure m1 = Mesure(1.0, SO2);
+    Mesure m2 = Mesure(5.0, O3);
+    Mesure m3 = Mesure(20.0, NO2);
+    Mesure m4 = Mesure(50.0, PM10);
     Capteur cap = Capteur("1", 0.5, 0.5);
     SerieMesures sm1 = SerieMesures(Temps(10, 0, 0, 0, 0, 0));
     sm1.ajouterMesure(m1);
@@ -59,10 +65,10 @@ bool TestUnit::Test1()
     sm1.ajouterMesure(m4);
     cap.ajouterSerieMesures(sm1);
 
-    Mesure m5 = Mesure(2.0, "SO2");
-    Mesure m6 = Mesure(15.0, "O3");
-    Mesure m7 = Mesure(30.0, "NO2");
-    Mesure m8 = Mesure(50.1, "PM10");
+    Mesure m5 = Mesure(2.0, SO2);
+    Mesure m6 = Mesure(15.0, O3);
+    Mesure m7 = Mesure(30.0, NO2);
+    Mesure m8 = Mesure(50.1, PM10);
     Capteur cap2 = Capteur("2", 0.5, 0.5);
     SerieMesures sm2 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
 
@@ -162,10 +168,10 @@ bool TestUnit::Test2()
     cout << endl
          << "..... Etape 1 : Vérification de la bonne exclusion des capteurs non ressemblants" << endl;
 
-    Mesure m1 = Mesure(1.0, "SO2");
-    Mesure m2 = Mesure(5.0, "O3");
-    Mesure m3 = Mesure(20.0, "NO2");
-    Mesure m4 = Mesure(50.0, "PM10");
+    Mesure m1 = Mesure(1.0, SO2);
+    Mesure m2 = Mesure(5.0, O3);
+    Mesure m3 = Mesure(20.0, NO2);
+    Mesure m4 = Mesure(50.0, PM10);
     Capteur cap = Capteur("1", 0.5, 0.5);
     SerieMesures sm1 = SerieMesures(Temps(10, 0, 0, 0, 0, 0));
     sm1.ajouterMesure(m1);
@@ -174,10 +180,10 @@ bool TestUnit::Test2()
     sm1.ajouterMesure(m4);
     cap.ajouterSerieMesures(sm1);
 
-    Mesure m5 = Mesure(2.0, "SO2");
-    Mesure m6 = Mesure(8.0, "O3");
-    Mesure m7 = Mesure(26.0, "NO2");
-    Mesure m8 = Mesure(48.1, "PM10");
+    Mesure m5 = Mesure(2.0, SO2);
+    Mesure m6 = Mesure(8.0, O3);
+    Mesure m7 = Mesure(26.0, NO2);
+    Mesure m8 = Mesure(48.1, PM10);
     Capteur cap2 = Capteur("2", 0.5, 0.5);
     SerieMesures sm2 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
 
@@ -187,10 +193,10 @@ bool TestUnit::Test2()
     sm2.ajouterMesure(m8);
     cap2.ajouterSerieMesures(sm2);
 
-    Mesure m9 = Mesure(6.0, "SO2");
-    Mesure m10 = Mesure(14.0, "O3");
-    Mesure m11 = Mesure(35.0, "NO2");
-    Mesure m12 = Mesure(48.1, "PM10");
+    Mesure m9 = Mesure(6.0, SO2);
+    Mesure m10 = Mesure(14.0, O3);
+    Mesure m11 = Mesure(35.0, NO2);
+    Mesure m12 = Mesure(48.1, PM10);
     Capteur cap3 = Capteur("3", 0.5, 0.5);
     SerieMesures sm3 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
 
@@ -255,14 +261,14 @@ bool TestUnit::Test3()
     Nettoyeur net1 = Nettoyeur("1", 0.5, 0.5, Temps(1, 0, 0, 0, 0, 0), Temps(9, 0, 0, 0, 0, 0), f);
     Nettoyeur net2 = Nettoyeur("2", 6, 6, Temps(1, 0, 0, 0, 0, 0), Temps(9, 0, 0, 0, 0, 0), f);
 
-    Mesure m1 = Mesure(100.0, "SO2");
-    Mesure m2 = Mesure(100.0, "O3");
-    Mesure m3 = Mesure(100.0, "NO2");
-    Mesure m4 = Mesure(100.0, "PM10");
-    Mesure m5 = Mesure(10.0, "SO2");
-    Mesure m6 = Mesure(10.0, "O3");
-    Mesure m7 = Mesure(10.0, "NO2");
-    Mesure m8 = Mesure(10.0, "PM10");
+    Mesure m1 = Mesure(100.0, SO2);
+    Mesure m2 = Mesure(100.0, O3);
+    Mesure m3 = Mesure(100.0, NO2);
+    Mesure m4 = Mesure(100.0, PM10);
+    Mesure m5 = Mesure(10.0, SO2);
+    Mesure m6 = Mesure(10.0, O3);
+    Mesure m7 = Mesure(10.0, NO2);
+    Mesure m8 = Mesure(10.0, PM10);
     Capteur cap = Capteur("1", 0.7, 0.7);
     SerieMesures sm1 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
     SerieMesures sm2 = SerieMesures(Temps(10, 0, 0, 0, 0, 0));
@@ -277,14 +283,14 @@ bool TestUnit::Test3()
     cap.ajouterSerieMesures(sm1);
     cap.ajouterSerieMesures(sm2);
 
-    Mesure m9 = Mesure(100.0, "SO2");
-    Mesure m10 = Mesure(100.0, "O3");
-    Mesure m11 = Mesure(100.0, "NO2");
-    Mesure m12 = Mesure(100.0, "PM10");
-    Mesure m13 = Mesure(101.0, "SO2");
-    Mesure m14 = Mesure(101.0, "O3");
-    Mesure m15 = Mesure(101.0, "NO2");
-    Mesure m16 = Mesure(101.0, "PM10");
+    Mesure m9 = Mesure(100.0, SO2);
+    Mesure m10 = Mesure(100.0, O3);
+    Mesure m11 = Mesure(100.0, NO2);
+    Mesure m12 = Mesure(100.0, PM10);
+    Mesure m13 = Mesure(101.0, SO2);
+    Mesure m14 = Mesure(101.0, O3);
+    Mesure m15 = Mesure(101.0, NO2);
+    Mesure m16 = Mesure(101.0, PM10);
     Capteur cap2 = Capteur("2", 1, 1);
     SerieMesures sm3 = SerieMesures(Temps(0, 0, 0, 0, 0, 0));
     SerieMesures sm4 = SerieMesures(Temps(10, 0, 0, 0, 0, 0));
@@ -307,7 +313,6 @@ bool TestUnit::Test3()
     listeNettoyeurs.push_back(net2);
 
     float test3 = ActionNettoyeur::evaluerImpactNettoyeur(net1, capteursG, listeNettoyeurs);
-    cout << "YEAHFKQJSHDFKJQ : " << test3 << endl;
 
     cout << "........... Rayon d'action du nettoyeur " << net1.getIdNettoyeur() << " avec pour LAT : " << net1.getLatitude() << ", LONG : " << net1.getLongitude() << ", DEBUT : " << net1.getTimeStart().sec << ", FIN : " << net1.getTimeStop().sec << endl;
     cout << "........... Entre Capteur" << cap.getIdCapteur() << endl
