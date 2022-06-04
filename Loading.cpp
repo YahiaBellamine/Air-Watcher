@@ -16,11 +16,9 @@ using namespace std;
 #include "Controller/ActionNettoyeur.h"
 #include "Controller/ActionQualiteAir.h"
 #include "Controller/ActionCapteur.h"
-#include "TestUnit/TestUnit.h"
-#include <time.h>
 
 static list<SerieMesures> listeSeriesMesures;
-static list<Attribut> listeAttributs;
+static map<string, Attribut*> listeAttributs;
 static map<string, Capteur> listeCapteursIntermediaires;
 
 static map<string, Capteur> listeCapteurs;
@@ -53,27 +51,31 @@ void loadMeasurements()
         date.min = stoi(tmp1);
         getline(fic, idCapteur, ';');
         SerieMesures serieMesures(date);
+
         getline(fic, tmp1, ';');
         getline(fic, tmp2, '\n');
-        mesure = Mesure(stof(tmp2), tmp1);
+        mesure = Mesure(stof(tmp2), listeAttributs.at(tmp1));
+        serieMesures.ajouterMesure(mesure);
+
+        fic.ignore(numeric_limits<streamsize>::max(), ';');
+        fic.ignore(numeric_limits<streamsize>::max(), ';');
+        getline(fic, tmp1, ';');
+        getline(fic, tmp2, '\n');
+        mesure = Mesure(stof(tmp2), listeAttributs.at(tmp1));
+        serieMesures.ajouterMesure(mesure);
+
+        fic.ignore(numeric_limits<streamsize>::max(), ';');
+        fic.ignore(numeric_limits<streamsize>::max(), ';');
+        getline(fic, tmp1, ';');
+        getline(fic, tmp2, '\n');
+        mesure = Mesure(stof(tmp2), listeAttributs.at(tmp1));
         serieMesures.ajouterMesure(mesure);
         fic.ignore(numeric_limits<streamsize>::max(), ';');
         fic.ignore(numeric_limits<streamsize>::max(), ';');
+
         getline(fic, tmp1, ';');
         getline(fic, tmp2, '\n');
-        mesure = Mesure(stof(tmp2), tmp1);
-        serieMesures.ajouterMesure(mesure);
-        fic.ignore(numeric_limits<streamsize>::max(), ';');
-        fic.ignore(numeric_limits<streamsize>::max(), ';');
-        getline(fic, tmp1, ';');
-        getline(fic, tmp2, '\n');
-        mesure = Mesure(stof(tmp2), tmp1);
-        serieMesures.ajouterMesure(mesure);
-        fic.ignore(numeric_limits<streamsize>::max(), ';');
-        fic.ignore(numeric_limits<streamsize>::max(), ';');
-        getline(fic, tmp1, ';');
-        getline(fic, tmp2, '\n');
-        mesure = Mesure(stof(tmp2), tmp1);
+        mesure = Mesure(stof(tmp2), listeAttributs.at(tmp1));
         serieMesures.ajouterMesure(mesure);
         listeSeriesMesures.push_back(serieMesures);
         Capteur capteur = listeCapteursIntermediaires.find(idCapteur)->second;
@@ -123,14 +125,17 @@ void loadAttributes()
     {
         cout << " ERREUR D'OUVERTURE DU FICHIER ! " << endl;
     }
-    string id, unite, description;
+    string id, unite, description, buffer;
+    getline(fic, id, '\n');
     while (!fic.eof())
     {
         getline(fic, id, ';');
         getline(fic, unite, ';');
         getline(fic, description, ';');
-        Attribut attribut(id, unite, description);
-        listeAttributs.push_back(attribut);
+        fic.ignore(1, '\n');
+
+        Attribut *attribut = new Attribut(id, unite, description);
+        listeAttributs.insert(pair<string, Attribut*>(id, attribut));
     }
 }
 
@@ -223,13 +228,12 @@ void loadUsers()
 
 int main()
 {
-    clock_t start, end;
-    double cpu_time_used;
-    start = clock();
-
     cout << "****** Debut test initialisation des capteurs" << endl;
     loadSensors();
     cout << "****** Fin test initialisation des capteurs" << endl;
+      cout << "****** Debut test initialisation des attributs" << endl;
+    loadAttributes();
+    cout << "****** Fin test initialisation des attributs" << endl;
     cout << "****** Debut test initialisation des mesures" << endl;
     loadMeasurements();
     cout << "****** Fin test initialisation des mesures" << endl;
@@ -239,17 +243,9 @@ int main()
     cout << "****** Debut test initialisation des nettoyeurs" << endl;
     loadCleaners();
     cout << "****** Fin test initialisation des nettoyeurs" << endl;
-    cout << "****** Debut test initialisation des attributs" << endl;
-    loadAttributes();
-    cout << "****** Fin test initialisation des attributs" << endl;
     cout << "****** Debut test initialisation des utilisateurs" << endl;
     loadUsers();
     cout << "****** Fin test initialisation des utilisateurs" << endl;
-
-    end = clock();
-    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-
-    cout << "Temps de chargement : " << cpu_time_used << " secondes." << endl;
 
     cout << "Veuillez choisir le type de compte auquel vous voulez vous connecter :" << endl;
     cout << "   1. Agence gouvernementale" << endl;
@@ -280,11 +276,6 @@ int main()
         {
             type = "fournisseur";
             etape1 = false;
-        }
-        else if (buffer == 4)
-        {
-            TestUnit::AllTests();
-            return 0;
         }
         else if (buffer == 0)
         {
@@ -428,15 +419,9 @@ int main()
                 cout << "      Seconde :" << endl;
                 scanf("\r\n%d", &seconde);
 
-                start = clock();
                 float *resultats = ActionQualiteAir::moyenneQualiteAir((abscisse), (ordonnee), (rayon), listeCapteurs, Temps((seconde), (minute), (heure), (jour), (mois), (annee)));
                 cout << "      La moyenne de la qualité de l'air sur la zone de centre (" << abscisse << "," << ordonnee << ") de rayon " << rayon << " depuis le " << jour << "/" << mois << "/" << annee << " à " << heure << "h" << minute << "m" << seconde << "s est : " << endl;
                 cout << "     SO2 : " << resultats[0] << ", O3 : " << resultats[1] << ", NO2 : " << resultats[2] << ", PM10 : " << resultats[3] << endl;
-
-                end = clock();
-                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-
-                cout << "Temps de l'algo : " << cpu_time_used << " secondes." << endl;
             }
             else if (type == "individuPrive")
             {
@@ -458,7 +443,6 @@ int main()
             }
             else if (type == "fournisseur")
             {
-                start = clock();
                 string idNettoyeurSelectionne;
                 float impactNettoyeur = 0.0;
                 for (pair<string, Fournisseur> f : listeFournisseurs)
@@ -477,11 +461,6 @@ int main()
                 }
 
                 cout << "      L'impact est de : " << impactNettoyeur << endl;
-
-                end = clock();
-                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-
-                cout << "Temps de l'algo : " << cpu_time_used << " secondes." << endl;
             }
         }
         else if (buffer == 2)
@@ -492,14 +471,7 @@ int main()
                 cout << "      Choisissez l'ID du capteur à comparer :" << endl;
                 cin >> idCapteurCompare;
                 Capteur cap = listeCapteurs[(idCapteurCompare)];
-                cout << "CAPTEUR : " << cap << endl;
-                cout << "MESURES : " << cap.getSeriesMesures().at(0) << endl;
-                start = clock();
                 vector<Capteur> resultats = ActionCapteur::comparerCapteur(cap, listeCapteurs);
-                end = clock();
-                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-
-                cout << "Temps de l'algo : " << cpu_time_used << " secondes." << endl;
             }
             else if (type == "individuPrive")
             {

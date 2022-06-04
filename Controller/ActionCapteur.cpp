@@ -35,6 +35,8 @@ vector<Capteur> ActionCapteur::comparerCapteur(Capteur &capteurSelectionne, map<
 
 	vector<Capteur> capteursSimilaires;
 
+	cout << "CAPTEUR SELECTIONNE : " << capteurSelectionne << endl;
+
 	float moyenneO3 = 0;
 	float moyenneSO2 = 0;
 	float moyenneNO2 = 0;

@@ -61,17 +61,17 @@ float ActionNettoyeur::evaluerImpactNettoyeur(Nettoyeur unNettoyeur, map<string,
 				// <
 				if (Temps::difftime(serie.getDate(), leNettoyeur.getTimeStart()) == -1)
 				{
-					for (Mesure m : serie.getVecMesures())
+					for (pair<string, Mesure> m : serie.getListeMesures())
 					{
-						sommeAvant = sommeAvant + m.getValeur();
+						sommeAvant = sommeAvant + m.second.getValeur();
 					}
 					nbMesuresAvant = nbMesuresAvant + 1;
 				}
 				else if (Temps::difftime(serie.getDate(), leNettoyeur.getTimeStart()) == 1)
 				{
-					for (Mesure m : serie.getVecMesures())
+					for (pair<string, Mesure> m : serie.getListeMesures())
 					{
-						sommeApres = sommeApres + m.getValeur();
+						sommeApres = sommeApres + m.second.getValeur();
 					}
 					nbMesuresApres = nbMesuresApres + 1;
 				}
