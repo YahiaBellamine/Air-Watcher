@@ -7,7 +7,6 @@ else
 endif
 EXEC=main
 OBJECTS= Loading.o TestUnit/TestUnit.o Model/Capteur.o Model/SerieMesures.o Model/Mesure.o Controller/ActionCapteur.o Controller/ActionQualiteAir.o Model/AgenceGouvernementale.o Model/Attribut.o Model/Fournisseur.o Model/IndividuPrive.o Model/Nettoyeur.o Model/Utilisateur.o Controller/ServiceUtilisateur.o Controller/ActionNettoyeur.o Model/Temps.o
-TEST =  mainAlexis.o Model/Capteur.o Model/SerieMesures.o Model/Mesure.o Controller/ActionCapteur.o Model/Temps.o
 
 all: $(OBJECTS)
 	$(CXX) -o $(EXEC) $(OBJECTS)
@@ -22,9 +21,6 @@ clean:
 	rm Controller/*.o
 	rm TestUnit/*.o
 	rm Model/*.o
-
-loading: Loading.cpp
-	g++ -o loading Loading.cpp Model/SerieMesures.cpp Model/Capteur.cpp Model/Fournisseur.cpp Model/Attribut.cpp Model/Mesure.cpp Model/Temps.cpp Model/Nettoyeur.cpp Model/IndividuPrive.cpp
 
 test: $(TEST)
 	$(CXX) -o $(EXEC) $(TEST)
